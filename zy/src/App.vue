@@ -12,4 +12,8 @@
   html{
     font-size: 16.375px;
   }
+
+  img{
+    vertical-align: middle;
+  }
 </style>
