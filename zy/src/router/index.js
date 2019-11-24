@@ -11,12 +11,14 @@ import VueRouter from 'vue-router'
 
 import jkh from '../components/wtq/jkh'
 import index from "../components/cfy/index"
+import login from "../components/mhp/login"
 Vue.use(VueRouter)
 
 const routes = [
   // {path: '/',name: 'home',component: Home},
   {path: '/jkh',name: 'jkh',component: jkh},
   {path: '/',component: index},
+  {path: '/login',component: login},
 ]
 
 const router = new VueRouter({
