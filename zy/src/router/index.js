@@ -14,8 +14,8 @@ import index from "../components/cfy/index"
 import parent from "../views/cfy/parent"
 import test from "../views/cfy/test"
 import goGuaHao from "../components/cfy/goGuaHao/goGuaHao"
-import login from "../components/mhp/login"
-import pwdLogin from "../components/mhp/pwdLogin"
+import login from "../components/mhp/login" //用户快速登录页面
+import pwdLogin from "../components/mhp/pwdLogin" //密码登录页面
 Vue.use(VueRouter)
 
 const routes = [

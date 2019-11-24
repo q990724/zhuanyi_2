@@ -1,8 +1,9 @@
 <template> 
     <div class="pwdLogin-container">
         <!-- 1.标题 -->
-        <h4>haha</h4>
-        <van-nav-bar title="快速登录/注册" left-arrow @click-left="onClickLeft" class="login-title" />
+        <van-nav-bar title="登录" left-arrow @click-left="onClickLeft" class="login-title" />
+        <!-- 2.标题下面的说明 -->
+
     </div>
 </template>
 <script>
@@ -13,7 +14,9 @@ export default{
         }
     },
     methods: {
-        
+        onClickLeft(){
+            this.$router.go(-1)
+        },
     },
 }
 </script>
