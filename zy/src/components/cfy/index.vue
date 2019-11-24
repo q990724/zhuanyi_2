@@ -271,14 +271,21 @@
              </div>
              <!-- 一病多问 -->
              <div class="index-content-item">
-                 <one-by-more></one-by-more>
-                 <one-by-more></one-by-more>
-                 <one-by-more></one-by-more>
+                 <!-- 懒加载数据 -->
+                <van-list v-model="isloading" finished-text="没有更多了" @load="onLoad" :finished="finished">
+                    <van-cell  v-for="(item,index) of list" :key="index" style="padding:0">
+                        <one-by-more :item="item"></one-by-more>
+                        <!-- 随机生成广告 -->
+                        <div class="small-banner" v-show="index % 3 == 0">
+                            <img 
+                            :src="
+                            require(`../../../public/images/index/广告图片/b-0${parseInt(1+Math.random()*3)}.png`)">
+                        </div>
+                    </van-cell>
+                </van-list>
              </div>
              <!-- 小广告 -->
-             <div class="small-banner">
-                 <img src="../../../public/images/index/广告图片/b-01.png">
-             </div>
+             
         </div>
 
     </div>
@@ -288,6 +295,9 @@
 import rmtj_item from "./rmtj_item"
 import love from "./love"
 import oneByMore from "./oneByMore"
+
+// 假数据文件
+import oneByMore_json from "./json/oneByMore.js"
 
 export default {
     data(){
@@ -305,14 +315,34 @@ export default {
                 {title : "空腹不能吃香蕉喝牛奶" ,subtitle : "真相往往与你想的不一样" , pic : require("../../../public/images/index/热门推荐/1.jpg")},
                 {title : "为什么会出现莫名的淤青？" ,subtitle : "真的有“鬼掐青”？" , pic : require("../../../public/images/index/热门推荐/2.jpg")},
                 {title : "为母则刚是最毒的鸡汤" ,subtitle : "新手妈妈别硬抗" , pic : require("../../../public/images/index/热门推荐/3.jpg")},
-            ]
+            ],
+            oneByMore_json : oneByMore_json,
+            list : [],
+            finished : false,
+            isloading : false
         }
     },
     methods : {
         // 关闭头部广告
         closeBanner(){
             this.showBanner = false;
-        }
+        },
+        //加载更多
+         onLoad() {
+             console.log(this.list.length);
+            // 异步更新数据
+            setTimeout(() => {
+                this.list.push(this.oneByMore_json[this.list.length]);
+                // 加载状态结束
+                this.isloading = false;
+
+                // 数据全部加载完成
+                if (this.list.length >= this.oneByMore_json.length) {
+                    console.log(2);
+                    this.finished = true;
+                }
+            }, 500 + Math.random() * 2000);
+        },
     },
     components : {
         "rmtj-item" : rmtj_item,
@@ -578,6 +608,9 @@ export default {
         font-size: 1.099237rem;
         color: #28354c;
         font-weight: 500;
+    }
+    .van-cell__value,.van-cell{
+        overflow: visible;
     }
 
     /* 动画 */

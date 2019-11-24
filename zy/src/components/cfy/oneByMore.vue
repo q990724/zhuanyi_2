@@ -10,11 +10,10 @@
             </van-col>
             <van-col span="21">
                <div class="question-title">
-                  糖尿病、高血压十几年2016年查出甲状腺乳头状癌转移淋巴手术两侧全切，但一侧淋巴转移病灶手术风险大没去掉干净（图一👇）手术后医生建议碘131治疗，在上海复旦大学附属中山医院做过三次碘131治疗了！图二三👇是这两年早晨空腹优甲乐2片半，每两个月的检查结果图四👇是做第三次碘131治疗时候医生怀疑肺转移做的气管镜提取物病理报告检查图五👇是前天停优甲乐三周后的检查（我们8月16日住院做第四次同位素治疗）什么原因甲状腺球蛋白那么高
+                  {{item.question}}
                </div>
                <div class="question-tag">
-                  <span>#糖尿病</span>
-                  <span>#甲状腺乳头状癌</span>
+                  <span v-for="(t,i) of item.tags" :key="i">#{{t}}</span>
                </div>
             </van-col>
          </van-row>
@@ -26,20 +25,12 @@
             </van-col>
             <van-col span="21">
                <van-row gutter="8">
-                  <van-col span="5" class="answer-pic-item">
-                     <img src="../../../public/images/index/一病多问/item-1-1.png">
-                     <p>副主任医师</p>
-                  </van-col>
-                  <van-col span="5" class="answer-pic-item">
-                     <img src="../../../public/images/index/一病多问/item-1-2.png">
-                     <p>副主任医师</p>
-                  </van-col>
-                  <van-col span="5" class="answer-pic-item">
-                     <img src="../../../public/images/index/一病多问/item-1-3.png">
-                     <p>主治医师</p>
+                  <van-col span="5" class="answer-pic-item" v-for="(t,i) of item.answer_doctor" :key="i">
+                     <img :src="t.pic">
+                     <p>{{t.job}}</p>
                   </van-col>
                   <van-col span="9" class="answer-count">
-                     <p><span>16位</span>医生作答</p>
+                     <p><span>{{item.answer_count}}位</span>医生作答</p>
                      <a href="javascript:;">查询详情</a>
                   </van-col>
                </van-row>
@@ -51,7 +42,7 @@
 
 <script>
 export default {
-
+   props : ["item"]
 }
 </script>
 
