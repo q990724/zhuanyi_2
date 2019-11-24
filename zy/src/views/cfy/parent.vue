@@ -15,7 +15,7 @@
             
          </div>
          <div class="tab-item" v-if="index == 4">
-            <login></login>
+            <login @toggleFrame="toggleTab"></login>
          </div>
       </div>
 
@@ -103,7 +103,9 @@ export default {
   },
   methods : {
      toggleTab(index){
+        console.log(index);
         this.index = index;
+        this.active = index;
      }
   },
   components : {
