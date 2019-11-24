@@ -117,11 +117,15 @@ export default {
 </script>
 
 <style>
+  .frame{
+    padding-bottom: 50px;
+  }
+
    .van-tabbar-item__icon img{
       height: 21px !important;
    }
 
-   .frame{
-      padding-bottom: 50px;
+   .van-tabbar--fixed{
+     height:50px;
    }
 </style>

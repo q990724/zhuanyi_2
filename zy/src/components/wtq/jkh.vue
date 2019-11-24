@@ -10,14 +10,14 @@
   <div id="jkh">
     <div class="top-search">
       <!-- 上方搜索框 -->
-      <van-row data-id="sousuo" gutter="1"> 
+      <van-row data-id="sousuo"> 
         <van-col span="22">
           <!-- 搜索框 -->
           <form action="/">
             <van-search placeholder="搜索医生、疾病科普等内容" shape="round" background="linear-gradient(180deg,#3f86ff,#589bff)"/>
           </form>
         </van-col>
-        <van-col span="1">
+        <van-col span="2">
           <!-- 头像 -->
           <van-image class="touxiang" round  width="10rem"  height="10rem"  src="https://img.yzcdn.cn/vant/cat.jpeg"/>
         </van-col>
@@ -58,7 +58,7 @@
       <!-- 第三排 -->
       <div class="kind">
         <!-- 第一排类型 -->
-        <van-row gutter="2" justify="space-between">
+        <van-row  justify="space-between">
           <van-col span="6" class="kind-every">
             <div class="item">
               <div class="img">
@@ -93,7 +93,7 @@
           </van-col>
         </van-row>
         <!-- 第二排类型 -->
-        <van-row gutter="2">
+        <van-row>
           <van-col span="6" class="kind-every">
             <div class="item">
               <div class="img">
@@ -201,6 +201,8 @@ export default {
 </script>
 
 <style scoped>
+
+
 .van-row[data-id=sousuo],.van-search{
   background:#3f86ff !important;
 }
@@ -211,7 +213,7 @@ export default {
 .ask-question{
   
   position:fixed;
-  bottom:2rem;
+  bottom:5rem;
   left:50%;
   margin-left:-6rem;
   /* background:#3f86ff;

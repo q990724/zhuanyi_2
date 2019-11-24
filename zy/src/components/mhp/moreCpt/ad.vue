@@ -49,7 +49,9 @@ export default{
             }
         },
         goIndex(){
-            this.$emit("goIndex",0);
+            settimeout(()=>{
+                this.$emit("goIndex",0);
+            },800);
         }
     },
 }
