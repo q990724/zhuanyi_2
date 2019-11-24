@@ -11,12 +11,17 @@ import VueRouter from 'vue-router'
 
 import jkh from '../components/wtq/jkh'
 import index from "../components/cfy/index"
+import parent from "../views/cfy/parent"
+import test from "../views/cfy/test"
+
 Vue.use(VueRouter)
 
 const routes = [
   // {path: '/',name: 'home',component: Home},
   {path: '/jkh',name: 'jkh',component: jkh},
   {path: '/',component: index},
+  {path: "/parent",component: parent},
+  {path: "/test", component: test}
 ]
 
 const router = new VueRouter({

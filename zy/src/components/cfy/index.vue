@@ -613,6 +613,10 @@ export default {
         overflow: visible;
     }
 
+    .list .van-row{
+        width: 100%;
+    }
+
     /* 动画 */
     @keyframes iconrotate{
         /* 签到动画 */
