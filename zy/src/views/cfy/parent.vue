@@ -9,7 +9,13 @@
             
          </div>
          <div class="tab-item" v-if="index == 2">
-            <!-- <jkh></jkh> -->
+            <jkh></jkh>
+         </div>
+         <div class="tab-item" v-if="index == 3">
+            
+         </div>
+         <div class="tab-item" v-if="index == 4">
+            <login></login>
          </div>
       </div>
 
@@ -65,7 +71,7 @@
 <script>
 import index from "../../components/cfy/index";
 import jkh from "../../components/wtq/jkh"
-
+import login from "../../components/mhp/login"
 export default {
  data() {
     return {
@@ -102,7 +108,8 @@ export default {
   },
   components : {
      "index" : index,
-     "jkh" : jkh
+     "jkh" : jkh,
+     "login" : login
   }
 }
 </script>

@@ -45,14 +45,16 @@
         </div>
         <!-- 5.密码登录链接 -->
         <div>
-            <router-link  class="pwd" to="./aboutCom/pwdLogin.vue">密码登录</router-link>
+            <router-link  class="pwd" to="/pwdLogin">密码登录</router-link>
+            <!-- <a href="#/pwdLogin">lal</a> -->
         </div>
         <!-- 6.版权信息 -->
         <div class="copy">
             <p>未注册手机验证后将自动进行注册，点击“确定”即表示您已阅读并同意以下协议</p>
             <div>
-                <router-link to="./">《微医服务协议》</router-link>
-                <router-link to="./">《法律声明及隐私权政策》</router-link>
+                
+                <router-link to="./moreCpt/serveProto.vue">《微医服务协议》</router-link>
+                <router-link to="./moreCpt/lawProto.vue">《法律声明及隐私权政策》</router-link>
             </div>
         </div>
         <!-- 7.底部小图标 -->
@@ -60,7 +62,10 @@
     </div>
 </template>
 <script>
-import ad from "./aboutCom/ad.vue" 
+import ad from "./moreCpt/ad.vue" 
+import pwdLogin from "./pwdLogin" 
+import lawProto from "./lawProto.vue" 
+import serveProto from "./serveProto.vue" 
 export default{
     data() {
         return {
@@ -92,7 +97,10 @@ export default{
         },
     },
     components:{
-        "ad":ad
+        "ad":ad,
+        "pwdLogin":pwdLogin,
+        "serveProto":serveProto,
+        "lawProto":lawProto,
     }
 }
 </script>
