@@ -235,9 +235,7 @@
                 <div class="list">
                     <div class="list-title">
                         <h3>健康号精选</h3>
-                        <rmtj-item></rmtj-item>
-                        <rmtj-item></rmtj-item>
-                        <rmtj-item></rmtj-item>
+                        <rmtj-item v-for="(item,i) of rmtj_items" :key="i" :item="item"></rmtj-item>
                     </div>
                 </div>
              </div>
@@ -267,6 +265,20 @@
                     </van-row>
                 </div>
              </div>
+             <!-- 爱心义诊 -->
+             <div class="index-conent-item">
+                 <love></love>
+             </div>
+             <!-- 一病多问 -->
+             <div class="index-content-item">
+                 <one-by-more></one-by-more>
+                 <one-by-more></one-by-more>
+                 <one-by-more></one-by-more>
+             </div>
+             <!-- 小广告 -->
+             <div class="small-banner">
+                 <img src="../../../public/images/index/广告图片/b-01.png">
+             </div>
         </div>
 
     </div>
@@ -274,6 +286,9 @@
 
 <script>
 import rmtj_item from "./rmtj_item"
+import love from "./love"
+import oneByMore from "./oneByMore"
+
 export default {
     data(){
         return{
@@ -285,7 +300,12 @@ export default {
                 { text: '医生', value: 2 }
             ],
             searchVal : "",
-            showBanner : true
+            showBanner : true,
+            rmtj_items : [
+                {title : "空腹不能吃香蕉喝牛奶" ,subtitle : "真相往往与你想的不一样" , pic : require("../../../public/images/index/热门推荐/1.jpg")},
+                {title : "为什么会出现莫名的淤青？" ,subtitle : "真的有“鬼掐青”？" , pic : require("../../../public/images/index/热门推荐/2.jpg")},
+                {title : "为母则刚是最毒的鸡汤" ,subtitle : "新手妈妈别硬抗" , pic : require("../../../public/images/index/热门推荐/3.jpg")},
+            ]
         }
     },
     methods : {
@@ -295,7 +315,9 @@ export default {
         }
     },
     components : {
-        "rmtj-item" : rmtj_item
+        "rmtj-item" : rmtj_item,
+        "love" : love,
+        "one-by-more" : oneByMore
     }
 
 }
@@ -526,11 +548,25 @@ export default {
 
     .index-content .index-content-jksc{
         margin: .916031rem 0;
+        box-shadow: 0 0.256rem 0.59733333rem 0.34133333rem rgba(20,19,51,.06);
+        border-radius: .9375rem;
+        box-sizing: border-box;
+        padding: .9375rem;
     }
 
     .index-content .index-content-jksc .list img{
         width: 100%;
         margin-top: .68855rem;
+    }
+
+    .small-banner{
+        margin: .9375rem 0;
+    }
+
+    .small-banner img{
+        width: 100%;
+        height: 100%;
+        border-radius: .9375rem;
     }
 
     /*重写的vant样式 */
