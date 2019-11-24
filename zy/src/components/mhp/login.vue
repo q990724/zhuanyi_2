@@ -58,7 +58,7 @@
             </div>
         </div>
         <!-- 7.底部小图标 -->
-        <ad></ad>
+        <ad @goIndex="goIndex"></ad>
     </div>
 </template>
 <script>
@@ -95,6 +95,9 @@ export default{
             this.show=false;
             this.code=item.subname;
         },
+        goIndex(index){
+            this.$emit("toggleFrame",index);
+        }
     },
     components:{
         "ad":ad,

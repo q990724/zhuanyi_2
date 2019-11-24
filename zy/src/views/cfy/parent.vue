@@ -15,7 +15,7 @@
             
          </div>
          <div class="tab-item" v-if="index == 4">
-            <login></login>
+            <login @toggleFrame="toggleTab"></login>
          </div>
       </div>
 
@@ -103,7 +103,9 @@ export default {
   },
   methods : {
      toggleTab(index){
+        console.log(index);
         this.index = index;
+        this.active = index;
      }
   },
   components : {
@@ -115,11 +117,15 @@ export default {
 </script>
 
 <style>
+  .frame{
+    padding-bottom: 50px;
+  }
+
    .van-tabbar-item__icon img{
       height: 21px !important;
    }
 
-   .frame{
-      padding-bottom: 50px;
+   .van-tabbar--fixed{
+     height:50px;
    }
 </style>
