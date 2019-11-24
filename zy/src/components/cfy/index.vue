@@ -50,10 +50,12 @@
                         </div>
                     </van-col>
                     <van-col span="12">
-                        <div class="qgh">
-                            <h2>去挂号</h2>
-                            <p>全国<span>3200家</span>重点医院</p>
-                        </div>
+                        <router-link to="goGuahao" style="color:#000">
+                            <div class="qgh">
+                                <h2>去挂号</h2>
+                                <p>全国<span>3200家</span>重点医院</p>
+                            </div>
+                        </router-link>
                     </van-col>
                 </van-row>
             </div>
@@ -283,9 +285,7 @@
                         </div>
                     </van-cell>
                 </van-list>
-             </div>
-             <!-- 小广告 -->
-             
+             </div>    
         </div>
 
     </div>
@@ -332,10 +332,10 @@ export default {
              console.log(this.list.length);
             // 异步更新数据
             setTimeout(() => {
-                this.list.push(this.oneByMore_json[this.list.length]);
+                this.list.push(this.oneByMore_json[this.list.length]);      
                 // 加载状态结束
                 this.isloading = false;
-
+            
                 // 数据全部加载完成
                 if (this.list.length >= this.oneByMore_json.length) {
                     console.log(2);
