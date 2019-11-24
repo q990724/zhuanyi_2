@@ -138,13 +138,30 @@
          </van-row>
       </div>
       <div class="hlist">
-         <hitem></hitem>
-      </div>
+         <div  v-for="(item,i) of hospitalsList" :key="i" >
+            <hitem :item="item"></hitem>
+            <div class="carousel" v-show="i >= 3 && i%3==0">
+                  <van-swipe :autoplay="parseInt(1500 + Math.random() * 3000)" indicator-color="white">
+                     <van-swipe-item>
+                        <img src="../../../../public/images/qgh/carousel1.png">
+                     </van-swipe-item>
+                     <van-swipe-item>
+                        <img src="../../../../public/images/qgh/carousel2.png">
+                     </van-swipe-item>
+                     <van-swipe-item>
+                        <img src="../../../../public/images/qgh/carousel3.png">
+                     </van-swipe-item>
+                  </van-swipe>
+               </div>
+            </div>
+         </div>
+         
    </div>
 </template>
 
 <script>
 import hitem from "./h-item.vue"
+import axios_hospitals from "../../../assets/apis/hospital"
 export default {
    data(){
       return{
@@ -159,11 +176,24 @@ export default {
             { text: '患者评价数', value: 2 }
          ],
          activeNames : ["1"],
-         stepActive : 0
+         stepActive : 0,
+         hospitalsList : []
       }
    },
    components : {
       "hitem" : hitem
+   },
+   created(){
+      (async ()=>{
+         try {
+            var result = await axios_hospitals.getHostpitalAll();   
+            this.hospitalsList = result.result;
+            console.log(this.hospitalsList);
+         } catch (error) {
+            console.error(error);
+         }
+      })()
+      
    }
 }
 </script>
@@ -253,5 +283,9 @@ export default {
    .van-tag{
       padding: .04rem .3125rem;
       margin-left: .3125rem;
+   }
+
+   .carousel img{
+      width: 100%;
    }
 </style>
