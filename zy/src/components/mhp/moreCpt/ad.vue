@@ -49,7 +49,7 @@ export default{
             }
         },
         goIndex(){
-            settimeout(()=>{
+            setTimeout(()=>{
                 this.$emit("goIndex",0);
             },800);
         }
