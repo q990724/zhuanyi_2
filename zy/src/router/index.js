@@ -13,6 +13,10 @@ import jkh from '../components/wtq/jkh'
 import change from '../components/wtq/change'
 import recommand from '../components/wtq/recommand'
 import index from "../components/cfy/index"
+import parent from "../views/cfy/parent"
+import test from "../views/cfy/test"
+
+import login from "../components/mhp/login"
 Vue.use(VueRouter)
 
 const routes = [
@@ -21,6 +25,8 @@ const routes = [
   {path: '/recommand',name: 'recommand',component: recommand},
   {path: '/change',name: 'change',component: change},
   {path: '/',component: index},
+  {path: "/parent",component: parent},
+  {path: '/login',component: login},
 ]
 
 const router = new VueRouter({

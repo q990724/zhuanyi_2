@@ -3,12 +3,12 @@
         <van-row type="flex" align="center" justify="space-between">
             <van-col span="16">
                 <div class="item-title">
-                    <h4>空腹不能吃香蕉喝牛奶?</h4>
-                    <p>真相往往与你想的不一样</p>
+                    <h4>{{item.title}}</h4>
+                    <p>{{item.subtitle}}</p>
                 </div>
             </van-col>
             <van-col span="8">
-                <img src="../../../public/images/index/热门推荐/1.jpg">
+                <img :src="item.pic">
             </van-col>
         </van-row>
     </div>
@@ -16,7 +16,12 @@
 
 <script>
 export default {
-
+    props : ["item"],
+    data(){
+        return{
+           
+        }
+    }
 }
 </script>
 
