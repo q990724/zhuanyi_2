@@ -13,7 +13,7 @@ import jkh from '../components/wtq/jkh'
 import index from "../components/cfy/index"
 import parent from "../views/cfy/parent"
 import test from "../views/cfy/test"
-
+import goGuaHao from "../components/cfy/goGuaHao/goGuaHao"
 import login from "../components/mhp/login"
 Vue.use(VueRouter)
 
@@ -23,6 +23,7 @@ const routes = [
   {path: '/',component: index},
   {path: "/parent",component: parent},
   {path: '/login',component: login},
+  {path: '/goGuahao',component: goGuaHao},
 ]
 
 const router = new VueRouter({
