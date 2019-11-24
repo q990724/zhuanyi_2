@@ -63,10 +63,9 @@
 </template>
 <script>
 import ad from "./moreCpt/ad.vue" 
-import pwdLogin from "./moreCpt/pwdLogin" 
-import lawProto from "./moreCpt/ad.vue" 
-import serveProto from "./moreCpt/serveProto.vue" 
-import index from "../cfy/index" 
+import pwdLogin from "./pwdLogin" 
+import lawProto from "./lawProto.vue" 
+import serveProto from "./serveProto.vue" 
 export default{
     data() {
         return {
@@ -102,7 +101,6 @@ export default{
         "pwdLogin":pwdLogin,
         "serveProto":serveProto,
         "lawProto":lawProto,
-        "index":index,
     }
 }
 </script>

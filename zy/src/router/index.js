@@ -15,6 +15,7 @@ import parent from "../views/cfy/parent"
 import test from "../views/cfy/test"
 import goGuaHao from "../components/cfy/goGuaHao/goGuaHao"
 import login from "../components/mhp/login"
+import pwdLogin from "../components/mhp/pwdLogin"
 Vue.use(VueRouter)
 
 const routes = [
@@ -24,6 +25,7 @@ const routes = [
   {path: "/parent",component: parent},
   {path: '/login',component: login},
   {path: '/goGuahao',component: goGuaHao},
+  {path: '/pwdLogin',component: pwdLogin},
 ]
 
 const router = new VueRouter({
