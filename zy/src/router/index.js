@@ -14,6 +14,7 @@ import index from "../components/cfy/index"
 import parent from "../views/cfy/parent"
 import test from "../views/cfy/test"
 
+import login from "../components/mhp/login"
 Vue.use(VueRouter)
 
 const routes = [
@@ -21,7 +22,7 @@ const routes = [
   {path: '/jkh',name: 'jkh',component: jkh},
   {path: '/',component: index},
   {path: "/parent",component: parent},
-  {path: "/test", component: test}
+  {path: '/login',component: login},
 ]
 
 const router = new VueRouter({
