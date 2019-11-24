@@ -41,7 +41,7 @@ export default{
     methods: {
         onClickLeft(){
             this.$router.go(-1)
-            Toast('提示内容');
+            // Toast('提示内容');
         },
     },
     components:{
