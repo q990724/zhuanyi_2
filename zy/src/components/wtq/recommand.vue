@@ -150,7 +150,7 @@ export default {
 }
   .doc-img{
     width:3rem;
-    height:2.5rem;
+    height:3rem;
     padding:.305344rem;
   }
 .doc-info span{
@@ -185,6 +185,8 @@ export default {
   font-size:.732824rem;
   /* padding:.610687rem !important; */
   margin:1.5rem 0;
+  padding: 0 .610687rem;
+  box-sizing: border-box;
 }
 
 .bottom-right{

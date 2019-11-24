@@ -307,6 +307,7 @@ export default {
     color:#a6a8b6;
     font-size:.732824rem;
   }
+  
 /* 第三排 */
   .item{
       width:2.931298rem;

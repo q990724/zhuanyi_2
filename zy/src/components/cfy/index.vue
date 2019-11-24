@@ -520,7 +520,7 @@ export default {
     .index-content .index-content-tsfw .list{
         width: 100%;
         overflow-x: auto;
-        padding-bottom: 1.832061rem;    
+        padding-bottom: 2.832061rem;    
         margin-top: .916031rem;
     }
     .index-content .index-content-tsfw .warp{
@@ -574,6 +574,7 @@ export default {
         padding: 1.2rem;
         border-radius: .88855rem;
         margin-top: .610687rem;
+        
     }
 
     .index-content .index-content-jksc{
@@ -587,6 +588,15 @@ export default {
     .index-content .index-content-jksc .list img{
         width: 100%;
         margin-top: .68855rem;
+    }
+
+    .index-content .index-content-jksc .list div{
+        border-radius: 1.305344rem;
+    }
+
+    .index-content .index-content-jksc .list div div{
+        background-color: #fff;
+        padding: 5px 10px;
     }
 
     .small-banner{

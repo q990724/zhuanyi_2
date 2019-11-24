@@ -22,8 +22,10 @@ export default {
 <style scoped>
 
    .hitem{
-      padding: .625rem;
+      padding: 1.5rem .625rem;
       position: relative;
+      background-color: #fff;
+      border-bottom: 1px solid #ddd;
    }
    .pic img{
       width: 100%;
@@ -32,11 +34,8 @@ export default {
    }
 
    .hitem .content{
-      /* position: absolute;
-      top: 0;
-      bottom: 0; */
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       flex-direction: column;
       padding-left: .9375rem;
    }
