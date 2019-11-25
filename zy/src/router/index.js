@@ -13,6 +13,8 @@ import jkh from '../components/wtq/jkh'
 import jswz from '../components/wtq/jswz'
 import change from '../components/wtq/change'
 import recommand from '../components/wtq/recommand'
+import wz from '../components/wtq/wz'
+import nowz from '../components/wtq/nowz'
 import index from "../components/cfy/index"
 import parent from "../views/cfy/parent"
 import test from "../views/cfy/test"
@@ -25,6 +27,8 @@ Vue.use(VueRouter)
 const routes = [
   // {path: '/',name: 'home',component: Home},
   {path: '/jswz',name: 'jswz',component: jswz},
+  {path: '/wz',name: 'wz',component: wz},
+  {path: '/nowz',name: 'nowz',component: nowz},
   {path: '/jkh',name: 'jkh',component: jkh},
   {path: '/recommand',name: 'recommand',component: recommand},
   {path: '/change',name: 'change',component: change},
