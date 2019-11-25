@@ -1,7 +1,7 @@
 <template>
   <div class="goGuaHao">
     <div class="title">
-      <van-nav-bar title="预约挂号" left-arrow fixed/>
+      <van-nav-bar title="预约挂号" left-arrow fixed @click-left="goBack"/>
     </div>
     <div class="search">
       <van-row>
@@ -215,6 +215,9 @@ export default {
 			  }
 		  }
     },
+    goBack(){
+      this.back(this);
+    }
   },
   created() {
 	 //加载医院数据

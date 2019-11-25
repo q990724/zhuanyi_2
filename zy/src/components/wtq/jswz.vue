@@ -182,6 +182,7 @@ export default {
       // img2: new Image(), // 背景图片缓存
       // context: {}, // canvas对象
       // imageUrl:["../../../public/images/index/急速问诊/top-entry-health.png","../../../public/images/index/急速问诊/top-entry-help.png"],//图片路径
+      isDraw : false
     };
   },
   methods: {
@@ -221,7 +222,8 @@ export default {
 
       var x = 100,y = -10;
       
-      var draw = function(){
+      var draw = ()=>{
+        if(!this.isDraw) return;
         var img;
         if(index % 2 == 1){
           img = imgs[0]
@@ -245,23 +247,24 @@ export default {
           y++;
         }
         },10);
-        
-        
       }
 
-      setInterval(()=>{
+      var id2 = setInterval(()=>{
         ctx.clearRect(0,0,200,300);
         // requestAnimationFrame(draw);
         draw();
         index++;
       },3000);
-
       //  获取canvas  ctx.drawImage(img, 0, 0, img.width, img.height);
     },
     
   },
   mounted() {
+    this.isDraw = true;
     this.doDraw(this.imageUrl);
+  },
+  beforeDestroy(){
+    this.isDraw = false;
   }
 };
 </script>

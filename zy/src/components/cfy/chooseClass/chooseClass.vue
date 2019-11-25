@@ -1,21 +1,21 @@
 <template>
   <div class="chooseClass">
     <div class="title">
-      <van-nav-bar title="选择科室" left-arrow fixed/>
+      <van-nav-bar title="选择科室" left-arrow fixed @click-left="goBack"/>
     </div>
     <div class="htitle">
       <van-row type="flex" justify="space-between">
         <van-col span="18" class="left">
-          <h3>北京大学人民大学</h3>
+          <h3>{{result.hospital}}</h3>
           <p>
               <span>三级甲等</span>
-              <span>公立医院</span>
+              <span>{{result.type}}</span>
               <span>综合医院</span>
           </p>
         </van-col>
         <van-col span="6" class="right">
             <van-tag plain round>预约规则</van-tag>
-            <p><span>医院主页</span></p>
+            <p @click="goHmain"><span>医院主页</span></p>
         </van-col>
       </van-row>
     </div>
@@ -100,13 +100,25 @@ export default {
             activeIndex: 0,
             stepActive : 1,
             className : "精神心理科",
-            classSubname : "眼科"
+            classSubname : "眼科",
+            result : {}
         }
     },
     created(){
         this.$store.commit("setOrderStep",{name : "className" , val : this.className});
         this.$store.commit("setOrderStep",{name : "classSubname" , val : this.classSubname});
         console.log(this.$store.getters.getOrderStep);
+        this.detailId = this.$store.getters.getOrderStep.hid;
+        $.ajax({
+            url : `https://api.jisuapi.com/hospital/detailhospital?detailid=${this.detailId}&appkey=90b47e2a6f6c02d3`,
+            type : "GET",
+            dataType : "jsonp",
+            success: data=>{  
+                this.result = data.result;
+                this.$store.commit("setHospitalDetail",this.result);
+            }
+        });
+
     },
     methods : {
         leftActive(index){
@@ -122,6 +134,12 @@ export default {
             this.classSubname = data.text
             this.$store.commit("setOrderStep",{name : "classSubname" , val : this.classSubname});
             this.$router.push("chooseDoctor");  
+        },
+        goHmain(){
+            this.$router.push("h_main");
+        },
+        goBack(){
+            this.back(this);
         }
     }
 };

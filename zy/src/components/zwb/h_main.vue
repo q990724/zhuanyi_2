@@ -19,12 +19,12 @@
     <div class="detail">
       <div class="left">
         <div>
-          <span class="name">中国人民解放军总医院(301医院)</span>
-          <span class="type">三甲</span>
+          <span class="name">{{result.hospital}}</span>
+          <span class="type">{{result.level ? result.level : "暂无"}}</span>
         </div>
         <div>
-          <span class="time">放号时间：18:30</span>
-          <span class="orders">预约量：223.5万</span>
+          <span class="time">{{result.type}}</span>
+          <span class="orders">负责人: {{result.legalperson}}</span>
         </div>
       </div>
       <div class="right">
@@ -78,15 +78,22 @@
 <script>
 export default {
   data(){
-    return {}
+    return {
+      detailId : "14",
+      result : {}
+    }
   },
   methods: {
     onClickLeft:function(){
-
+      this.back(this);
     },
     todetail:function(){
       this.$router.push("h_detail")
     }
+  },
+  created(){
+    this.result = this.$store.getters.getHospitalDetail;
+   console.log(this.detailId);
   }
 }
 </script>

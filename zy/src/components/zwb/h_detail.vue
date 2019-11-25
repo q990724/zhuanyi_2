@@ -7,31 +7,31 @@
     />
     <div class="header">
       <div>
-        <span class="hname">中国人民解放军总医院(301医院)</span>
+        <span class="hname">{{detail.hospital}}</span>
         <span class="type">三甲</span>
       </div>
-      <span class="orders">预约量：223.5万</span>
+      <span class="orders">预约量：{{detail.detailid}}万</span>
     </div>
     <div class="container">
       <div class="item">
         <h2>
           <img src="../../../public/images/h_main/vertical.png">
-          <span>预约指南</span> 
+          <span>预约指南</span>   
         </h2>
         <div class="content">
           <p>1.预约周期：28天</p>
           <p>2.放号时间：18:30</p>
           <p>3.停挂时间：下午15:00停止挂号</p>
         </div>
-      </div>
+      </div>  
       <div class="item">
         <h2>
           <img src="../../../public/images/h_main/vertical.png">
-          <span>医院简介</span> 
+          <span>注册地址</span> 
         </h2>
         <div class="content">
           <p>
-            中国人民解放军总医院（301医院）创建于1953年，是集医疗、保健、教学、科研于一体的大型现代化综合性医院。医院是中央重要保健基地，承担军委、总部等多个体系单位、官兵的医疗保健和各军区、军兵种转诊、后送的疑难病诊治任务。医院同时又是解放军医学院，以研究生教育为主，是全军唯一一所医院办学单位。
+              {{detail.regaddress}}            
           </p>
         </div>
       </div>
@@ -58,7 +58,8 @@
         </h2>
         <div class="content">
           <p>
-				    北京市海淀区复兴路28号
+				    {{detail.address ? detail.address : detail.regaddress}}
+            <br/>
             <router-link to="" style="color:#3278ee">查看地址</router-link>
 					</p>
         </div>
@@ -66,11 +67,11 @@
       <div class="item">
         <h2>
           <img src="../../../public/images/h_main/vertical.png">
-          <span>医院网址</span> 
+          <span>专长</span> 
         </h2>
         <div class="content">
           <p>
-            http://www.301hospital.com.cn/
+            {{detail.speciality ? detail.speciality : detail.summary}}
 					</p>
         </div>
       </div>
@@ -81,7 +82,7 @@
         </h2>
         <div class="content">
           <p>
-            010-66887329
+            {{detail.tel ? detail.tel : "暂无"}}
 					</p>
         </div>
       </div>
@@ -113,12 +114,17 @@
 <script>
 export default {
   data(){
-    return {}
+    return {
+      detail : {}
+    }
   },
   methods: {
-    onClickLeft:function(){
-
+    onClickLeft(){
+      this.back(this);
     }
+  },
+  created(){
+    this.detail = this.$store.getters.getHospitalDetail;
   }
 }
 </script>

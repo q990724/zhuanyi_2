@@ -1,7 +1,7 @@
 <template>
    <div class="chooseDoctor">
       <div class="title">
-        <van-nav-bar :title="title" left-arrow fixed/>
+        <van-nav-bar :title="title" left-arrow fixed @click-left="goBack"/>
       </div>
       <!-- 日期选择 -->
       <div class="step">
@@ -65,6 +65,11 @@ export default {
    },
    components : {
       "ditem" : ditem
+   },
+   methods : {
+      goBack(){
+         this.back(this);
+      }
    }
 }
 </script>

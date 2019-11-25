@@ -23,6 +23,8 @@ import login from "../components/mhp/login" //用户快速登录页面
 import pwdLogin from "../components/mhp/pwdLogin" //密码登录页面
 import chooseClass from "../components/cfy/chooseClass/chooseClass"
 import chooseDoctor from "../components/cfy/chooseDoctor/chooseDoctor"
+import h_main from "../components/zwb/h_main"
+import h_detail from "../components/zwb/h_detail"
 
 import me from "../components/mhp/me"
 Vue.use(VueRouter)
@@ -42,7 +44,9 @@ const routes = [
   {path: '/pwdLogin',component: pwdLogin},
   {path: "/chooseClass",component: chooseClass},
   {path: "/chooseDoctor",component: chooseDoctor},
-  {path: "/me",component: me}
+  {path: "/me",component: me},
+  {path: "/h_main",component: h_main},
+  {path: "/h_detail",component: h_detail},
 ]
 
 const router = new VueRouter({
