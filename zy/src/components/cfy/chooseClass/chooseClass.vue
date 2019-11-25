@@ -19,6 +19,14 @@
         </van-col>
       </van-row>
     </div>
+    <div class="step">
+      <van-steps :active="stepActive">
+        <van-step>选择医院</van-step>
+        <van-step>选择科室</van-step>
+        <van-step>选择医生</van-step>
+        <van-step>提交预约</van-step>
+      </van-steps>
+    </div>
     <div class="help">
         <h5>不知道选哪个科室</h5>
         <router-link to="">点我立即咨询</router-link>
@@ -33,6 +41,7 @@
                 :active-id.sync="activeId"
                 :main-active-index.sync="activeIndex"
                 height="450"
+                @click-nav="leftActive"
             />
         </div>
     </div>
@@ -45,7 +54,7 @@ export default {
         return{
             searchVal : "",
             items : [
-                {text : "推荐科室" , children : [
+                {text : "精神心理科" , children : [
                     {text: '眼科',id: 1,},
                     {text: '不孕不育男科',id: 2,},
                     {text: '泌尿外科',id: 3,},
@@ -57,37 +66,51 @@ export default {
                     {text: '风湿免疫科门诊',id: 1,},
                     {text: '内分泌科门诊',id: 2,},
                 ]},
-                {text : "外科" , children : [
+                {text : "中医科" , children : [
                     {text: '心血管外科',id: 1,},
                     {text: '泌尿外科',id: 2,},
                     {text: '乳腺外科门诊',id: 3,},
                 ]},
-                {text : "骨科" , children : [
+                {text : "产科" , children : [
                     {text: '骨关节科',id: 1,},
                     {text: '脊柱外科门诊',id: 2,},
                     {text: '创伤骨科门诊',id: 3,},
                 ]},
-                {text : "妇产科" , children : [
+                {text : "儿科" , children : [
                     {text: '妇科门诊',id: 1,},
                     {text: '计划生育中心',id: 2,},
                 ]},
-                {text : "男科" , children : [
+                {text : "口腔颌面科" , children : [
                     {text: '不孕不育男科',id: 1,},
                 ]},
-                {text : "眼科" , children : [
+                {text : "外科" , children : [
                     {text: '眼科',id: 1,},
                 ]},
-                {text : "耳鼻喉科门诊" , children : [
+                {text : "男科" , children : [
                     {text: '骨关节科',id: 1,},
                     {text: '脊柱外科门诊',id: 2,},
                     {text: '创伤骨科门诊',id: 3,},
                 ]},
-                {text : "其他" , children : [
+                {text : "肿瘤及防治科" , children : [
                     {text: '骨肿瘤科',id: 1,},
                 ]},
             ],
             activeId: 1,
-            activeIndex: 0
+            activeIndex: 0,
+            stepActive : 1,
+            className : "精神心理科"
+        }
+    },
+    created(){
+        console.log(this.$store.getters.getOrderStep);
+    },
+    methods : {
+        leftActive(index){
+            for(var i = 0;i < this.items.length;i++){
+                if(i == index){
+                    this.className = this.items[i].text;
+                }
+            }
         }
     }
 };
