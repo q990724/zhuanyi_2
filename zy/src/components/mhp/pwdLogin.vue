@@ -1,5 +1,5 @@
 <template> 
-    <div class="pwdLogin-container">
+    <div class="pwdLogin-container">    
         <!-- 1.标题 -->
         <van-nav-bar title="登录" left-arrow @click-left="onClickLeft" class="login-title" />
         <!-- 2.标题下面的说明 -->
@@ -18,7 +18,7 @@
             <van-field
                 v-model="password"
                 type="password"
-                left-icon="contact"
+                class="iconfont icon-mima"
                 placeholder="密码"
             />
             <van-icon class="iconfont" class-prefix='icon' name='wang_light' />
@@ -43,6 +43,7 @@
     </div>
 </template>
 <script>
+
 import ad from "./moreCpt/ad"
 import config from "../../assets/js/config.js"
 export default{
@@ -66,13 +67,13 @@ export default{
             }else{
                 // 发送ajax请求
                 //http://127.0.0.1:5050/user/login/:phone&:upwd
-                config.axios.get(`${this.url}${this.uname}&${this.password}`)
+                config.axios.get(`${this.url}${this.username}&${this.password}`)
                 .then(res=>{
-                    // console.log(res)
+                    console.log(res)
                     if(res.data.code==-1){
                         this.$toast("登录账号或密码错误！")
-                    }else{
-                        this.$router.push("/");
+                    }else if(res.data.code==1){
+                        this.$router.push("/me");
                     }
                 })
                 .catch(err=>{
