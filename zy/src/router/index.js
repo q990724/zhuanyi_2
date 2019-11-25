@@ -22,6 +22,7 @@ import goGuaHao from "../components/cfy/goGuaHao/goGuaHao"
 import login from "../components/mhp/login" //用户快速登录页面
 import pwdLogin from "../components/mhp/pwdLogin" //密码登录页面
 import chooseClass from "../components/cfy/chooseClass/chooseClass"
+import me from "../components/mhp/me"
 Vue.use(VueRouter)
 
 const routes = [
@@ -37,7 +38,8 @@ const routes = [
   {path: '/login',component: login},
   {path: '/goGuahao',component: goGuaHao},
   {path: '/pwdLogin',component: pwdLogin},
-  {path: "/chooseClass",component: chooseClass}
+  {path: "/chooseClass",component: chooseClass},
+  {path: "/me",component: me}
 ]
 
 const router = new VueRouter({

@@ -51,8 +51,7 @@
         <!-- 6.版权信息 -->
         <div class="copy">
             <p>未注册手机验证后将自动进行注册，点击“确定”即表示您已阅读并同意以下协议</p>
-            <div>
-                
+            <div>               
                 <router-link to="./moreCpt/serveProto.vue">《微医服务协议》</router-link>
                 <router-link to="./moreCpt/lawProto.vue">《法律声明及隐私权政策》</router-link>
             </div>
