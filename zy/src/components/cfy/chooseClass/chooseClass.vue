@@ -1,7 +1,7 @@
 <template>
   <div class="chooseClass">
     <div class="title">
-      <van-nav-bar title="预约挂号" left-arrow fixed/>
+      <van-nav-bar title="选择科室" left-arrow fixed/>
     </div>
     <div class="htitle">
       <van-row type="flex" justify="space-between">
@@ -41,7 +41,8 @@
                 :active-id.sync="activeId"
                 :main-active-index.sync="activeIndex"
                 height="450"
-                @click-nav="leftActive"
+                @click-nav="leftActive" 
+                @click-item="rightActive"
             />
         </div>
     </div>
@@ -98,10 +99,13 @@ export default {
             activeId: 1,
             activeIndex: 0,
             stepActive : 1,
-            className : "精神心理科"
+            className : "精神心理科",
+            classSubname : "眼科"
         }
     },
     created(){
+        this.$store.commit("setOrderStep",{name : "className" , val : this.className});
+        this.$store.commit("setOrderStep",{name : "classSubname" , val : this.classSubname});
         console.log(this.$store.getters.getOrderStep);
     },
     methods : {
@@ -109,8 +113,15 @@ export default {
             for(var i = 0;i < this.items.length;i++){
                 if(i == index){
                     this.className = this.items[i].text;
+                    this.$store.commit("setOrderStep",{name : "className" , val : this.className});
                 }
             }
+        },
+        rightActive(data){
+            console.log(1);
+            this.classSubname = data.text
+            this.$store.commit("setOrderStep",{name : "classSubname" , val : this.classSubname});
+            this.$router.push("chooseDoctor");  
         }
     }
 };

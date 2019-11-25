@@ -251,7 +251,7 @@ export default {
             }
           }
 		  });
-		  //var result = await axios_hospitals.getHostpitalAll(this.htype);
+		  var result = await axios_hospitals.getHostpitalAll(this.htype);
 		  this.hospitalsList = result;
         console.log(this.hospitalsList);
       } catch (error) {

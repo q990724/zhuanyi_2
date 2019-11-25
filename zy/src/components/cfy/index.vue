@@ -421,6 +421,10 @@ export default {
         background-size: cover;
     }
 
+    .search{
+        background-color: #fff;
+    }
+
     .index-content{
         padding: 0 .916031rem;
     }
