@@ -222,26 +222,37 @@ export default {
       var x = 100,y = -10;
       
       var draw = function(){
-        if(x <= 0 || y >=0){
+        var img;
+        if(index % 2 == 1){
+          img = imgs[0]
+        }else{
+          img = imgs[1]
+        }
+        var id = setInterval(()=>{
+          if(x <= 10){
           x = 100;
           y = -10;
+          clearInterval(id);
           return
         }else{
-          ctx.drawImage(imgs[0], x, y);
+          if(y >= 20){
+            y = 20;
+          }
+          ctx.clearRect(0,0,200,300);
+          ctx.drawImage(img, x, y);
           console.log(x,y);
-          x--,y++;
-          draw();
+          x -= 3;
+          y++;
         }
+        },10);
+        
+        
       }
 
       setInterval(()=>{
         ctx.clearRect(0,0,200,300);
-        if(index % 2 == 1){
-          requestAnimationFrame(draw);
-          
-        }else{
-          ctx.drawImage(imgs[1], 0, 0);
-        }
+        // requestAnimationFrame(draw);
+        draw();
         index++;
       },3000);
 
