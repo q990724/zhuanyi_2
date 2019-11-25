@@ -1,18 +1,17 @@
 <template>
-   <router-link to="chooseClass">
-      <div class="hitem">
-         <van-row>
-            <van-col span="5" class="pic">
-               <img :src="`http://127.0.0.1:5050/${item.hpic}`">
-            </van-col>
-            <van-col span="19" class="content">
-               <h5>{{item.hname}}</h5>
-               <div><span>{{item.hrank}}</span> <span>{{item.hmajor}}</span></div>
-               <p><span>{{item.comment_msg}}</span></p>
-            </van-col>
-         </van-row>
-      </div>
-   </router-link>
+   <div class="hitem" @click="goChooseClass">
+      <van-row>
+         <van-col span="5" class="pic">
+            <!-- `http://127.0.0.1:5050/${item.hpic}` -->
+            <img src="../../../../public/images/index/1.png">
+         </van-col>
+         <van-col span="19" class="content">
+            <h5>{{item.hospital}}</h5>
+            <div><span>{{item.legalperson}}</span> <span>{{item.regdate ? item.regdate : "暂时未知"}}</span></div>
+            <p><span>{{item.regaddress}}</span></p>
+         </van-col>
+      </van-row>
+   </div>
    
 </template>
 
@@ -21,8 +20,24 @@ export default {
    props : ["item"],
    data(){
       return{
-         
+         hid : 0
       }
+   },
+   methods : {
+      goChooseClass(e){
+         if(this.hid == 0){
+            this.$notify({
+               type : "danger",
+               message : "出现错误"
+            });
+            return;
+         }
+         this.$store.commit("setOrderStep",{name : "hid" , val : this.hid});
+         this.$router.push("chooseClass");
+      }
+   },
+   created(){
+      this.hid = this.item.detailid;
    }
 }
 </script>

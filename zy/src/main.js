@@ -11,6 +11,9 @@ axios.defaults.withCredentials = true;
 // 完整引入vant
 import Vant from 'vant';
 import 'vant/lib/index.css';
+
+import "../public/font_2pwk3xyas9n/iconfont.css"
+
 Vue.use(Vant);
 Vue.config.productionTip = false
 
