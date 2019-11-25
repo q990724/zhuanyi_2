@@ -89,13 +89,14 @@ export default {
       setTimeout(()=>{
         // 定时器,每隔一段时间就加载recommand的数据 然后把它存放在list中 去遍历list
         for(var i = 0; i < 2; i++){
+          // push之后 list已经改变了  ,等到变一次之后,list数量已经变了,再循环第二次就已经是当前list的长度了 
           this.list.push(this.recommand[this.list.length]);
           console.log(this.list.length);
         }
-        this.loading = false;
+        this.loading = false;//加载完成
         this.$emit("open",{opacity : 1})
         if(this.list.length >= this.recommand.length){
-          this.finished = true;
+          this.finished = true;//整体加载结束
           return;
         }
         
