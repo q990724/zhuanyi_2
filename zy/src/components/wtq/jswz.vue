@@ -86,9 +86,9 @@
       <van-swipe style="height: 150px;" vertical :autoplay = "4000" :show-indicators=false :duration = "4000">
         <van-swipe-item>
           <ul class="people-list">
-            <li>北京 的患者张**购买了 <span data-id="sprice">¥19</span> 电话问诊 <span>3分钟前</span></li>
-            <li>北京 的患者张**购买了 <span data-id="sprice">¥19</span> 电话问诊 <span>3分钟前</span></li>
-            <li>北京 的患者张**购买了 <span data-id="sprice">¥19</span> 电话问诊 <span>3分钟前</span></li>
+            <li>北京 的患者张**购买了 <span data-id="price">¥19</span> 电话问诊 <span>3分钟前</span></li>
+            <li>北京 的患者张**购买了 <span data-id="price">¥19</span> 电话问诊 <span>3分钟前</span></li>
+            <li>北京 的患者张**购买了 <span data-id="price">¥19</span> 电话问诊 <span>3分钟前</span></li>
           </ul>
         </van-swipe-item>
         <van-swipe-item>
