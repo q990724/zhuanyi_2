@@ -5,7 +5,6 @@
       title="我的问诊"
       left-arrow
       @click-left="onClickLeft"
-      @click-right="onClickRight"
     />
     <!-- 组件 标签页 -->
     <van-tabs v-model="activeName" color="#3F86FF">
@@ -32,10 +31,15 @@
 </template>
 <script>
 import nowz from './nowz'
+import goback from './js/tz.js'
 export default {
   methods:{
-     onClickLeft(){},
-     onClickRight(){},
+    onClickLeft(){},
+    onClickRight(){},
+    // 返回上一页------go(-1)--bug???
+    onClickLeft(){
+      this.goback();
+    }
   },
   data(){
     return {

@@ -45,7 +45,7 @@
                 <van-row type="flex" justify="space-between" gutter="18">
                     <van-col span="12">
                         <div class="jswz">
-                            <h2>极速问诊 <img src="../../../public/images/index/k.png"></h2>
+                            <h2 @click="go_jswz">极速问诊 <img src="../../../public/images/index/k.png"></h2>
                             <p>三甲专家/<span>3分钟</span>接诊</p>
                         </div>
                     </van-col>
@@ -323,6 +323,10 @@ export default {
         }
     },
     methods : {
+        // 跳到极速问诊
+        go_jswz(){
+            this.$router.push("/jswz");
+        },
         // 关闭头部广告
         closeBanner(){
             this.showBanner = false;
