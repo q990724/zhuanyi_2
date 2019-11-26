@@ -9,7 +9,7 @@
 <template>
   <div id="jxwz">
     <!-- 组件头部 -->
-    <van-nav-bar title="急速问诊" left-arrow @click-left="onClickLeft"/>
+    <van-nav-bar class="bar" fixed title="急速问诊" left-arrow @click-left="onClickLeft"/>
     <!-- 上方图片 -->
     <div class="top-img">
       <!-- 在线接诊医生数 -->
@@ -17,6 +17,12 @@
         <p>当前在线接诊医生人数</p>
         <div class="top-count">
           <!-- 数量显示 -->
+            <!-- 轮播组件 -->
+            <span>0</span>   
+            <span>2</span>   
+            <span>4</span>   
+            <span>1</span>   
+            <span>0</span>   
         </div>
       </div>
       <!-- canvas 绘图 -->
@@ -192,7 +198,7 @@ export default {
   methods: {
     // 组件头部导航栏后退
     onClickLeft() {
-      goback(this);
+      this.back(this);
     },
     // 跳转到我的问诊
     gotomywz() {
@@ -213,7 +219,7 @@ export default {
       var funs= [];//保存到这个数组中,多个promise对象
 
       // 获取图片对应的文字,保存在数组中
-      var docInfo = [];
+      // var docInfo = [];
       var obj = {};//保存最终所有图片和图片对应的医生信息
 
       //遍历imageUrl (每次遍历到的都是一个###对象) 创建所有图片
@@ -234,10 +240,10 @@ export default {
 
 
       }//循环结束
-      console.log(imgs);
+      
       Promise.all(funs).then(res=>{
         console.log(res);
-        imgs = res;
+        imgs = res;console.log(imgs);
       })
 
       // 此时两个照片都保存在imgs中  然后对应的医生信息保存在 docInfo中
@@ -271,10 +277,11 @@ export default {
             y = 20;
           }
           
-          // ctx.clearRect(0,0,200,300);
-          // ctx.fillText(str1,150,250);
-          // ctx.fillText(str2,150,250);
-          // ctx.drawImage(img, x, y);
+          ctx.clearRect(0,0,200,300);
+          ctx.fillText(str1,150,250);
+          ctx.fillText(str2,150,250);
+          ctx.font = "20px SimHei";
+          ctx.drawImage(img, x, y);
           
 
           // ctx.font = "39px SimHei" #字体大小 字体
@@ -298,7 +305,7 @@ export default {
   },
   mounted() {
     this.isDraw = true;
-    // this.doDraw(this.docInfo);
+    this.doDraw(this.docInfo);
   },
   beforeDestroy(){
     this.isDraw = false;
@@ -312,6 +319,19 @@ export default {
   right: 0;
   top: 1.25rem;
   /* border: 1px solid #000; */
+}
+
+/* .top-count{
+  display:flex;
+} */
+/* .one{
+  width:.625rem;
+  height:1.25rem;
+} */
+
+.bar{
+  z-index:999;
+  /* background-color:#fff6e6; */
 }
 .small-icon {
   position: fixed;
@@ -354,8 +374,23 @@ export default {
   width: 100%;
   height: 23rem;
   position: relative;
+  margin-top:46px;
+  background-color:#fff;
 }
-
+.top-count{
+  position:absolute;
+  top:14.625rem;
+  left:2.625rem;
+  font-weight:700;
+}
+.top-count span{
+  width:1.5rem;
+  height:1.5rem;
+  background-color:#d6eaff;
+  padding:.5rem;
+  margin-right:.5rem;
+  border-radius:.3125rem;
+}
 .top-text p {
   font-weight: 400;
   color: #83889a;
@@ -438,4 +473,5 @@ export default {
   color: #83889a;
   font-size: 0.6rem;
 }
+
 </style>

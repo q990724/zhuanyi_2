@@ -38,7 +38,7 @@ export default {
     onClickRight(){},
     // 返回上一页------go(-1)--bug???
     onClickLeft(){
-      this.goback();
+      this.back(this);
     }
   },
   data(){
