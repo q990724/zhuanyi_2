@@ -18,7 +18,7 @@ import weather from '../components/wtq/weather'
 import nowz from '../components/wtq/nowz'
 import index from "../components/cfy/index"
 import parent from "../views/cfy/parent"
-import test from "../views/cfy/test"
+import test from "../components/cfy/test"
 import goGuaHao from "../components/cfy/goGuaHao/goGuaHao"
 import login from "../components/mhp/login" //用户快速登录页面
 import pwdLogin from "../components/mhp/pwdLogin" //密码登录页面
@@ -53,7 +53,8 @@ const routes = [
   {path: "/h_detail",component: h_detail},
   {path: "/d_detail",component: d_detail},
   {path: "/order",component: order},
-  {path: "/map",component: map}
+  {path: "/map",component: map},
+  {path: "/test",component: test}
 ]
 
 const router = new VueRouter({

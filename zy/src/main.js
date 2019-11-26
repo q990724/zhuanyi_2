@@ -8,9 +8,11 @@ import VueJsonp from 'vue-jsonp'
 
 
 
-axios.defaults.baseURL = "http://127.0.0.1:5050/"
+// axios.defaults.baseURL = "/api/"
+
+Vue.prototype.axios = axios;
 //保存session 信息
-axios.defaults.withCredentials = true;
+//axios.defaults.withCredentials = true;
 // 完整引入vant
 import Vant from 'vant';
 import 'vant/lib/index.css';
