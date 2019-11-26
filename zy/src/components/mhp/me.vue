@@ -8,7 +8,7 @@
         <div class="user-info">
             <!-- 2.1设置按钮 -->
             <van-row>
-                <van-col class="set" span="12">
+                <van-col class="set" offset="22" span="2">
                     <img class="set-img" src="../../../public/images/me/me/icon-set.png" alt="">
                 </van-col>
             </van-row>
@@ -27,7 +27,7 @@
                 </van-col>
             </van-row>
             <!-- 2.3vip -->
-            <van-row class="vip-ad" type="flex" justify="space-between">
+            <van-row class="vip-ad" type="flex" justify="space-between" >
                 <van-col class="vip-img" span="4">
                     <img src="../../../public/images/me/me/Mr.png" alt="">
                 </van-col>
@@ -59,7 +59,7 @@
             <van-col span="6" class="quan-item">
                 <p>10</p>
                 <span>健康币(个)</span>
-                <span>签到领福利喽</span>
+                <p class="healthy">签到领福利喽</p>
             </van-col>
             <van-col span="6" class="quan-item">
                 <p>****</p>
@@ -69,6 +69,12 @@
         </van-row>
         </div>
         <!-- 4.我的订单 -->
+        <div>
+            <van-nav-bar class="tool-title" title="我的订单"/>
+            <van-row class="tool-con myorder" type="flex" justify="center">
+                <orderItem v-for="(l,i) of list" :key="i"></orderItem>
+            </van-row>
+        </div>
         <!-- 5.常用工具 -->
         <div class="tool">
             <!-- 2.1标题 -->
@@ -94,25 +100,64 @@
 </template>
 <script>
 import "../../assets/css/animate.css"
+import config from "../../assets/js/config.js"
+import orderItem from "./moreCpt/orderItem"
 export default {
     data() {
         return {
-            
+            list:[
+                {text:"我的预约",path:"../../../public/images/me/me/icon-book.png"},
+                {text:"我的预约",path:"../../../public/images/me/me/icon-book.png"},
+                {text:"我的预约",path:"../../../public/images/me/me/icon-book.png"},
+                {text:"我的预约3",path:"../../../public/images/me/me/icon-book.png"},
+            ],
         }
+    },
+    created(){
+        this.isLogin();
     },
     methods: {
         onClickLeft(){
             this.$router.go(-1);
+        },
+        isLogin(){
+            config.axios.get("/user/islogin").then(res=>{
+                if(res.data.code==1){
+                    this.$toast("登录成功！")
+                }else{
+                    this.$router.push("/login");
+                }
+            })
+            .catch(err=>{
+                console.log(err);
+            })
         }
     },
     components:{
-
+        "orderItem":orderItem,
     },
 }
 </script>
 <style scoped>
     .healthy{
         animation: bounce 3s infinite;
+        color:#fff;
+        background: chocolate;
+        font-size: .654962rem !important;
+        height:1.221374rem;
+        line-height: 1.221374rem;
+        text-align: center;
+        padding:0 !important;
+        font-weight: normal !important;
+        z-index: 999;
+    }
+    .healthy::before{
+        content:"";
+        border:.305344rem solid transparent !important;
+        border-bottom: chocolate;
+        position:absolute;
+        left:50%;
+        top: -0.305344rem;
     }
     .me-title{
         width:100%;
@@ -132,6 +177,7 @@ export default {
         background: url("../../../public/images/me/me/OXn.png");
         height:11.419847rem;
         margin-top:2.931298rem;
+        padding:0 0.421374rem;
     }
     .set{
         padding-top:.821374rem;
@@ -173,10 +219,10 @@ export default {
     }
     .vip-ad{
         background: url("../../../public/images/me/me/OLY.png") repeat-y  ;
-        background-size: 95% 100%;
-        width:95.5%;
+        background-size: 93% 100%;
+        background-position: center;
+        width:96.5%;
         margin-top: 0.921374rem;
-        margin-bottom: 0;
         padding:.210687rem .510687rem;
     }
     .vip-img{
@@ -186,6 +232,7 @@ export default {
         width:1.221374rem;
         height:1.221374rem;
         margin-top:.510687rem;
+        margin-left: 0.821374rem;
     }
     .vip-text{
         font-size: 1.077099rem;
@@ -222,4 +269,10 @@ export default {
         font-size:.732824rem;
         color:#83889a;
     }
+    .myorder{
+        margin-bottom: .610687rem;
+        text-align: center;
+        line-height:200%;
+    }
+    
 </style>
