@@ -271,10 +271,10 @@ export default {
             y = 20;
           }
           
-          ctx.clearRect(0,0,200,300);
+          // ctx.clearRect(0,0,200,300);
           // ctx.fillText(str1,150,250);
           // ctx.fillText(str2,150,250);
-          ctx.drawImage(img, x, y);
+          // ctx.drawImage(img, x, y);
           
 
           // ctx.font = "39px SimHei" #字体大小 字体
