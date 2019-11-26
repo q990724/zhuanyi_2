@@ -21,7 +21,7 @@
                   </p>
                </van-col>
                <van-col span="4" class="yy">
-                  <van-tag type="primary" plain >预约</van-tag>
+                  <van-tag type="primary" plain :data-did="item.detailid" @click="goDetail">预约</van-tag>
                </van-col>
             </van-row>
          </van-col>
@@ -35,6 +35,14 @@ export default {
    data(){
       return{
          unknowPic : require('../../../../public/images/qgh/unknow.png')
+      }
+   },
+   methods : {
+      goDetail(e){
+         var did = e.target.dataset.did;
+         if(!did) did = 61293;
+         this.$store.commit("setOrderStep",{name : "did" , val : did});
+         this.$router.push("d_detail");
       }
    }
 }
