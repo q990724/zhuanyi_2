@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     orderStep : {},
-    hospitalDetail : {}
+    hospitalDetail : {},
+    doctorDetail : {}
   },
   getters : {
     getOrderStep(state){
@@ -14,6 +15,9 @@ export default new Vuex.Store({
     },
     getHospitalDetail(state){
       return state.hospitalDetail;
+    },
+    getDoctorDetail(state){
+      return state.doctorDetail;
     }
   },
   mutations: {
@@ -22,6 +26,9 @@ export default new Vuex.Store({
     },
     setHospitalDetail(state,obj){
       state.hospitalDetail = obj;
+    },
+    setDoctorDetail(state,obj){
+      state.doctorDetail = obj;
     }
   },
   actions: {
