@@ -5,14 +5,15 @@
         <img src="../../../public/images/shopping/bu99c-lmzdu.png" alt="">
       </span>
     </van-col>
-    <van-col span="16" class = "shopping-search">
+    <van-col span="15" class = "shopping-search">
       <router-link to = "">
         <span>
-          <img src="../../../public/images/shopping/bas27-e3p3a.png" alt="">
+          <img src="../../../public/images/shopping/fdj.png" alt="">
+          <span>搜索你想找的商品</span>
         </span>
       </router-link>
     </van-col>
-    <van-col span="3" class = "commodity-order">
+    <van-col span="4" class = "commodity-order">
       <router-link to = "">
         <span>
           <img src="../../.././public/images/shopping/batbi-8osvo.png" alt="">
@@ -47,13 +48,25 @@ export default {
     background: #fff;
     align-items: center;
   }
+  
   .shopping-search a{
     background: #e0e1e6;
     height: 2.2rem;
+    /* line-height: 1.9; */
+    align-items: center;
     margin: 0 1.03125rem;
     display: flex;
     border-radius: 1rem;
     padding-left: .9625rem;
+  }
+  .shopping-search a>span>img{
+    width: 1.5625rem;
+    height: 1.5625rem;
+  }
+  .shopping-search a>span>span{
+    color: #9d9ea7;
+    font-size: .9625rem;
+    padding-left: .6875rem;
   }
   .commodity-order>a,.shopping-cart>a{
     position: relative;
