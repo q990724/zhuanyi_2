@@ -3,6 +3,39 @@
     <router-view/>
   </div>
 </template>
+<script>
+import { Dialog } from 'vant';
+export default {
+  // 116
+  created(){
+    window.onkeydown = (e)=>{
+      var msg = "刷新后您当前的预约信息会被清空,确认刷新?";
+      e = e || window.event;
+      if(e.keyCode == 116){
+        e.preventDefault();
+        var nowPath = this.$route.path
+        if(nowPath == "/" || nowPath == "/jswz"){
+          window.location.reload();
+          return;
+        }
+
+        Dialog.confirm({
+          title: '确认刷新?',
+          message: msg
+        }).then(() => {
+          window.location.reload();
+        }).catch(() => {
+          return;
+        });
+      }
+    }
+    window.addEventListener('load', ()=>{
+      if(this.$route.path=="/") return;
+      this.$router.replace('/') // 列表页面的路由
+    })
+  }
+}
+</script>
 
 <style>
   *{

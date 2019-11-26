@@ -76,7 +76,7 @@ router.post("/insertUserOrder",function(req,res){
 //判断用户是否已经登录
 router.get("/islogin",function(req,res){
    if(!req.session.uid){
-     res.send({code : -1 , msg : "请重新登录!"});
+     res.send({code : -1 , msg : "未登录!"});
    }else{
      res.send({code : 1 , msg : "已登录"});
    }

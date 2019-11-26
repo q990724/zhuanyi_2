@@ -16,6 +16,7 @@ import Vant from 'vant';
 import 'vant/lib/index.css';
 import goback from "./components/wtq/js/tz"
 import "../public/font_2pwk3xyas9n/iconfont.css"
+import "../public/js/jquery-1.11.3"
 
 Vue.use(Vant);
 Vue.config.productionTip = false
