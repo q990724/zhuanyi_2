@@ -107,7 +107,8 @@ export default {
     created(){
         this.$store.commit("setOrderStep",{name : "className" , val : this.className});
         this.$store.commit("setOrderStep",{name : "classSubname" , val : this.classSubname});
-        console.log(this.$store.getters.getOrderStep);
+        var code = this.$store.getters.getOrderStep.cityCode;
+        if(!code)code=110000;
         this.detailId = this.$store.getters.getOrderStep.hid;
         $.ajax({
             url : `https://api.jisuapi.com/hospital/detailhospital?detailid=${this.detailId}&appkey=90b47e2a6f6c02d3`,
@@ -116,6 +117,17 @@ export default {
             success: data=>{  
                 this.result = data.result;
                 this.$store.commit("setHospitalDetail",this.result);
+                //获取当前医院的经纬度
+                $.ajax({
+                    url : `http://restapi.amap.com/v3/geocode/geo?key=5d67a03906f29f89e83779c660bfe15c&s=rsv3&city=${code}&address=${this.result.hospital}`,
+                    dataType : "jsonp",
+                    success : data=>{
+                        console.log("获取医院地址信息成功");
+                        console.log(data);
+                        this.$store.commit("setOrderStep",{name : "cityLocation" , val : data.geocodes[0].location});
+                        console.log(this.$store.getters.getOrderStep);
+                    }
+                });
             }
         });
 

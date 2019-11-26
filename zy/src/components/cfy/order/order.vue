@@ -136,7 +136,7 @@
       border-bottom: .04266667rem solid #eee;
       height: 3.375rem;
       display: flex;
-      justify-content: start;
+      justify-content: flex-start;
       align-items: center;
       margin-top: 2.5rem;
       background: #fff;

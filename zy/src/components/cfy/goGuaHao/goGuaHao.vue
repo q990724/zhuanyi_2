@@ -226,10 +226,12 @@ export default {
         //获取当前经纬度
         getMyPosition(result => {
           this.position = result.lng + "," + result.lat;
+          this.$store.commit("setOrderStep",{name : "position",val : this.position});
           console.log(this.position);
         });
         getCity(cityCode => {
           this.cityCode = cityCode;
+          this.$store.commit("setOrderStep",{name : "cityCode" ,val : cityCode})
           console.log(this.cityCode);
           switch (this.cityCode) {
             case "110000": {

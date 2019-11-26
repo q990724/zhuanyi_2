@@ -31,6 +31,16 @@
         <span class="todetail" @click="todetail">查看详情</span>
       </div>
     </div>
+    <div class="map">
+      <van-row>
+        <van-col span="20">
+          <p><span>医院地址：</span>{{result.address ? result.address : result.regaddress}}</p>
+        </van-col>
+        <van-col span="4">
+          <b @click="goMap">导航</b>
+        </van-col>
+      </van-row>
+    </div>
     <div class="content">
       <div class="left-days">
         <div class="text">
@@ -89,16 +99,41 @@ export default {
     },
     todetail:function(){
       this.$router.push("h_detail")
+    },
+    goMap(){
+      this.$router.push("map");
+      // window.open("https://m.amap.com/navi/?start=116.403124,39.940693&dest=116.481488,39.990464&destName=方恒国际中心&naviBy=car&key=5d67a03906f29f89e83779c660bfe15c");
     }
   },
   created(){
     this.result = this.$store.getters.getHospitalDetail;
-   console.log(this.detailId);
+    console.log("my:" + this.$store.getters.getOrderStep.position);
+    console.log(this.result);
+    console.log(this.detailId);
   }
 }
 </script>
 
 <style scoped>
+.map{
+  margin: .625rem 0;
+  background: #fff;
+  padding: .5rem .625rem;
+}
+.map b{
+  font-size: 1rem;
+  padding: 0 .8rem;
+  background: #4294fe;
+  color: #fff;
+  border-radius: .625rem;
+}
+
+.map p{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+
 .van-nav-bar .van-icon{
   color:#000;
 }

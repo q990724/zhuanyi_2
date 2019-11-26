@@ -27,7 +27,7 @@ import h_main from "../components/zwb/h_main"
 import h_detail from "../components/zwb/h_detail"
 import d_detail from "../components/cfy/chooseDoctor/doctorDetail"
 import order from "../components/cfy/order/order"
-
+import map from "../components/cfy/map/map"
 import me from "../components/mhp/me"
 Vue.use(VueRouter)
 
@@ -50,7 +50,8 @@ const routes = [
   {path: "/h_main",component: h_main},
   {path: "/h_detail",component: h_detail},
   {path: "/d_detail",component: d_detail},
-  {path: "/order",component: order}
+  {path: "/order",component: order},
+  {path: "/map",component: map}
 ]
 
 const router = new VueRouter({

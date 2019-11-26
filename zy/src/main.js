@@ -4,6 +4,9 @@ import router from './router'
 import store from './store'
 import axios from "axios"
 import vant from "vant"
+import VueJsonp from 'vue-jsonp'
+
+
 
 axios.defaults.baseURL = "http://127.0.0.1:5050/"
 //保存session 信息
@@ -17,7 +20,7 @@ import "../public/font_2pwk3xyas9n/iconfont.css"
 Vue.use(Vant);
 Vue.config.productionTip = false
 Vue.prototype.back = goback;
-
+Vue.use(VueJsonp);
 
 new Vue({
   router,
