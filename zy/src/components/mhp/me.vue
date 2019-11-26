@@ -5,10 +5,10 @@
             <van-nav-bar class="me-title" title="我" left-arrow @click-left="onClickLeft"  fixed/>
         </header>
         <!-- 2.用户信息 -->
-        <div class="user-info" style="position:relative;">
+        <div class="user-info">
             <!-- 2.1设置按钮 -->
             <van-row>
-                <van-col class="set" offset="22" span="12">
+                <van-col class="set" span="12">
                     <img class="set-img" src="../../../public/images/me/me/icon-set.png" alt="">
                 </van-col>
             </van-row>
@@ -64,7 +64,7 @@
             <van-col span="6" class="quan-item">
                 <p>****</p>
                 <span>健康账户(元)</span>
-                <p class="bounce">理财/红包/充值</p>
+                <p class="healthy">理财/红包/充值</p>
             </van-col>
         </van-row>
         </div>
@@ -93,6 +93,7 @@
     </div>
 </template>
 <script>
+import "../../assets/css/animate.css"
 export default {
     data() {
         return {
@@ -110,6 +111,9 @@ export default {
 }
 </script>
 <style scoped>
+    .healthy{
+        animation: bounce 3s infinite;
+    }
     .me-title{
         width:100%;
     }
@@ -173,10 +177,6 @@ export default {
         width:95.5%;
         margin-top: 0.921374rem;
         margin-bottom: 0;
-        position: absolute;
-        bottom: 0;
-        left:3%;
-        right:3%;
         padding:.210687rem .510687rem;
     }
     .vip-img{
