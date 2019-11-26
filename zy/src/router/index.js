@@ -25,6 +25,8 @@ import chooseClass from "../components/cfy/chooseClass/chooseClass"
 import chooseDoctor from "../components/cfy/chooseDoctor/chooseDoctor"
 import h_main from "../components/zwb/h_main"
 import h_detail from "../components/zwb/h_detail"
+import d_detail from "../components/cfy/chooseDoctor/doctorDetail"
+import order from "../components/cfy/order/order"
 
 import me from "../components/mhp/me"
 Vue.use(VueRouter)
@@ -47,6 +49,8 @@ const routes = [
   {path: "/me",component: me},
   {path: "/h_main",component: h_main},
   {path: "/h_detail",component: h_detail},
+  {path: "/d_detail",component: d_detail},
+  {path: "/order",component: order}
 ]
 
 const router = new VueRouter({
