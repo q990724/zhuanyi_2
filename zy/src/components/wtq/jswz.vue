@@ -9,7 +9,7 @@
 <template>
   <div id="jxwz">
     <!-- 组件头部 -->
-    <van-nav-bar title="急速问诊" left-arrow @click-left="onClickLeft"/>
+    <van-nav-bar class="bar" fixed title="急速问诊" left-arrow @click-left="onClickLeft"/>
     <!-- 上方图片 -->
     <div class="top-img">
       <!-- 在线接诊医生数 -->
@@ -17,6 +17,12 @@
         <p>当前在线接诊医生人数</p>
         <div class="top-count">
           <!-- 数量显示 -->
+            <!-- 轮播组件 -->
+            <span>0</span>   
+            <span>2</span>   
+            <span>4</span>   
+            <span>1</span>   
+            <span>0</span>   
         </div>
       </div>
       <!-- canvas 绘图 -->
@@ -177,18 +183,24 @@ export default {
   data() {
     return {
       active: 0,
-      imageUrl:[require("../../../public/images/index/急速问诊/top-entry-health.png"),require("../../../public/images/index/急速问诊/top-entry-help.png")], 
+      docInfo:[
+        { picSrc : require("../../../public/images/index/急速问诊/top-entry-health.png"), docName : "张光华 主任医师" , keshi : "湖南省人民医院"},
+        { picSrc : require("../../../public/images/index/急速问诊/top-entry-help.png"), docName : "厉致诚 主任医师" , keshi : "辽宁省人民医院"},
+      ], 
       // img1: new Image(), // 背景图片缓存
       // img2: new Image(), // 背景图片缓存
       // context: {}, // canvas对象
       // imageUrl:["../../../public/images/index/急速问诊/top-entry-health.png","../../../public/images/index/急速问诊/top-entry-help.png"],//图片路径
-      isDraw : false
+      isDraw : false,
+
     };
   },
   methods: {
+    // 组件头部导航栏后退
     onClickLeft() {
-      goback(this);
+      this.back(this);
     },
+    // 跳转到我的问诊
     gotomywz() {
       this.$router.push("/wz");
     },
@@ -199,37 +211,61 @@ export default {
 
     // 在Canvas画布 添加图片
     // imageUrl为后台提供图片地址
-    doDraw(imageUrl) {
+    doDraw(docInfo) {
       var canvas = document.getElementById("mycanvas");
       var ctx = canvas.getContext("2d");
       var index = 1;
       var imgs =[];
-      var funs= [];
-      //遍历imageUrl 创建所有图片
-      for(var item of imageUrl){
+      var funs= [];//保存到这个数组中,多个promise对象
+
+      // 获取图片对应的文字,保存在数组中
+      // var docInfo = [];
+      var obj = {};//保存最终所有图片和图片对应的医生信息
+
+      //遍历imageUrl (每次遍历到的都是一个###对象) 创建所有图片
+      for(var item of docInfo){
+
+        //每遍历一次 就把内部的img 
         funs.push(new Promise((resolve,reject)=>{
           var img = new Image();
-          img.src = item;
+          img.src = item.picSrc;
           img.onload = ()=>{
             resolve(img);
+            console.log(img);
           }
-        }))
-      }
+          
+        }));
 
+
+
+
+      }//循环结束
+      
       Promise.all(funs).then(res=>{
-        imgs = res;
+        console.log(res);
+        imgs = res;console.log(imgs);
       })
+
+      // 此时两个照片都保存在imgs中  然后对应的医生信息保存在 docInfo中
 
       var x = 100,y = -10;
       
       var draw = ()=>{
         if(!this.isDraw) return;
         var img;
+        var str1;//保存医生名
+        var str2;//保存医生医院
         if(index % 2 == 1){
-          img = imgs[0]
+          img = imgs[0];
+          str1 = this.docInfo[0].docName;
+          str2 = this.docInfo[0].keshi;
         }else{
           img = imgs[1]
+          str1 = this.docInfo[1].docName;
+          str2 = this.docInfo[1].keshi;
         }
+
+        console.log(img,str1,str2);
         var id = setInterval(()=>{
           if(x <= 10){
           x = 100;
@@ -240,8 +276,16 @@ export default {
           if(y >= 20){
             y = 20;
           }
+          
           ctx.clearRect(0,0,200,300);
+          ctx.fillText(str1,150,250);
+          ctx.fillText(str2,150,250);
+          ctx.font = "20px SimHei";
           ctx.drawImage(img, x, y);
+          
+
+          // ctx.font = "39px SimHei" #字体大小 字体
+          // ctx.textBaseline = "top"; [top;alphabetic;bottom]
           console.log(x,y);
           x -= 3;
           y++;
@@ -261,7 +305,7 @@ export default {
   },
   mounted() {
     this.isDraw = true;
-    this.doDraw(this.imageUrl);
+    this.doDraw(this.docInfo);
   },
   beforeDestroy(){
     this.isDraw = false;
@@ -274,7 +318,20 @@ export default {
   position: absolute;
   right: 0;
   top: 1.25rem;
-  border: 1px solid #000;
+  /* border: 1px solid #000; */
+}
+
+/* .top-count{
+  display:flex;
+} */
+/* .one{
+  width:.625rem;
+  height:1.25rem;
+} */
+
+.bar{
+  z-index:999;
+  /* background-color:#fff6e6; */
 }
 .small-icon {
   position: fixed;
@@ -317,8 +374,23 @@ export default {
   width: 100%;
   height: 23rem;
   position: relative;
+  margin-top:46px;
+  background-color:#fff;
 }
-
+.top-count{
+  position:absolute;
+  top:14.625rem;
+  left:2.625rem;
+  font-weight:700;
+}
+.top-count span{
+  width:1.5rem;
+  height:1.5rem;
+  background-color:#d6eaff;
+  padding:.5rem;
+  margin-right:.5rem;
+  border-radius:.3125rem;
+}
 .top-text p {
   font-weight: 400;
   color: #83889a;
@@ -401,4 +473,5 @@ export default {
   color: #83889a;
   font-size: 0.6rem;
 }
+
 </style>

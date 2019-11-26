@@ -1,15 +1,18 @@
 <template>
     <div class="me-container">
         <!-- 1.标题 -->
-        <van-nav-bar class="me-title" title="我" left-arrow @click-left="onClickLeft" />
+        <header>
+            <van-nav-bar class="me-title" title="我" left-arrow @click-left="onClickLeft"  fixed/>
+        </header>
         <!-- 2.用户信息 -->
-        <div class="user-info" style="position: relative;">
-            <!-- 2.1标题 -->
+        <div class="user-info">
+            <!-- 2.1设置按钮 -->
             <van-row>
-                <van-col class="set" offset="22" span="12">
+                <van-col class="set" span="12">
                     <img class="set-img" src="../../../public/images/me/me/icon-set.png" alt="">
                 </van-col>
             </van-row>
+            <!-- 2.2头像和说明信息 -->
             <van-row class="all-info" type="flex" justify="center">
                 <van-col class="avator" span="6">
                     <img src="../../../public/images/me/me/q.png" alt="">
@@ -23,29 +26,48 @@
                     </div>
                 </van-col>
             </van-row>
-            <van-row class="vip-ad" type="flex" justify="center">
-                <van-col span="4">
+            <!-- 2.3vip -->
+            <van-row class="vip-ad" type="flex" justify="space-between">
+                <van-col class="vip-img" span="4">
                     <img src="../../../public/images/me/me/Mr.png" alt="">
                 </van-col>
-                <van-col span="8">
+                <van-col class="vip-text" span="6">
                     <span>健康VIP会员</span>
                 </van-col>
-                <van-col span="10">
+                <van-col span="12">
                     <van-swipe :autoplay="3000" style="height: 2rem; width:12.5rem" vertical :show-indicators="false">
                         <van-swipe-item>
-                            <div class="van-ellipsis">每天只需0.5元/天，一年预计可省1510元</div>
+                            <div class="van-ellipsis car-text">每天只需0.5元/天，一年预计可省1510元</div>
                         </van-swipe-item>
                         <van-swipe-item>
-                            <div class="van-ellipsis">解锁专家号源实时提醒，挂号不再难</div>
+                            <div class="van-ellipsis car-text">解锁专家号源实时提醒，挂号不再难</div>
                         </van-swipe-item>
                     </van-swipe>
                 </van-col>
-                <van-col span="2">
+                <van-col span="2" class="r-arrow">
                     <img src="../../../public/images/me/me/r.png" alt="">
                 </van-col>
             </van-row>
         </div>
         <!-- 3.优惠券说明 -->
+        <div>
+        <van-row type="flex" justify="space-around" class="quan">
+            <van-col span="6" class="quan-item">
+                <p>0</p>
+                <span>优惠券(张)</span>
+            </van-col>
+            <van-col span="6" class="quan-item">
+                <p>10</p>
+                <span>健康币(个)</span>
+                <span>签到领福利喽</span>
+            </van-col>
+            <van-col span="6" class="quan-item">
+                <p>****</p>
+                <span>健康账户(元)</span>
+                <p class="healthy">理财/红包/充值</p>
+            </van-col>
+        </van-row>
+        </div>
         <!-- 4.我的订单 -->
         <!-- 5.常用工具 -->
         <div class="tool">
@@ -65,17 +87,13 @@
             </van-row>
         </div>
         <!-- 6.我的社区 -->
-        <van-swipe style="height: 200px;" vertical>
-                <van-swipe-item>1</van-swipe-item>
-                <van-swipe-item>2</van-swipe-item>
-                <van-swipe-item>3</van-swipe-item>
-                <van-swipe-item>4</van-swipe-item>
-              </van-swipe>
+        
         <!-- 7.健康档案 -->
 
     </div>
 </template>
 <script>
+import "../../assets/css/animate.css"
 export default {
     data() {
         return {
@@ -93,8 +111,11 @@ export default {
 }
 </script>
 <style scoped>
+    .healthy{
+        animation: bounce 3s infinite;
+    }
     .me-title{
-        border-bottom: .061069rem solid #eee;
+        width:100%;
     }
     .tool-title{
         border-bottom: .061069rem solid #eee;
@@ -104,9 +125,13 @@ export default {
         background: #fff;
         border-bottom: .061069rem solid #eee;
     }
+    .user{
+        height:11.419847rem;
+    }
     .user-info{
         background: url("../../../public/images/me/me/OXn.png");
         height:11.419847rem;
+        margin-top:2.931298rem;
     }
     .set{
         padding-top:.821374rem;
@@ -149,11 +174,52 @@ export default {
     .vip-ad{
         background: url("../../../public/images/me/me/OLY.png") repeat-y  ;
         background-size: 95% 100%;
-        width:100%;
+        width:95.5%;
         margin-top: 0.921374rem;
         margin-bottom: 0;
-        position: absolute;
-        bottom: 0;
-        left:3%;
+        padding:.210687rem .510687rem;
+    }
+    .vip-img{
+        width:1.532061rem;
+    }
+    .vip-img>img{
+        width:1.221374rem;
+        height:1.221374rem;
+        margin-top:.510687rem;
+    }
+    .vip-text{
+        font-size: 1.077099rem;
+        font-weight: 600;
+        color:#6b331a;
+        margin-top:.38855rem;
+        width:30%;
+    }
+    .car-text{
+        margin-top: .510687rem; 
+        font-size: .754962rem;
+        color:#6b331a;
+    }
+    .r-arrow>img{
+        width:1.221374rem;
+        height:1.221374rem;
+        margin-top:.410687rem;
+        margin-left:-0.88855rem;
+    }
+    .quan{
+        height:4.819084rem;
+        background: #fff;
+        margin-bottom: .610687rem;
+    }
+    .quan-item{
+        text-align: center;
+        line-height: 200%;
+    }
+    .quan-item>p{
+        font-size: 1.099237rem;
+        padding-top:.610687rem;
+    }
+    .quan-item>span{
+        font-size:.732824rem;
+        color:#83889a;
     }
 </style>

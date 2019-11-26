@@ -14,6 +14,7 @@ import jswz from '../components/wtq/jswz'
 import change from '../components/wtq/change'
 import recommand from '../components/wtq/recommand'
 import wz from '../components/wtq/wz'
+import weather from '../components/wtq/weather'
 import nowz from '../components/wtq/nowz'
 import index from "../components/cfy/index"
 import parent from "../views/cfy/parent"
@@ -38,6 +39,7 @@ const routes = [
   {path: '/nowz',name: 'nowz',component: nowz},
   {path: '/jkh',name: 'jkh',component: jkh},
   {path: '/recommand',name: 'recommand',component: recommand},
+  {path: '/weather',name: 'weather',component: weather},
   {path: '/change',name: 'change',component: change},
   {path: '/',component: parent},
   {path: "/parent",component: parent},
