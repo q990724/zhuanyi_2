@@ -76,7 +76,7 @@ export default {
             }
          });
       }
-      this.order_time = new Date(this.item.order_time).toLocaleString();
+      this.order_time = this.item.order_time;
       this.down_time = new Date(this.item.downtime).toLocaleString();
       switch(this.item.status){
          case 1 :{
