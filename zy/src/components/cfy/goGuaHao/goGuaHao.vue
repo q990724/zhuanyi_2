@@ -143,7 +143,8 @@
       </van-row>
     </div>
     <div class="hlist">
-      <div v-for="(item,i) of hospitalsList" :key="i">
+      <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+      <van-cell v-for="(item,i) of hospitalsList" :key="i">
         <hitem :item="item"></hitem>
         <div class="carousel" v-show="i >= 3 && i%3==0">
           <van-swipe :autoplay="parseInt(1500 + Math.random() * 3000)" indicator-color="white">
@@ -158,7 +159,8 @@
             </van-swipe-item>
           </van-swipe>
         </div>
-      </div>
+      </van-cell>
+    </van-list>
     </div>
   </div>
 </template>
@@ -194,7 +196,10 @@ export default {
       hospitalsList: [],
       position: "",
       cityCode: 0,
-      htype : "北京"
+      htype : "北京",
+      pno : 0,
+      loading : false,
+      finished:false
     };
   },
   components: {
@@ -217,6 +222,18 @@ export default {
     },
     goBack(){
       this.back(this);
+    },
+    onLoad(){
+      (async ()=>{
+        this.pno++;
+        var result = await axios_hospitals.getHostpitalAll(this.htype,this.pno);
+        this.hospitalsList = this.hospitalsList.concat(result);
+        this.loading = false;
+
+        if(this.hospitalsList.length >= 90){
+          this.finished = true;
+        }
+      })()
     }
   },
   created() {
