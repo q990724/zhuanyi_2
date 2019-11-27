@@ -40,7 +40,7 @@ router.get("/showUserOrder",function(req,res){
    pool.query(sql,[uid],function(err,result){
       if(err) throw err;
       if(result.length > 0){
-         res.send({code : 1 , msg : "查询成功" , data : result[0]});
+         res.send({code : 1 , msg : "查询成功" , data : result});
       }else{
          res.send({code : -1 , msg : "还没有预约过任何医生!"});
       }
