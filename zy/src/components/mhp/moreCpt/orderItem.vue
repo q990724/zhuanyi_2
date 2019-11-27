@@ -1,12 +1,10 @@
 <template>
-    <div class="order-item-container">
-        <van-col class="order-item" span="6">
-            <div class="order-img">
-                <img src="../../../../public/images/me/me/icon-book.png" alt="">
-            </div>
-            <span>我的预约</span>  
-        </van-col>
-    </div>
+    <van-col class="order-item" span="6">
+        <div class="order-img">
+            <img src="../../../../public/images/me/me/icon-book.png" alt="">
+        </div>
+        <span>我的预约</span>  
+    </van-col>
 </template>
 <script>
 export default {

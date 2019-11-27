@@ -85,7 +85,7 @@ export default{
             this.show=true;
         },
         onClickLeft(){
-            this.$router.go(-1);
+            this.$router.push("/");
         },
         onCancel(){
             this.show = false;

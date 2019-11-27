@@ -10,7 +10,6 @@
         <van-cell-group>
             <van-field
                 v-model="username"
-                clearable
                 left-icon="contact"
                 placeholder="邮箱、手机号或用户名"
                 @click-right-icon="$toast('question')"
@@ -28,7 +27,7 @@
             <van-button type="info" class="okBtn" @click="onLogin">登   录</van-button>
         </div>
         <!-- 5.版权说明 -->
-        <div>
+        <div class="qlogin">
             <router-link  class="pwd" to="/login">快速登录/注册</router-link>
         </div>
         <div class="copy">
@@ -56,8 +55,7 @@ export default{
     },
     methods: {
         onClickLeft(){
-            this.$router.go(-1)
-            // Toast('提示内容');
+            this.$router.push("/")
         },
         onLogin(){
             if(this.username==""){
@@ -103,7 +101,6 @@ export default{
         font-size: .932824rem;
         color:#2f7fe2;
         text-decoration-line: underline;
-        margin-left:43%;
     }
     .copy{
         margin: 1.221374rem 5%;
@@ -120,5 +117,8 @@ export default{
     }
     .copy>div{
         margin:0 15%;
+    }
+    .qlogin{
+        text-align: center;
     }
 </style>
