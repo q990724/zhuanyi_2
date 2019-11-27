@@ -1,4 +1,5 @@
 <template>
+
    <div class = "my-register">
      <van-nav-bar title="标题" left-text="返回" left-arrow />
       <div class = "doc-title">
@@ -49,7 +50,7 @@
         </div>
       </div>
       <div class = "be-careful">
-        <van-collapse :accordion = "false" style="padding:0;">
+        <van-collapse v-model="activeNames" :accordion = "false" style="padding:0;">
           <van-collapse-item name="1" >
             <div slot="title" >
               <span>挂号费由医院自行设定，平台不收取任何额外费用。</span><br>
@@ -80,10 +81,17 @@
             <span>预约时间段:</span>
           </div>
           <div>
-            <span>123132</span>
+            <span @click="kai">{{time}}</span>
             <i></i>
           </div>
         </div>
+        <!-- <van-action-sheet
+          v-model="show"
+          :actions="actions"
+          cancel-text="取消"
+          @cancle="onCancle"
+          @select="funTime"
+        /> -->
       </div>
       <div class = "patient">
         <div>
@@ -91,32 +99,74 @@
             <span>所患疾病:</span>
           </div>
           <div>
+            <van-action-sheet v-model="show" :actions="actions"/>
             <router-link to="" class = "a_color">请选择疾病</router-link>
             <i></i>
           </div>
         </div>
       </div>
       <van-action-sheet v-model="show"  cancel-text="取消"  style="width:27rem;"/>
-      <button class = "my-register-btn">提交</button>
+      <button class = "my-register-btn" @click="submit">提交</button>
    </div>
 </template>
 
 <script>
+import axios from 'axios';
+axios.defaults.baseURL = "http://127.0.0.1:5050/"
    export default {
       data(){
         return {
           activeNames: ['1'],
           show: false,
           actions: [
-          { name: '08:00-08:59'},
-          { name: '09:00-09:59'},
-          { name: '10:00-10:59'},
-          { name: '14:00-14:59'},
-          { name: '15:00-15:59'},
-          { name: '16:00-16:59'},
+            { name: '选项' },
+            { name: '选项' },
+            { name: '选项', subname: '描述信息' }
           ],
-          time:"08:00-08-59"
+          time:"08:00-08:59",
+          
         }
+      },
+      methods:{
+        onCancle(){
+          this.show = false;
+          
+        },
+        kai(){
+          this.show = true;
+        },
+        funTime(item){
+          this.time = item.name;
+        },
+        submit(){
+          var orderStep = this.$store.getters.getOrderStep; 
+          var hospitalDetail = this.$store.getters.getHospitalDetail; 
+          var doctorDetail = this.$store.getters.getDoctorDetail; 
+          var userInfo = {
+            did:orderStep.did,
+            className:orderStep.className,
+            hname:hospitalDetail.hospital,
+            class_name:orderStep.className,
+            class_subname:orderStep.classSubname,
+            order_number:0,
+            order_time:new Date().getFullYear()+"年"+new Date().getMonth()+"月"+new Date().getDate()+"日 "+this.time,
+            downtime:new Date().getTime(),
+            status:1,
+
+          }
+          axios.get("user/insertUserOrder",{
+            params:userInfo
+          }).then(res=>{
+            console.log("插入成功");
+            console.log(res);
+          }).catch(err=>{
+            console.log(err);
+          })
+          
+          
+
+          //Axios.get(`doctor/showDoctorOrder/:${}`)
+        },
       },
    }
 </script>
