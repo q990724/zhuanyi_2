@@ -28,7 +28,7 @@
             <van-button type="info" class="okBtn" @click="onLogin">登   录</van-button>
         </div>
         <!-- 5.版权说明 -->
-        <div>
+        <div class="qlogin">
             <router-link  class="pwd" to="/login">快速登录/注册</router-link>
         </div>
         <div class="copy">
@@ -103,7 +103,6 @@ export default{
         font-size: .932824rem;
         color:#2f7fe2;
         text-decoration-line: underline;
-        margin-left:43%;
     }
     .copy{
         margin: 1.221374rem 5%;
@@ -120,5 +119,8 @@ export default{
     }
     .copy>div{
         margin:0 15%;
+    }
+    .qlogin{
+        text-align: center;
     }
 </style>
