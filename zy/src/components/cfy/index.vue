@@ -234,6 +234,12 @@
                         </van-col>
                     </van-row>
                 </div>
+
+                <!-- 天气 -->
+                <weather></weather>
+
+
+
                 <div class="list">
                     <div class="list-title">
                         <h3>健康号精选</h3>
@@ -245,7 +251,7 @@
                 <div class="title">
                     <van-row type="flex" justify="space-between" align="center">
                         <van-col span="10">
-                            <h2>健康商城</h2>
+                            <h3>健康商城</h3>
                         </van-col>
                         <van-col span="4" class="more">
                             <span>更多</span>
@@ -295,7 +301,7 @@
 import rmtj_item from "./rmtj_item"
 import love from "./love"
 import oneByMore from "./oneByMore"
-
+import weather from '../wtq/weather'
 // 假数据文件
 import oneByMore_json from "./json/oneByMore.js"
 
@@ -351,7 +357,8 @@ export default {
     components : {
         "rmtj-item" : rmtj_item,
         "love" : love,
-        "one-by-more" : oneByMore
+        "one-by-more" : oneByMore,
+        "weather" : weather
     }
 
 }

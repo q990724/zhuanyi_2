@@ -34,14 +34,14 @@ export default {
       this.$router.replace('/') // 列表页面的路由
     })
 
-    document.oncontextmenu = e=>{
-      return false;
-      // e = e || window.event;
-      // if(e.button == 2){
-      //   console.log("鼠标右键点击");
-      //   return false;
-      // }
-    }
+    // document.oncontextmenu = e=>{
+    //   return false;
+    //   // e = e || window.event;
+    //   // if(e.button == 2){
+    //   //   console.log("鼠标右键点击");
+    //   //   return false;
+    //   // }
+    // }
   }
 }
 </script>
@@ -93,7 +93,7 @@ export default {
 @media (max-width:328px){html{font-size:12px;}}
 
   body{
-    background: #f8f8f8;
+    background: #fff;
   }
   img{
     vertical-align: middle;
