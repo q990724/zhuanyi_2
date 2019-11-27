@@ -10,7 +10,6 @@
         <van-cell-group>
             <van-field
                 v-model="username"
-                clearable
                 left-icon="contact"
                 placeholder="邮箱、手机号或用户名"
                 @click-right-icon="$toast('question')"
@@ -56,8 +55,7 @@ export default{
     },
     methods: {
         onClickLeft(){
-            this.$router.go(-1)
-            // Toast('提示内容');
+            this.$router.push("/")
         },
         onLogin(){
             if(this.username==""){
