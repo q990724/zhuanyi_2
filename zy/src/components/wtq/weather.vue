@@ -92,7 +92,10 @@ export default {
    data(){
       return{
          myownpos:"北京",
-         result:{},//返回的结果
+         result:{
+           daily:[{}],
+           index:[{}],
+         },//返回的结果
          timg:"",
          wimg:"",
         //  生活指数

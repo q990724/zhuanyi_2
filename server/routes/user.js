@@ -1,4 +1,4 @@
-const express=require("express");
+﻿const express=require("express");
 var router=express.Router();
 var pool=require("../pool");
 
@@ -47,16 +47,16 @@ router.get("/showUserOrder",function(req,res){
    });
 });
 //插入用户预约信息
-router.post("/insertUserOrder",function(req,res){
+router.get("/insertUserOrder",function(req,res){
    var uid = req.session.uid;
-   var did = req.body.did;
-   var hname = req.body.hname;
-   var class_name = req.body.class_name;
-   var class_subname = req.body.class_subname;
-   var order_number = req.body.order_number;
-   var order_time = req.body.order_time;
-   var down_time = req.body.downtime;
-   var status = req.body.status;
+   var did = req.query.did;
+   var hname = req.query.hname;
+   var class_name = req.query.class_name;
+   var class_subname = req.query.class_subname;
+   var order_number = req.query.order_number;
+   var order_time = req.query.order_time;
+   var down_time = req.query.downtime;
+   var status = req.query.status;
 
    if(!uid){
       res.send({code : -2, msg :'未登录,请重新登录'});

@@ -53,7 +53,7 @@
                             <p>专家门诊-[微医平台] <b>100.00元</b></p>
                         </van-col>
                         <van-col span="4">
-                            <router-link to="/" class="goOrder">预约</router-link>
+                            <router-link to="/order" class="goOrder">预约</router-link>
                         </van-col>
                     </van-row>
                     <van-collapse-item title="显示全部排版" name="2" style="text-align:center;padding:0;">
@@ -155,6 +155,11 @@ export default {
                 this.detail = data.result;
                 this.$store.commit("setDoctorDetail",data.result);
                 console.log(this.detail);
+                var orderStep = this.$store.getters.getOrderStep;
+                var hospitalDetail = this.$store.getters.getHospitalDetail;
+                var doctorDetail = this.$store.getters.getDoctorDetail;
+
+                console.log(orderStep,hospitalDetail,doctorDetail);
             }
         });
 
@@ -166,7 +171,8 @@ export default {
     methods : {
         goBack(){
             this.back(this);
-        }
+        },
+       
     }
 }
 </script>
@@ -175,9 +181,7 @@ export default {
     i{
         font-style: normal;
     }
-    .title{
-        /* height: 46px; */
-    }
+    
     .doc-title{
         margin-top: 46px;
         min-height: 10rem;
