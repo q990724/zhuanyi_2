@@ -80,7 +80,7 @@
             <!-- 2.1标题 -->
             <van-nav-bar class="tool-title" z-index=-1 title="常用工具"/>
             <van-row class="tool-con myorder" type="flex" justify="center">
-                <orderItem v-for="(l,i) of list.slice(4,8)" :key="i" :item="l"></orderItem>
+                <orderItem v-for="(l,i) of list.slice(4,8)" :key="i" :item="l" @click="getMore($event)"></orderItem>
             </van-row>
             <van-row class="tool-con myorder" type="flex" justify="center">
                 <orderItem v-for="(l,i) of list.slice(8,12)" :key="i" :item="l"></orderItem>
@@ -147,7 +147,9 @@ export default {
         onClickLeft(){
             this.$router.go(-1);
         },
-        
+        getMore(e){
+            console.log("11")
+        }
     },
     components:{
         "orderItem":orderItem,
