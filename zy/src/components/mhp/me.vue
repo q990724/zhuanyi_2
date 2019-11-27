@@ -79,18 +79,24 @@
         <div class="tool">
             <!-- 2.1标题 -->
             <van-nav-bar class="tool-title" title="常用工具"/>
-            <van-row class="tool-con" type="flex" justify="center">
+            <van-row class="tool-con myorder" type="flex" justify="center">
                 <orderItem v-for="(l,i) of list.slice(4,8)" :key="i" :item="l"></orderItem>
             </van-row>
-            <van-row class="tool-con" type="flex" justify="center">
-                <van-col span="6">span: 6</van-col>
-                <van-col span="6">span: 6</van-col>
-                <van-col span="6">span: 6</van-col>
-                <van-col span="6">span: 6</van-col>
+            <van-row class="tool-con myorder" type="flex" justify="center">
+                <orderItem v-for="(l,i) of list.slice(8,12)" :key="i" :item="l"></orderItem>
             </van-row>
         </div>
         <!-- 6.我的社区 -->
-        
+        <div class="tool">
+            <!-- 2.1标题 -->
+            <van-nav-bar class="tool-title" title="常用工具"/>
+            <van-row class="tool-con myorder" type="flex" justify="center">
+                <orderItem v-for="(l,i) of list.slice(4,8)" :key="i" :item="l"></orderItem>
+            </van-row>
+            <van-row class="tool-con myorder" type="flex" justify="center">
+                <orderItem v-for="(l,i) of list.slice(8,12)" :key="i" :item="l"></orderItem>
+            </van-row>
+        </div>
         <!-- 7.健康档案 -->
 
     </div>
@@ -111,8 +117,13 @@ export default {
            
                 {text:"家庭联系人",path:"http://127.0.0.1:8081/images/me/me/icon-order2.png"},
                 {text:"关注收藏",path:"http://127.0.0.1:8081/images/me/me/icon-star.png"},
-                {text:"关注收藏",path:"http://127.0.0.1:8081/images/me/me/icon-star.png"},
-                {text:"关注收藏",path:"http://127.0.0.1:8081/images/me/me/icon-star.png"},         
+                {text:"我的医生",path:"http://127.0.0.1:8081/images/me/me/icon-doctor.png"},
+                {text:"会员福利",path:"http://127.0.0.1:8081/images/me/me/icon-member.png"},       
+
+                {text:"我的关注",path:"http://127.0.0.1:8081/images/me/me/icon-sns-watch.png"},
+                {text:"我的提问",path:"http://127.0.0.1:8081/images/me/me/icon-sns-question.png"},
+                {text:"我的发帖",path:"http://127.0.0.1:8081/images/me/me/icon-sns-post.png"},
+                {text:"更多",path:"http://127.0.0.1:8081/images/me/me/icon-sns-more.png"},        
             ],
         }
     },
@@ -149,11 +160,11 @@ export default {
     }
     .healthy::before{
         content:"";
-        border:.305344rem solid transparent !important;
-        border-bottom: chocolate;
+        border:.305344rem solid transparent;
+        border-bottom-color: chocolate;
         position:absolute;
         left:50%;
-        top: -0.305344rem;
+        top: -0.625344rem;
     }
     .me-title{
         width:100%;

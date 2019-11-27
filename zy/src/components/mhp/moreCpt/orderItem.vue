@@ -1,7 +1,7 @@
 <template>
     <van-col class="order-item" span="6">
         <div class="order-img">
-            <img src="item.path" alt="">
+            <img :src="item.path" alt="">
 
         </div>
         <span>{{item.text}}</span>  
