@@ -70,7 +70,7 @@
         </div>
         <!-- 4.我的订单 -->
         <div>
-            <van-nav-bar class="tool-title" title="我的订单"/>
+            <van-nav-bar class="tool-title" z-index=-1 title="我的订单"/>
             <van-row class="tool-con myorder" type="flex" justify="center">
                 <orderItem v-for="(l,i) of list.slice(0,4)" :key="i" :item="l"></orderItem>
             </van-row>
@@ -78,7 +78,7 @@
         <!-- 5.常用工具 -->
         <div class="tool">
             <!-- 2.1标题 -->
-            <van-nav-bar class="tool-title" title="常用工具"/>
+            <van-nav-bar class="tool-title" z-index=-1 title="常用工具"/>
             <van-row class="tool-con myorder" type="flex" justify="center">
                 <orderItem v-for="(l,i) of list.slice(4,8)" :key="i" :item="l"></orderItem>
             </van-row>
@@ -89,16 +89,20 @@
         <!-- 6.我的社区 -->
         <div class="tool">
             <!-- 2.1标题 -->
-            <van-nav-bar class="tool-title" title="常用工具"/>
+            <van-nav-bar class="tool-title" z-index=-1 title="我的社区"/>
             <van-row class="tool-con myorder" type="flex" justify="center">
-                <orderItem v-for="(l,i) of list.slice(4,8)" :key="i" :item="l"></orderItem>
-            </van-row>
-            <van-row class="tool-con myorder" type="flex" justify="center">
-                <orderItem v-for="(l,i) of list.slice(8,12)" :key="i" :item="l"></orderItem>
+                <orderItem v-for="(l,i) of list.slice(12,16)" :key="i" :item="l"></orderItem>
             </van-row>
         </div>
         <!-- 7.健康档案 -->
-
+        <div class="health-da">
+            <van-nav-bar class="tool-title" z-index=-1 title="健康档案"/>
+            <img src="../../../public/images/me/me/empty-new.png" alt="">
+            <div>
+                <p>请添加联系人，进行健康档案管理</p>
+                <div class="add">添加家庭联系人</div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -115,10 +119,15 @@ export default {
                 {text:"服务包订单",path:"http://127.0.0.1:8081/images/me/me/icon-order.png"},
                 {text:"商品订单",path:"http://127.0.0.1:8081/images/me/me/icon-order2.png"},
            
-                {text:"家庭联系人",path:"http://127.0.0.1:8081/images/me/me/icon-order2.png"},
+                {text:"家庭联系人",path:"http://127.0.0.1:8081/images/me/me/icon-patients.png"},
                 {text:"关注收藏",path:"http://127.0.0.1:8081/images/me/me/icon-star.png"},
                 {text:"我的医生",path:"http://127.0.0.1:8081/images/me/me/icon-doctor.png"},
-                {text:"会员福利",path:"http://127.0.0.1:8081/images/me/me/icon-member.png"},       
+                {text:"会员福利",path:"http://127.0.0.1:8081/images/me/me/icon-member.png"}, 
+
+                {text:"我的课程",path:"http://127.0.0.1:8081/images/me/me/icon-course.png"},
+                {text:"会员好友",path:"http://127.0.0.1:8081/images/me/me/BJh154243448.png"},
+                {text:"帮助反馈",path:"http://127.0.0.1:8081/images/me/me/icon-help.png"},
+                {text:"更多",path:"http://127.0.0.1:8081/images/me/me/icon-more.png"},      
 
                 {text:"我的关注",path:"http://127.0.0.1:8081/images/me/me/icon-sns-watch.png"},
                 {text:"我的提问",path:"http://127.0.0.1:8081/images/me/me/icon-sns-question.png"},
@@ -281,5 +290,26 @@ export default {
         text-align: center;
         line-height:200%;
     }
-    
+    .health-da{
+        text-align: center;
+    }
+    .health-da img{
+        width: 3.847328rem;
+        height:3.847328rem;
+        margin: 1.621374rem auto;
+    }
+    .health-da>div>p{
+        font-size: .854962rem;
+        color:#83889a;
+    }
+    .health-da>div>.add{
+        border: .061069rem solid #3f86ff;
+        color:#3f86ff;
+        width:35%;
+        height: 1.221374rem;
+        line-height: 1.221374rem;
+        margin: 1.610687rem auto;
+        padding:.48855rem 0;
+        border-radius: 1.216031rem;
+    }
 </style>
