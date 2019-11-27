@@ -16,7 +16,7 @@ router.post("/insertDoctorOrder",function(req,res){
     var sql = "insert into doctor_orders values(null,?,?,?)";
     pool.query(sql,[uid,did,order_number],function(err,result){
        if(err) throw err;
-       if(result.affectedRows >= 0){
+       if(result.affectedRows > 0){
           res.send({code : 1 , msg : "插入成功"});
        }else{
           res.send({code : -1 , msg : "插入失败"});

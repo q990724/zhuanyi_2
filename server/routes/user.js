@@ -49,21 +49,22 @@ router.get("/showUserOrder",function(req,res){
 //插入用户预约信息
 router.post("/insertUserOrder",function(req,res){
    var uid = req.session.uid;
-   console.log(uid);
    var did = req.body.did;
    var hname = req.body.hname;
    var class_name = req.body.class_name;
    var class_subname = req.body.class_subname;
    var order_number = req.body.order_number;
    var order_time = req.body.order_time;
+   var down_time = req.body.downtime;
+   var status = req.body.status;
 
    if(!uid){
       res.send({code : -2, msg :'未登录,请重新登录'});
       return;
    }
 
-   var sql = "insert into user_orders values(null,?,?,?,?,?,?,?)";
-   pool.query(sql,[uid,did,hname,class_name,class_subname,order_number,order_time],function(err,result){
+   var sql = "insert into user_orders values(null,?,?,?,?,?,?,?,?,?)";
+   pool.query(sql,[uid,did,hname,class_name,class_subname,order_number,order_time,down_time,status],function(err,result){
       if(err) throw err;
       if(result.affectedRows >= 0){
          res.send({code : 1 , msg : "插入成功"});
