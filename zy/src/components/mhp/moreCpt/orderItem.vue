@@ -1,14 +1,15 @@
 <template>
     <van-col class="order-item" span="6">
         <div class="order-img">
-            <img src="../../../../public/images/me/me/icon-book.png" alt="">
+            <img src="item.path" alt="">
+
         </div>
-        <span>我的预约</span>  
+        <span>{{item.text}}</span>  
     </van-col>
 </template>
 <script>
 export default {
-    
+    props:["item"]
 }
 </script>
 <style scoped>

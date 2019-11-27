@@ -72,7 +72,7 @@
         <div>
             <van-nav-bar class="tool-title" title="我的订单"/>
             <van-row class="tool-con myorder" type="flex" justify="center">
-                <orderItem v-for="(l,i) of list" :key="i"></orderItem>
+                <orderItem v-for="(l,i) of list.slice(0,4)" :key="i" :item="l"></orderItem>
             </van-row>
         </div>
         <!-- 5.常用工具 -->
@@ -80,10 +80,7 @@
             <!-- 2.1标题 -->
             <van-nav-bar class="tool-title" title="常用工具"/>
             <van-row class="tool-con" type="flex" justify="center">
-                <van-col span="6">span: 6</van-col>
-                <van-col span="6">span: 6</van-col>
-                <van-col span="6">span: 6</van-col>
-                <van-col span="6">span: 6</van-col>
+                <orderItem v-for="(l,i) of list.slice(4,8)" :key="i" :item="l"></orderItem>
             </van-row>
             <van-row class="tool-con" type="flex" justify="center">
                 <van-col span="6">span: 6</van-col>
@@ -102,36 +99,35 @@
 import "../../assets/css/animate.css"
 import config from "../../assets/js/config.js"
 import orderItem from "./moreCpt/orderItem"
+import checkLogin from "../../assets/apis/user/checkLogin.js"
 export default {
     data() {
         return {
             list:[
-                {text:"我的预约",path:"../../../public/images/me/me/icon-book.png"},
-                {text:"我的预约",path:"../../../public/images/me/me/icon-book.png"},
-                {text:"我的预约",path:"../../../public/images/me/me/icon-book.png"},
-                {text:"我的预约3",path:"../../../public/images/me/me/icon-book.png"},
+                {text:"我的预约",path:"http://127.0.0.1:8081/images/me/me/icon-book.png"},
+                {text:"我的问诊",path:"http://127.0.0.1:8081/images/me/me/icon-consult.png"},
+                {text:"服务包订单",path:"http://127.0.0.1:8081/images/me/me/icon-order.png"},
+                {text:"商品订单",path:"http://127.0.0.1:8081/images/me/me/icon-order2.png"},
+           
+                {text:"家庭联系人",path:"http://127.0.0.1:8081/images/me/me/icon-order2.png"},
+                {text:"关注收藏",path:"http://127.0.0.1:8081/images/me/me/icon-star.png"},
+                {text:"关注收藏",path:"http://127.0.0.1:8081/images/me/me/icon-star.png"},
+                {text:"关注收藏",path:"http://127.0.0.1:8081/images/me/me/icon-star.png"},         
             ],
         }
     },
     created(){
-        this.isLogin();
+        if(checkLogin()){
+            this.$toast("登录成功！")
+        }else{
+            this.$router.push("/login")
+        };
     },
     methods: {
         onClickLeft(){
             this.$router.go(-1);
         },
-        isLogin(){
-            config.axios.get("/user/islogin").then(res=>{
-                if(res.data.code==1){
-                    this.$toast("登录成功！")
-                }else{
-                    this.$router.push("/login");
-                }
-            })
-            .catch(err=>{
-                console.log(err);
-            })
-        }
+        
     },
     components:{
         "orderItem":orderItem,
