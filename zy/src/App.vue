@@ -33,6 +33,15 @@ export default {
       if(this.$route.path=="/") return;
       this.$router.replace('/') // 列表页面的路由
     })
+
+    document.oncontextmenu = e=>{
+      return false;
+      // e = e || window.event;
+      // if(e.button == 2){
+      //   console.log("鼠标右键点击");
+      //   return false;
+      // }
+    }
   }
 }
 </script>
