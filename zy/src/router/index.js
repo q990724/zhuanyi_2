@@ -30,6 +30,7 @@ import d_detail from "../components/cfy/chooseDoctor/doctorDetail"
 import order from "../components/cfy/order/order"
 import map from "../components/cfy/map/map"
 import me from "../components/mhp/me"
+import myorder from "../views/cfy/myorder.vue"
 Vue.use(VueRouter)
 
 const routes = [
@@ -54,7 +55,8 @@ const routes = [
   {path: "/d_detail",component: d_detail},
   {path: "/order",component: order},
   {path: "/map",component: map},
-  {path: "/test",component: test}
+  {path: "/test",component: test},
+  {path: "/myorder",component: myorder}
 ]
 
 const router = new VueRouter({
