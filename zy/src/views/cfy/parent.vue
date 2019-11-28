@@ -12,7 +12,7 @@
             <jkh></jkh>
          </div>
          <div class="tab-item" v-if="index == 3">
-            
+            <find></find>
          </div>
          <div class="tab-item" v-if="index == 4">
             <login @toggleFrame="toggleTab"></login>
@@ -72,6 +72,7 @@
 import index from "../../components/cfy/index";
 import jkh from "../../components/wtq/jkh"
 import login from "../../components/mhp/login"
+import find from "../../components/zwb/find";
 export default {
  data() {
     return {
@@ -111,7 +112,8 @@ export default {
   components : {
      "index" : index,
      "jkh" : jkh,
-     "login" : login
+     "login" : login,
+     "find":find
   }
 }
 </script>

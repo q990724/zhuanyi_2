@@ -28,6 +28,21 @@ router.get("/login/:phone&:upwd",function(req,res){
 
 });
 
+//注册接口
+router.get("/reg",(req,res)=>{
+   var uname=req.query.uname;
+   var upwd=req.query.upwd;
+   var sql="insert into user(uname,upwd) values(?,?)";
+   pool.query(sql,[uname,upwd],(err,res)=>{
+      if(err) throw err;
+      if(res.affectedRows==1){
+         res.send({code:1,msg:"注册成功"});
+      }else{
+         res.send({code:-1,msg:"注册失败"});
+      }
+   })
+})
+
 //查询用户预约信息
 router.get("/showUserOrder",function(req,res){
    var uid = req.session.uid;
