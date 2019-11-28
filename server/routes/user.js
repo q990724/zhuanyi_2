@@ -74,6 +74,27 @@ router.get("/insertUserOrder",function(req,res){
    });
 });
 
+//删除某条用户预约信息
+ router.get("/removeUserOrder",function(req,res){
+    var uid = req.session.uid;
+    var did = req.query.did;
+ 
+    if(!uid){
+       res.send({code : -2, msg :'未登录,请重新登录'});
+       return;
+    }
+ 
+    var sql = "delete from user_orders where did=? and uid=?";
+    pool.query(sql,[did,uid],function(err,result){
+       if(err) throw err;
+       if(result.affectedRows > 0){
+          res.send({code : 1 , msg : "删除成功"});
+       }else{
+          res.send({code : -1 , msg : "删除失败"});
+       }
+    });
+ });
+
 //判断用户是否已经登录
 router.get("/islogin",function(req,res){
    if(!req.session.uid){
