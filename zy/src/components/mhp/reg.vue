@@ -27,6 +27,7 @@
     </div>    
 </template>
 <script>
+import config from "../../assets/js/config.js" 
 export default {
     data() {
         return {
@@ -39,7 +40,7 @@ export default {
             this.$router.go(-1);
         },
         okBtn(){
-
+            
         }
     },
 }
