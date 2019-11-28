@@ -93,8 +93,23 @@ export default {
       return{
          myownpos:"北京",
          result:{
-           daily:[{}],
-           index:[{}],
+           daily:[
+             {day:{img:""}},
+             {week:"",night:{templow:""},day:{temphigh:"",img:""}},
+           ],
+           index:[
+             {},
+             {},
+             {},
+             {iname:"",ivalue:"",detail:""},
+             {},
+             {},
+             {iname:"",ivalue:"",detail:""},
+            ],
+           week:"",
+           templow:"",
+           temphigh:"",
+           tquality:"",
          },//返回的结果
          timg:"",
          wimg:"",
@@ -107,6 +122,18 @@ export default {
       }
    },
    methods:{
+    //  login(){
+    //    return new Promise( (resolve,reject)=>{
+        
+    //    } )
+    //  },
+    //  wait(){
+    //    this.login().then(res => {
+    //       if (res.code === 0) {
+    //           localStorage.setItem(res.data.access_token)
+    //       }
+    //   });
+    //  },
      shua(e){//更改图片 
         console.log(e);
         var img = e.target;
@@ -121,6 +148,8 @@ export default {
               shuaxin(this.cpos).then(res=>{
                 console.log(res);
                 this.result = res;
+                this.timg = require(`../../../public/images/index/weathercn02/${this.result.daily[0].day.img}.png`);
+                this.wimg = require(`../../../public/images/index/weathercn02/${this.result.daily[1].day.img}.png`);
                 img.src = require("../../../public/images/index/shuaxin.png");
               });
            },2000);
@@ -165,8 +194,7 @@ export default {
   //       //  明天
   //       // 拿图片
   //       // var srcHead = "../../../public/images/index/weathercn02/";
-  //       this.timg = require(`../../../public/images/index/weathercn02/${this.result.daily[0].day.img}.png`);
-  //       this.wimg = require(`../../../public/images/index/weathercn02/${this.result.daily[1].day.img}.png`);
+  //      
   //       console.log(this.timg,this.wimg);
   //       // 生活指数
   //       this.warning1 = this.result.index[3];
