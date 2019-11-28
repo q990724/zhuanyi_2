@@ -119,22 +119,36 @@ export default {
         // 定位的城市
         cpos:"",
         loading:true,
+        // 锁
+        weatherLock:true,
+        startTime:0,
+        lastTime:0,
       }
    },
    methods:{
-    //  login(){
-    //    return new Promise( (resolve,reject)=>{
-        
-    //    } )
-    //  },
-    //  wait(){
-    //    this.login().then(res => {
-    //       if (res.code === 0) {
-    //           localStorage.setItem(res.data.access_token)
-    //       }
-    //   });
-    //  },
      shua(e){//更改图片 
+        console.log("当前时间:" + new Date().getTime());
+        console.log("上次点击时间:" + this.lastTime);
+        if(this.lastTime == 0){
+          this.lastTime = new Date().getTime();
+          if(this.lastTime - this.startTime<10000){
+            console.log(1);
+            this.weatherLock = false;
+          }else{
+            this.weatherLock = true;
+          }
+        }else{
+          var c = new Date().getTime() - this.lastTime;
+          this.lastTime = new Date().getTime();
+          if(c<10000){
+            console.log(2);
+            this.weatherLock = false;
+          }else{
+            this.weatherLock = true;
+          }
+        }
+        if(!this.weatherLock)return;
+        this.weatherLock = false;
         console.log(e);
         var img = e.target;
         var src = img.src;
@@ -142,10 +156,12 @@ export default {
         console.log(houzhui);
         if(houzhui == ".png"){
           img.src = require("../../../public/images/index/shuaxin.gif");
-          
+          console.log("请求一次天气")
            setTimeout(()=>{
               // 再发请求
               shuaxin(this.cpos).then(res=>{
+                
+                this.weatherLock = true;
                 console.log(res);
                 this.result = res;
                 this.timg = require(`../../../public/images/index/weathercn02/${this.result.daily[0].day.img}.png`);
@@ -174,37 +190,46 @@ export default {
         case "120000":
         this.cpos = "天津"
         break;
-        
+        default:
+        this.cpos = "北京"
       }
     })
 
     shuaxin(this.cpos).then(res=>{
       console.log(res);
       this.result = res;
+      this.timg = require(`../../../public/images/index/weathercn02/${this.result.daily[0].day.img}.png`);
+      this.wimg = require(`../../../public/images/index/weathercn02/${this.result.daily[1].day.img}.png`);
+     
     });
-  //  $.ajax({
-  //     url : "https://api.jisuapi.com/weather/query?appkey=90b47e2a6f6c02d3&city=北京",
-  //     type : "GET",
-  //     dataType : "jsonp",
-  //     success : res=>{
-  //        console.log("发送天气请求成功");
-  //        console.log(res.result);
-  //        this.result = res.result;
-  //        console.log(this.result);
-  //       //  明天
-  //       // 拿图片
-  //       // var srcHead = "../../../public/images/index/weathercn02/";
-  //      
-  //       console.log(this.timg,this.wimg);
-  //       // 生活指数
-  //       this.warning1 = this.result.index[3];
-  //       this.warning2 = this.result.index[6];
-  //       console.log(this.warning1)
-  //     }
+   $.ajax({
+      url : "https://api.jisuapi.com/weather/query?appkey=90b47e2a6f6c02d3&city=北京",
+      type : "GET",
+      dataType : "jsonp",
+      success : res=>{
+         console.log("发送天气请求成功");
+         console.log(res.result);
+         this.result = res.result;
+         console.log(this.result);
+        //  明天
+        // 拿图片
+        // var srcHead = "../../../public/images/index/weathercn02/";
+       
+        console.log(this.timg,this.wimg);
+        // 生活指数
+        this.warning1 = this.result.index[3];
+        this.warning2 = this.result.index[6];
+        console.log(this.warning1)
+      }
 
-  //  });
+   });
 
   },//组件创建之后的函数
+  mounted() {
+    this.startTime = new Date().getTime();
+    console.log("页面创建时间:" +this.startTime);
+
+  },
 };
 </script>
 <style scoped>

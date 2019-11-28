@@ -137,7 +137,7 @@ export default {
     funTime(item) {
       this.time = item.name;
     },
-    submit() {
+    submit() {//只是单纯提交用户的所有信息
       var orderStep = this.$store.getters.getOrderStep;
       var hospitalDetail = this.$store.getters.getHospitalDetail;
       var doctorDetail = this.$store.getters.getDoctorDetail;
@@ -160,33 +160,142 @@ export default {
         downtime: new Date().getTime(),
         status: 1
       };
-      //计算预约号码
-      this.computedOrderNumber(userInfo.did)
-        .then(res => {
-          userInfo.order_number = res;
-          //插入医生和用户信息
-          this.insertUserOrder(userInfo).then(res=>{
-            if(res){
-              this.insertDoctorOrder(userInfo.did,userInfo.order_number).then(res=>{
-                if(res){
-                  Toast.success("预约成功!");
-                }else{
-                  Toast.success("预约失败!");
-                }
-              }).catch(err=>{
-                console.log(err);
-              });
-            }else{
-              Toast.success("预约失败!");
-            }
-          }).catch(err=>{
-            console.log(err);
-          })
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      (async ()=>{
+        var bool = await this.checkOrder(userInfo.did);
+        if(!bool) return;
+        var count = await this.computedOrderNumber(userInfo.did);
+        userInfo.order_number = count;
+        var insertUser = await this.insertUserOrder(userInfo);//返回的是bool值
+        if(insertUser){//如果插入成功,就继续插入医生列表
+        console.log("插入用户成功");
+        console.log(count);
+        // 然后再插入到医生列表中
+          var insertDoctor = await this.insertDoctorOrder(userInfo.did,userInfo.order_number);
+          if(insertDoctor){
+            Toast.success("预约成功!")
+          }else{
+            Toast.fail("预约失败!")
+          }
+        }else{
+          //否则提示 插入失败
+          Toast.fail("预约失败!")
+        }
+      })();
+
+      //计算预约号码/
+      
+        // this.computedOrderNumber(userInfo.did)
+        //   .then(res => {
+        //     userInfo.order_number = res;
+        //     //插入医生和用户信息
+        //     this.insertUserOrder(userInfo).then(res=>{
+        //       if(res){
+        //         this.insertDoctorOrder(userInfo.did,userInfo.order_number).then(res=>{
+        //           if(res){
+        //             Toast.success("预约成功!");
+        //           }else{
+        //             Toast.success("预约失败!");
+        //           }
+        //         }).catch(err=>{
+        //           console.log(err);
+        //         });
+        //       }else{
+        //         Toast.success("预约失败!");
+        //       }
+        //     }).catch(err=>{
+        //       console.log(err);
+        //     })
+        //   })
+        //   .catch(err => {
+        //     console.log(err);
+        //   });
+    
     },
+    
+    computedOrderNumber(did){
+      //计算病人的订单号(传对应医生的编号),查找对应医生所有病人的编号,然后排序,返回的是一个当前病人的编号
+      return new Promise( (resolve,reject)=>{
+        axios.get(`doctor/showDoctorOrder/${did}`)
+        .then(res=>{
+          console.log(res.data.data);
+          //返回的结果计算
+          var result = res.data.data;
+          var count = 0;//病人订单的编号
+          if(res.data.code == -1){
+            count = 1;
+          }else{
+            result.sort( (a,b)=>{//排好序
+              return a.order_number - b.order_number;
+            } )
+            count = result[result.length-1].order_number+1;
+            console.log(result);
+          }
+          
+          resolve(count);
+        })
+      })
+    },
+    insertUserOrder(params){
+      // 传一个参数
+      return new Promise( (resolve,reject) =>{
+        // 插入用户预约信息--返回的就是插入成功或失败 , 返回一个布尔值
+        axios.get("/user/insertUserOrder",{params}).then(res=>{
+          console.log(res);
+          if(res.data.code == -1){
+            resolve(false)
+          }else{
+            resolve(true)
+          }
+        }).catch(err=>{
+          console.error(err);
+          Toast.fail("服务器繁忙")
+        })
+      });
+    },
+    //插入医生的预约信息---医生编号.还有病人排好序的编号--返回bool值,插入成功或失败
+    insertDoctorOrder(did,order_number){
+      return new Promise( (resolve,reject)=>{
+        axios.get("/doctor/insertDoctorOrder",{
+          params:{
+            did,order_number
+          }
+        }).then(res=>{
+          console.log(res);
+          if(res.data.code == -1){
+            resolve(false)
+          }else{
+            resolve(true)
+          }
+        }).catch(err=>{
+          console.log(err);
+          Toast.fail("服务器繁忙")
+        })
+      } )
+    },
+    
+    checkOrder(did){
+      return new Promise( (resolve,reject)=>{
+        axios.get("/user/showUserOrder",{params:{did}}).then(res=>{
+          console.log(res);
+          if(res.data.code == 1){//查询成功
+            var arr = res.data.data;
+            for(var item of arr){
+              if(item.did == did){
+                resolve(false);
+                Toast.fail("您已预约过此医生")
+              }else{
+                resolve(true)
+              }
+            }
+          }else{
+
+          }
+        }).catch(err=>{
+          console.log(err);
+        })
+      })
+    }
+    /*
     //计算预约号
     computedOrderNumber(did) {
       return new Promise((resolve, reject) => {
@@ -253,8 +362,10 @@ export default {
           });
       });
     }
+    */
+    
   }
-};
+}
 </script>
 
 <style scoped>

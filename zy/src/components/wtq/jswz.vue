@@ -27,12 +27,7 @@
       </div>
       <!-- canvas 绘图 -->
       <canvas id="mycanvas" width="200px" height="300px">
-        <!-- <div style="display:none">
-          <img ref="conf0" src="../../../public/images/index/急速问诊/top-entry-health.png">
-        </div>
-        <div style="display:none">
-          <img ref="conf1" src="../../../public/images/index/急速问诊/top-entry-health.png">
-        </div> -->
+        
       </canvas>
     </div>
 
@@ -85,7 +80,7 @@
           <h2 style="color:#28354c">问诊动态</h2>
         </van-col>
         <van-col span="14">
-          <p class="helped">已有 XXXX 患者获得帮助</p>
+          <p class="helped">已有 4200 患者获得帮助</p>
         </van-col>
       </van-row>
       <!-- 组件 列表 -->
@@ -119,31 +114,18 @@
         <van-swipe-item>
           <ul class="people-list">
             <li>
-              北京 的患者张**购买了 ¥19 电话问诊
+              北京 的患者张**购买了
+              <span data-id="price">¥19</span> 电话问诊
               <span>3分钟前</span>
             </li>
             <li>
-              北京 的患者张**购买了 ¥19 电话问诊
+              北京 的患者张**购买了
+              <span data-id="price">¥19</span> 电话问诊
               <span>3分钟前</span>
             </li>
             <li>
-              北京 的患者张**购买了 ¥19 电话问诊
-              <span>3分钟前</span>
-            </li>
-          </ul>
-        </van-swipe-item>
-        <van-swipe-item>
-          <ul class="people-list">
-            <li>
-              北京 的患者张**购买了 ¥19 电话问诊
-              <span>3分钟前</span>
-            </li>
-            <li>
-              北京 的患者张**购买了 ¥19 电话问诊
-              <span>3分钟前</span>
-            </li>
-            <li>
-              北京 的患者张**购买了 ¥19 电话问诊
+              北京 的患者张**购买了
+              <span data-id="price">¥19</span> 电话问诊
               <span>3分钟前</span>
             </li>
           </ul>
@@ -151,15 +133,37 @@
         <van-swipe-item>
           <ul class="people-list">
             <li>
-              北京 的患者张**购买了 ¥19 电话问诊
+              北京 的患者张**购买了
+              <span data-id="price">¥19</span> 电话问诊
               <span>3分钟前</span>
             </li>
             <li>
-              北京 的患者张**购买了 ¥19 电话问诊
+              北京 的患者张**购买了
+              <span data-id="price">¥19</span> 电话问诊
               <span>3分钟前</span>
             </li>
             <li>
-              北京 的患者张**购买了 ¥19 电话问诊
+              北京 的患者张**购买了
+              <span data-id="price">¥19</span> 电话问诊
+              <span>3分钟前</span>
+            </li>
+          </ul>
+        </van-swipe-item>
+        <van-swipe-item>
+          <ul class="people-list">
+           <li>
+              北京 的患者张**购买了
+              <span data-id="price">¥19</span> 电话问诊
+              <span>3分钟前</span>
+            </li>
+            <li>
+              北京 的患者张**购买了
+              <span data-id="price">¥19</span> 电话问诊
+              <span>3分钟前</span>
+            </li>
+            <li>
+              北京 的患者张**购买了
+              <span data-id="price">¥19</span> 电话问诊
               <span>3分钟前</span>
             </li>
           </ul>
@@ -276,13 +280,16 @@ export default {
           if(y >= 20){
             y = 20;
           }
-          
+          ctx.save();
           ctx.clearRect(0,0,200,300);
-          ctx.fillText(str1,150,250);
-          ctx.fillText(str2,150,250);
-          ctx.font = "20px SimHei";
+          ctx.fillStyle = "#83889a";
+          ctx.fillText(str1,70,250);
+
+          ctx.fillText(str2,70,270);
+          ctx.font = "12px SimHei";
+
           ctx.drawImage(img, x, y);
-          
+          ctx.restore();
 
           // ctx.font = "39px SimHei" #字体大小 字体
           // ctx.textBaseline = "top"; [top;alphabetic;bottom]
@@ -290,7 +297,7 @@ export default {
           x -= 3;
           y++;
         }
-        },10);
+        },15);
       }
 
       var id2 = setInterval(()=>{
