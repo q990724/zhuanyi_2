@@ -2,7 +2,6 @@
     <van-col class="order-item" span="6">
         <div class="order-img">
             <img :src="item.path" alt="">
-
         </div>
         <span>{{item.text}}</span>  
     </van-col>

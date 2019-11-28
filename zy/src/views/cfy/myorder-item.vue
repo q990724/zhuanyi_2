@@ -14,37 +14,37 @@
             </p>
             <p class="btns">
                <van-button plain type="info" round class="btn" @click="showDetail">查看详情</van-button>
-               <van-button plain type="danger" round class="btn">取消预约</van-button>
-            </p>
-            <p>
-               <van-dialog v-model="show" title="预约详情" show-cancel-button>
-                  <div class="top1">
-                     <img src="../../../public/images/index/1.png">
-                     <div>
-                        <p>医生姓名：{{docDetail.name}}</p>
-                        <p>医院地址：{{docDetail.hospital}}</p>
-                        <p>主科室：{{item.class_name}}</p>
-                        <p>副科室：{{item.class_subname}}</p>
-                     </div>
-                  </div>
-                  <div class="top2">
-                     <p>预约号：<b>{{item.order_number}}</b></p>
-                     <p>下单时间：{{down_time}}</p>
-                     <p>预约时间：{{order_time}}</p>
-                     <p>当前预约状态：<b>{{status}}</b></p>
-                  </div>
-               </van-dialog>
+               <van-button plain type="danger" round class="btn" @click="unOrder">取消预约</van-button>
             </p>
          </div>
       </div>
+      <p>
+         <van-dialog v-model="show" title="预约详情" show-cancel-button>
+            <div class="top1">
+               <img :src="docDetail.pic ? docDetail.pic : require('../../../public/images/qgh/unknow.png')">
+               <div>
+                  <p>医生姓名：{{docDetail.name}}</p>
+                  <p>医院地址：{{docDetail.hospital}}</p>
+                  <p>主科室：{{item.class_name}}</p>
+                  <p>副科室：{{item.class_subname}}</p>
+               </div>
+            </div>
+            <div class="top2">
+               <p>预约号：<b>{{item.order_number}}</b></p>
+               <p>下单时间：{{down_time}}</p>
+               <p>预约时间：{{order_time}}</p>
+               <p>当前预约状态：<b>{{status}}</b></p>
+            </div>
+         </van-dialog>
+      </p>
    </div>
 </template>
 
 <script>
 import { Dialog } from 'vant';
+import { Toast } from 'vant';
 export default {
    props:["item"],
-
    data(){
       return{
          show : false,
@@ -57,6 +57,59 @@ export default {
    methods : {
       showDetail(){
          this.show = !this.show;
+      },
+      removeUserOrder(){
+         return new Promise((resolve,reject)=>{
+            var did = this.item.did;
+            this.axios.get("http://127.0.0.1:5050/user/removeUserOrder",{
+               params : {
+                  did : did
+               }
+            }).then(res=>{
+               if(res.data.code != 1){
+                  Toast.fail("取消失败，请重试!");
+                  resolve(false);
+               }else{
+                  resolve(true);
+               }
+            }).catch((err)=>{
+               Toast.fail("服务器繁忙，请稍后再试!");
+               resolve(false);
+            });
+         });
+
+      },
+      removeDoctorOrder(){
+         return new Promise((resolve,reject)=>{
+            var did = this.item.did;
+            this.axios.get("http://127.0.0.1:5050/doctor/removeDoctorOrder",{
+               params : {
+                  did : did
+               }
+            }).then(res=>{
+               if(res.data.code != 1){
+                  Toast.fail("取消失败，请重试!");
+                  resolve(false);
+               }else{
+                  resolve(true);
+               }
+            }).catch((err)=>{
+               Toast.fail("服务器繁忙，请稍后再试!");
+               resolve(false);
+            });
+         });
+      },
+      unOrder(){
+         this.removeUserOrder().then(res=>{
+            if(res){
+               this.removeDoctorOrder().then(res=>{
+                  if(res){
+                     Toast.success("取消成功!");
+                     window.location.reload();
+                  }
+               })
+            }
+         });
       }
    },
    created(){
@@ -176,6 +229,10 @@ export default {
 
    .top1 p{
       margin-top: 13px;
+   }
+
+   .top1 img{
+      width: 50%;
    }
 
    .van-dialog{
