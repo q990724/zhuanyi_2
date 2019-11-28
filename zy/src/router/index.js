@@ -31,6 +31,7 @@ import order from "../components/cfy/order/order"
 import map from "../components/cfy/map/map"
 import me from "../components/mhp/me"
 import myorder from "../views/cfy/myorder.vue"
+import reg from "../components/mhp/reg"
 Vue.use(VueRouter)
 
 const routes = [
@@ -56,7 +57,8 @@ const routes = [
   {path: "/order",component: order},
   {path: "/map",component: map},
   {path: "/test",component: test},
-  {path: "/myorder",component: myorder}
+  {path: "/myorder",component: myorder},
+  {path: "/reg",component: reg},
 ]
 
 const router = new VueRouter({
