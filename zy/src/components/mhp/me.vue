@@ -18,7 +18,7 @@
                     <img src="../../../public/images/me/me/q.png" alt="">
                 </van-col>
                 <van-col class="info" span="18">
-                    <p>用户zy13800000000</p>
+                    <p id="p123">{{user}}</p>
                     <h4>完善信息</h4>
                     <div>
                         <img src="../../../public/images/me/me/gift.gif" alt="">
@@ -110,6 +110,7 @@ import "../../assets/css/animate.css"
 import config from "../../assets/js/config.js"
 import orderItem from "./moreCpt/orderItem"
 import checkLogin from "../../assets/apis/user/checkLogin.js"
+
 export default {
     data() {
         return {
@@ -134,21 +135,38 @@ export default {
                 {text:"我的发帖",path:require("../../../public/images/me/me/icon-sns-post.png")},
                 {text:"更多",path:require("../../../public/images/me/me/icon-sns-more.png")},        
             ],
+            user:"",
         }
     },
     created(){
+        this.user=this.$route.params.username;
         if(checkLogin()){
             this.$toast("登录成功！")
         }else{
             this.$router.push("/login")
         };
     },
+    mounted() {
+        // this.bus.$on("un",this.add);
+    },
+    updated(){
+        // console.log("nishizhu"+this.user)
+
+        
+    },
     methods: {
         onClickLeft(){
             this.$router.go(-1);
         },
         getMore(e){
-            console.log("11")
+            // console.log("11")
+        },
+        add(username){
+            this.user=username;
+            debugger
+            $("#p123").html(this.user)
+            console.log("这里是传过来的"+this.user)
+            console.log("这里是"+ $("#p123").html()+"传过来的"+this.user)
         }
     },
     components:{

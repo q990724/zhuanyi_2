@@ -53,6 +53,9 @@ export default{
             url:"/user/login/"
         }
     },
+    mounted(){
+        
+    },
     methods: {
         onClickLeft(){
             this.$router.push("/")
@@ -71,8 +74,9 @@ export default{
                     if(res.data.code==-1){
                         this.$toast("登录账号或密码错误！")
                     }else if(res.data.code==1){
+                        this.$toast("登录成功")
                         sessionStorage.setItem('user',JSON.stringify(res.data.data[0]));
-                        this.$router.push("/me");
+                        this.$router.push({name:"me",params:{username:this.username}})
                     }
                 })
                 .catch(err=>{
@@ -80,6 +84,10 @@ export default{
                 })
             }
         },
+        add(){
+            console.log(this.username)
+            // this.bus.$emit("un",this.username);    
+        }
     },
     components:{
         "ad":ad,

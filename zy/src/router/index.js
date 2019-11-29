@@ -53,7 +53,7 @@ const routes = [
   {path: '/pwdLogin',component: pwdLogin},
   {path: "/chooseClass",component: chooseClass},
   {path: "/chooseDoctor",component: chooseDoctor},
-  {path: "/me",component: me},
+  {path: "/me",name:"me",component: me},
   {path: "/h_main",component: h_main},
   {path: "/h_detail",component: h_detail},
   {path: "/d_detail",component: d_detail},
