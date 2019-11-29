@@ -36,7 +36,7 @@
       <van-tabs v-model="active" color="#36d" title-active-color="#3f86ff" style="font-weight:700">
         <van-tab title="图文问诊">
           <!-- 第一个问诊连接 -->
-          <div class="first-wz">
+          <div class="first-wz" @click="goUpload">
             <div class="text1">
               <h3>三甲主治及以上级别接诊</h3>
               <P>服务人次 24.8万</P>
@@ -200,6 +200,9 @@ export default {
     };
   },
   methods: {
+    goUpload(){
+      this.$router.push("/upload")
+    },
     // 组件头部导航栏后退
     onClickLeft() {
       this.back(this);
@@ -235,7 +238,7 @@ export default {
           img.src = item.picSrc;
           img.onload = ()=>{
             resolve(img);
-            console.log(img);
+            // console.log(img);
           }
           
         }));
@@ -293,7 +296,7 @@ export default {
 
           // ctx.font = "39px SimHei" #字体大小 字体
           // ctx.textBaseline = "top"; [top;alphabetic;bottom]
-          console.log(x,y);
+          // console.log(x,y);
           x -= 3;
           y++;
         }

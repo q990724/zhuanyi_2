@@ -245,8 +245,8 @@
                     </van-row>
                 </div>
 
-                <!-- 天气
-                <weather></weather> -->
+                <!-- 天气 -->
+                <!-- <weather></weather> -->
 
 
 
