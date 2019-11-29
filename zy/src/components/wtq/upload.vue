@@ -24,7 +24,7 @@
           :after-read="afterRead"
         />
       </div>
-      <van-button id="button" type="primary" size="large" @click="uploadImages">大号按钮</van-button>
+      <van-button id="button" type="primary" size="large" @click="uploadImages">上传图片</van-button>
     </div> 
   </div>
 </template>
@@ -73,9 +73,7 @@ export default {
         });
       }
     },
-    loadingPost(){
-      
-    },
+    
    
   },
 }
@@ -116,7 +114,7 @@ export default {
   margin-top:2rem;
 }
 #button{
-  margin-top:15.25rem;
+  margin-top:8.25rem;
 
 }
 .van-button--primary{
