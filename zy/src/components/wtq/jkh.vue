@@ -70,25 +70,25 @@
           <van-col span="6" class="kind-every">
             <div class="item">
               <div class="img">
-                <img src="../../../public/images/jkh/1.png">
+                <img src="../../../public/images/jkh/2.png">
               </div>
-              <p class="item-info">就医互助</p>
+              <p class="item-info">女性健康</p>
             </div>
           </van-col>
           <van-col span="6" class="kind-every">
             <div class="item">
               <div class="img">
-                <img src="../../../public/images/jkh/1.png">
+                <img src="../../../public/images/jkh/3.png">
               </div>
-              <p class="item-info">就医互助</p>
+              <p class="item-info">亲子育儿</p>
             </div>
           </van-col>
           <van-col span="6" class="kind-every">
             <div class="item">
               <div class="img">
-                <img src="../../../public/images/jkh/1.png">
+                <img src="../../../public/images/jkh/4.png">
               </div>
-              <p class="item-info">就医互助</p>
+              <p class="item-info">慢病调理</p>
             </div>
           </van-col>
         </van-row>
@@ -97,33 +97,33 @@
           <van-col span="6" class="kind-every">
             <div class="item">
               <div class="img">
-                <img src="../../../public/images/jkh/1.png">
+                <img src="../../../public/images/jkh/5.png">
               </div>
-              <p class="item-info">就医互助</p>
+              <p class="item-info">皮肤疾病</p>
             </div>
           </van-col>
           <van-col span="6" class="kind-every">
             <div class="item">
               <div class="img">
-                <img src="../../../public/images/jkh/1.png">
+                <img src="../../../public/images/jkh/6.png">
               </div>
-              <p class="item-info">就医互助</p>
+              <p class="item-info">肿瘤癌症</p>
             </div>
           </van-col>
           <van-col span="6" class="kind-every">
             <div class="item">
               <div class="img">
-                <img src="../../../public/images/jkh/1.png">
+                <img src="../../../public/images/jkh/7.jpg">
               </div>
-              <p class="item-info">就医互助</p>
+              <p class="item-info">会员生活</p>
             </div>
           </van-col>
           <van-col span="6" class="kind-every">
             <div class="item">
               <div class="img">
-                <img src="../../../public/images/jkh/1.png">
+                <img src="../../../public/images/jkh/8.png">
               </div>
-              <p class="item-info">就医互助</p>
+              <p class="item-info">两性之间</p>
             </div>
           </van-col>
         </van-row>
@@ -165,7 +165,7 @@
           </van-tab>
           <!-- 另一个页面 -->
           <van-tab title="我的关注">
-            <recommand></recommand>
+            <recommand @open="openQuestion"></recommand>
           </van-tab>
         </van-tabs>
     

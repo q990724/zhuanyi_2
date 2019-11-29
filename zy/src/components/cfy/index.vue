@@ -106,24 +106,32 @@
                             <p>私人医生</p>
                         </div>
                         <div class="item">
-                            <img src="../../../public/images/index/tsfw-list-1.png">
-                            <p>私人医生</p>
+                            <img src="../../../public/images/index/2.png">
+                            <p>三甲体检</p>
                         </div>
                         <div class="item">
-                            <img src="../../../public/images/index/tsfw-list-1.png">
-                            <p>私人医生</p>
+                            <img src="../../../public/images/index/3.png">
+                            <p>海外就医</p>
                         </div>
                         <div class="item">
-                            <img src="../../../public/images/index/tsfw-list-1.png">
-                            <p>私人医生</p>
+                            <img src="../../../public/images/index/4.png">
+                            <p>妈咪宝贝</p>
                         </div>
                         <div class="item">
-                            <img src="../../../public/images/index/tsfw-list-1.png">
-                            <p>私人医生</p>
+                            <img src="../../../public/images/index/5.png">
+                            <p>肝病中心</p>
                         </div>
                         <div class="item">
-                            <img src="../../../public/images/index/tsfw-list-1.png">
-                            <p>私人医生</p>
+                            <img src="../../../public/images/index/6.png">
+                            <p>保险平台</p>
+                        </div>
+                        <div class="item">
+                            <img src="../../../public/images/index/7.png">
+                            <p>病友群</p>
+                        </div>
+                        <div class="item">
+                            <img src="../../../public/images/index/8.png">
+                            <p>膏方节</p>
                         </div>
                     </div>
                     
