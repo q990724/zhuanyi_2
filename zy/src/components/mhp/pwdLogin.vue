@@ -71,6 +71,7 @@ export default{
                     if(res.data.code==-1){
                         this.$toast("登录账号或密码错误！")
                     }else if(res.data.code==1){
+                        sessionStorage.setItem('user',JSON.stringify(res.data.data[0]));
                         this.$router.push("/me");
                     }
                 })

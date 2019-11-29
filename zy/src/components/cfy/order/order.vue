@@ -1,9 +1,9 @@
 <template>
   <div class="my-register">
-    <van-nav-bar title="标题" left-text="返回" left-arrow/>
+    <van-nav-bar title="预约信息" left-arrow @click-left="onClickLeft"/>
     <div class="doc-title">
-      <img src="../../../../public/images/qgh/dlogo1.png" alt>
-      <span>吴佩</span>
+      <img :src="doctorDetail.pic">
+      <span>{{doctorDetail.name}}</span>
       医生
     </div>
     <div class="information">
@@ -12,7 +12,7 @@
           <span>就诊医院:</span>
         </div>
         <div class="information-item">
-          <span>瑞金医院(医联平台)</span>
+          <span>{{hospitalDetail.hospital ? hospitalDetail.hospital : hospitalDetail.regaddress}}</span>
         </div>
       </div>
       <div>
@@ -20,7 +20,7 @@
           <span>科室医生:</span>
         </div>
         <div class="information-item">
-          <span>门诊肾脏 - 潘晓霞</span>
+          <span>{{orderStep.className}} - {{doctorDetail.name}}</span>
         </div>
       </div>
       <div>
@@ -28,7 +28,9 @@
           <span>门诊时间:</span>
         </div>
         <div class="information-item">
-          <span class="text-color">2019-12-02 周一 下午</span>
+          <span
+            class="text-color"
+          >{{time}}</span>
         </div>
       </div>
       <div>
@@ -44,7 +46,7 @@
           <span>费用:</span>
         </div>
         <div class="information-item">
-          <span>68.00元 （挂号费）</span>
+          <span>100元 （挂号费）</span>
         </div>
       </div>
     </div>
@@ -70,7 +72,7 @@
           <span>就诊人:</span>
         </div>
         <div>
-          <router-link to>李明</router-link>
+          <router-link to>{{uname}}</router-link>
           <i></i>
         </div>
       </div>
@@ -81,17 +83,10 @@
           <span>预约时间段:</span>
         </div>
         <div>
-          <span @click="kai">{{time}}</span>
+          <span @click="open">{{time}}</span>
           <i></i>
         </div>
       </div>
-      <!-- <van-action-sheet
-          v-model="show"
-          :actions="actions"
-          cancel-text="取消"
-          @cancle="onCancle"
-          @select="funTime"
-      />-->
     </div>
     <div class="patient">
       <div>
@@ -99,45 +94,105 @@
           <span>所患疾病:</span>
         </div>
         <div>
-          <van-action-sheet v-model="show" :actions="actions"/>
-          <router-link to class="a_color">请选择疾病</router-link>
+          <span @click="open2" class="a_color">{{dis}}</span>
           <i></i>
         </div>
       </div>
     </div>
-    <van-action-sheet v-model="show" cancel-text="取消" style="width:27rem;"/>
+    <van-action-sheet
+      v-model="show"
+      :actions="actions"
+      cancel-text="取消"
+      @cancel="onCancel"
+      @select="phoneMethod"
+      @click-overlay="hide"
+      style="width:27rem;"
+    />
+    <van-action-sheet
+      v-model="show2"
+      :actions="actions2"
+      cancel-text="取消"
+      @cancel="onCancel2"
+      @select="phoneMethod2"
+      @click-overlay="hide2"
+      style="width:27rem;"
+    />
     <button class="my-register-btn" @click="submit">提交</button>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import { Toast } from 'vant';
+import { Toast } from "vant";
 axios.defaults.baseURL = "http://127.0.0.1:5050/";
 export default {
   data() {
     return {
+      uname:"",
+      orderStep:{},
+      hospitalDetail:{},
+      doctorDetail:{},
       activeNames: ["1"],
       show: false,
+      show2: false,
       actions: [
-        { name: "选项" },
-        { name: "选项" },
-        { name: "选项", subname: "描述信息" }
+        { name: "08:00-08:59" },
+        { name: "09:00-09:59" },
+        { name: "10:00-10:59" },
+        { name: "14:00-14:59" },
+        { name: "15:00-15:59" },
+        { name: "16:00-16:59" }
       ],
-      time: "08:00-08:59"
+      time: "08:00-08-59",
+      doctor: {},
+      orderMsg: {},
+      uname: "",
+      dis: "请选择疾病",
+      actions2: [
+        { name: "关节炎" },
+        { name: "骨质增生" },
+        { name: "骨折" },
+        { name: "骨关节炎" },
+        { name: "骨瘤" },
+        { name: "骨质疏松" }
+      ]
     };
   },
   methods: {
-    onCancle() {
+    onClickLeft: function() {
+      this.back(this);
+    },
+    open() {
+      this.show = !this.show;
+    },
+    open2() {
+      this.show2 = !this.show2;
+    },
+    hide() {
       this.show = false;
     },
-    kai() {
-      this.show = true;
+    hide2() {
+      this.show2 = false;
     },
-    funTime(item) {
-      this.time = item.name;
+    phoneMethod(item) {
+      var str = item.name;
+      this.time = str;
+      this.show = false;
     },
-    submit() {//只是单纯提交用户的所有信息
+    phoneMethod2(item) {
+      var str = item.name;
+      this.dis = str;
+      this.show2 = false;
+      console.log(item, this.dis, str);
+    },
+    onCancel() {
+      this.show = false;
+    },
+    onCancel2() {
+      this.show2 = false;
+    },
+    submit() {
+      //只是单纯提交用户的所有信息
       var orderStep = this.$store.getters.getOrderStep;
       var hospitalDetail = this.$store.getters.getHospitalDetail;
       var doctorDetail = this.$store.getters.getDoctorDetail;
@@ -160,58 +215,44 @@ export default {
         downtime: new Date().getTime(),
         status: 1
       };
-      (async ()=>{
-        var bool = await this.checkOrder(userInfo.did);
-        if(!bool) return;
-        var count = await this.computedOrderNumber(userInfo.did);
-        userInfo.order_number = count;
-        var insertUser = await this.insertUserOrder(userInfo);//返回的是bool值
-        if(insertUser){//如果插入成功,就继续插入医生列表
-        console.log("插入用户成功");
-        console.log(count);
-        // 然后再插入到医生列表中
-          var insertDoctor = await this.insertDoctorOrder(userInfo.did,userInfo.order_number);
-          if(insertDoctor){
-            Toast.success("预约成功!")
-          }else{
-            Toast.fail("预约失败!")
-          }
-        }else{
-          //否则提示 插入失败
-          Toast.fail("预约失败!")
-        }
-      })();
-
-      //计算预约号码/
       
-        // this.computedOrderNumber(userInfo.did)
-        //   .then(res => {
-        //     userInfo.order_number = res;
-        //     //插入医生和用户信息
-        //     this.insertUserOrder(userInfo).then(res=>{
-        //       if(res){
-        //         this.insertDoctorOrder(userInfo.did,userInfo.order_number).then(res=>{
-        //           if(res){
-        //             Toast.success("预约成功!");
-        //           }else{
-        //             Toast.success("预约失败!");
-        //           }
-        //         }).catch(err=>{
-        //           console.log(err);
-        //         });
-        //       }else{
-        //         Toast.success("预约失败!");
-        //       }
-        //     }).catch(err=>{
-        //       console.log(err);
-        //     })
-        //   })
-        //   .catch(err => {
-        //     console.log(err);
-        //   });
-    
+      (async () => {
+        var bool = await this.checkOrder(userInfo.did);
+        console.log(bool)
+        if (!bool){
+          return;
+        }else{
+          var count = await this.computedOrderNumber(userInfo.did);
+          userInfo.order_number = count;
+          var insertUser = await this.insertUserOrder(userInfo); //返回的是bool值
+          if (insertUser) {
+            //如果插入成功,就继续插入医生列表
+            console.log("插入用户成功");
+            console.log(count);
+            // 然后再插入到医生列表中
+            var insertDoctor = await this.insertDoctorOrder(
+              userInfo.did,
+              userInfo.order_number
+            );
+            if (insertDoctor) {
+              Toast.success({message:"预约成功！",onOpened:()=>{
+                this.$router.push("/");
+              }});
+            } else {
+              Toast.fail({message:"预约失败！",onOpened:()=>{
+                this.$router.push("/");
+              }});
+            }
+          } else {
+            //否则提示 插入失败
+            Toast.fail({message:"预约失败！",onOpened:()=>{
+                this.$router.push("/");
+              }});
+          }
+          };
+        
+      })();
     },
-    
     computedOrderNumber(did){
       //计算病人的订单号(传对应医生的编号),查找对应医生所有病人的编号,然后排序,返回的是一个当前病人的编号
       return new Promise( (resolve,reject)=>{
@@ -275,108 +316,45 @@ export default {
     
     checkOrder(did){
       return new Promise( (resolve,reject)=>{
-        axios.get("/user/showUserOrder",{params:{did}}).then(res=>{
+        axios.get("/user/showUserOrder").then(res=>{
           console.log(res);
           if(res.data.code == 1){//查询成功
             var arr = res.data.data;
-            for(var item of arr){
-              if(item.did == did){
+            for(var i = 0; i < arr.length; i++){
+              if(arr[i].did == did){
                 resolve(false);
-                Toast.fail("您已预约过此医生")
-              }else{
-                resolve(true)
+                Toast.fail({message:"您已预约过此医生！",onOpened:()=>{
+                this.$router.push("/");
+              }});
+              }else if(i == arr.length-1){
+                resolve(true);
               }
             }
-          }else{
-
+          }else if(res.data.code == -1){
+            resolve(true);
           }
         }).catch(err=>{
           console.log(err);
         })
       })
     }
-    /*
-    //计算预约号
-    computedOrderNumber(did) {
-      return new Promise((resolve, reject) => {
-        //计算预约号码
-        axios
-          .get(`doctor/showDoctorOrder/${did}`)
-          .then(res => {
-            //
-            if (res.data.code == -1) {
-              resolve(1);
-            } else {
-              var arr = res.data.data;
-              arr.sort((a, b) => {
-                return a.order_number - b.order_number;
-              });
-              resolve(arr[arr.length - 1].order_number + 1);
-            }
-          })
-          .catch(err => {
-            reject(err);
-          });
-      });
-    },
-    //插入用户预约信息
-    insertUserOrder(params) {
-      return new Promise((resolve, reject) => {
-        //插入到用户预约表中
-        axios
-          .get("user/insertUserOrder", {
-            params: params
-          })
-          .then(res => {
-            if (res.data.code == 1) {
-              resolve(true);
-            } else {
-              resolve(false);
-            }
-          })
-          .catch(err => {
-            reject(err);
-          });
-      });
-    },
-    //插入医生预约信息
-    insertDoctorOrder(did, order_number) {
-      return new Promise((resolve, reject) => {
-        //插入到用户预约表中
-        axios
-          .get("doctor/insertDoctorOrder", {
-            params: {
-              did : did,
-              order_number : order_number
-            }
-          })
-          .then(res => {
-            if (res.data.code == 1) {
-              resolve(true);
-            } else {
-              resolve(false);
-            }
-          })
-          .catch(err => {
-            reject(err);
-          });
-      });
+  },
+   created(){
+    this.orderStep = this.$store.getters.getOrderStep;
+    this.hospitalDetail = this.$store.getters.getHospitalDetail;
+    this.doctorDetail = this.$store.getters.getDoctorDetail;
+    this.uname=JSON.parse(sessionStorage.getItem('user')).user_name;
+    if(!this.uname){
+      var t=new Date().getTime().toString().slice(-4);
+      this.uname="zhuanyi"+t;
     }
-    */
-    
   }
 }
 </script>
 
 <style scoped>
-.mint-header {
-  background: #fff;
-  font-size: 1.1rem;
-  color: #28354c;
-  width: 26rem;
-  position: fixed;
-  top: 0;
-  border-bottom: 0.0625rem solid #ebecf1;
+.van-nav-bar .van-icon {
+  color: #000;
 }
 .doc-title {
   padding: 0.3125rem 0.625rem;
