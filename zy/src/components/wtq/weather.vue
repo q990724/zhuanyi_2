@@ -125,111 +125,111 @@ export default {
         lastTime:0,
       }
    },
-   methods:{
-     shua(e){//更改图片 
-        console.log("当前时间:" + new Date().getTime());
-        console.log("上次点击时间:" + this.lastTime);
-        if(this.lastTime == 0){
-          this.lastTime = new Date().getTime();
-          if(this.lastTime - this.startTime<10000){
-            console.log(1);
-            this.weatherLock = false;
-          }else{
-            this.weatherLock = true;
-          }
-        }else{
-          var c = new Date().getTime() - this.lastTime;
-          this.lastTime = new Date().getTime();
-          if(c<10000){
-            console.log(2);
-            this.weatherLock = false;
-          }else{
-            this.weatherLock = true;
-          }
-        }
-        if(!this.weatherLock)return;
-        this.weatherLock = false;
-        console.log(e);
-        var img = e.target;
-        var src = img.src;
-        var houzhui = /\.\w+$/.exec(src)[0];
-        console.log(houzhui);
-        if(houzhui == ".png"){
-          img.src = require("../../../public/images/index/shuaxin.gif");
-          console.log("请求一次天气")
-           setTimeout(()=>{
-              // 再发请求
-              shuaxin(this.cpos).then(res=>{
+  //  methods:{
+  //   //  shua(e){//更改图片 
+  //   //     console.log("当前时间:" + new Date().getTime());
+  //   //     console.log("上次点击时间:" + this.lastTime);
+  //   //     if(this.lastTime == 0){
+  //   //       this.lastTime = new Date().getTime();
+  //   //       if(this.lastTime - this.startTime<10000){
+  //   //         console.log(1);
+  //   //         this.weatherLock = false;
+  //   //       }else{
+  //   //         this.weatherLock = true;
+  //   //       }
+  //   //     }else{
+  //   //       var c = new Date().getTime() - this.lastTime;
+  //   //       this.lastTime = new Date().getTime();
+  //   //       if(c<10000){
+  //   //         console.log(2);
+  //   //         this.weatherLock = false;
+  //   //       }else{
+  //   //         this.weatherLock = true;
+  //   //       }
+  //   //     }
+  //   //     if(!this.weatherLock)return;
+  //   //     this.weatherLock = false;
+  //   //     console.log(e);
+  //   //     var img = e.target;
+  //   //     var src = img.src;
+  //   //     var houzhui = /\.\w+$/.exec(src)[0];
+  //   //     console.log(houzhui);
+  //   //     if(houzhui == ".png"){
+  //   //       img.src = require("../../../public/images/index/shuaxin.gif");
+  //   //       console.log("请求一次天气")
+  //   //        setTimeout(()=>{
+  //   //           // 再发请求
+  //   //           shuaxin(this.cpos).then(res=>{
                 
-                this.weatherLock = true;
-                console.log(res);
-                this.result = res;
-                this.timg = require(`../../../public/images/index/weathercn02/${this.result.daily[0].day.img}.png`);
-                this.wimg = require(`../../../public/images/index/weathercn02/${this.result.daily[1].day.img}.png`);
-                img.src = require("../../../public/images/index/shuaxin.png");
-              });
-           },2000);
+  //   //             this.weatherLock = true;
+  //   //             console.log(res);
+  //   //             this.result = res;
+  //   //             this.timg = require(`../../../public/images/index/weathercn02/${this.result.daily[0].day.img}.png`);
+  //   //             this.wimg = require(`../../../public/images/index/weathercn02/${this.result.daily[1].day.img}.png`);
+  //   //             img.src = require("../../../public/images/index/shuaxin.png");
+  //   //           });
+  //   //        },2000);
             
-          // });
-          // console.log(this.result)
-        }else{
-          img.src = require("../../../public/images/index/shuaxin.png");
-        }
-     }
-   },
-   created() {
+  //   //       // });
+  //   //       // console.log(this.result)
+  //   //     }else{
+  //   //       img.src = require("../../../public/images/index/shuaxin.png");
+  //   //     }
+  //   //  }
+  //  },
+  //  created() {
      
-    //会在组件创建成功之后自动调用该函数
-    // 自动在组件创建完成之后发送ajax请求--axios不支持jsonp
-    getCity(res=>{
-      console.log(res);
-      switch(res){
-        case "110000":
-        this.cpos = "北京"
-        break;
-        case "120000":
-        this.cpos = "天津"
-        break;
-        default:
-        this.cpos = "北京"
-      }
-    })
+  //   //会在组件创建成功之后自动调用该函数
+  //   // 自动在组件创建完成之后发送ajax请求--axios不支持jsonp
+  //   getCity(res=>{
+  //     console.log(res);
+  //     switch(res){
+  //       case "110000":
+  //       this.cpos = "北京"
+  //       break;
+  //       case "120000":
+  //       this.cpos = "天津"
+  //       break;
+  //       default:
+  //       this.cpos = "北京"
+  //     }
+  //   })
 
-    shuaxin(this.cpos).then(res=>{
-      console.log(res);
-      this.result = res;
-      this.timg = require(`../../../public/images/index/weathercn02/${this.result.daily[0].day.img}.png`);
-      this.wimg = require(`../../../public/images/index/weathercn02/${this.result.daily[1].day.img}.png`);
+  //   shuaxin(this.cpos).then(res=>{
+  //     console.log(res);
+  //     this.result = res;
+  //     this.timg = require(`../../../public/images/index/weathercn02/${this.result.daily[0].day.img}.png`);
+  //     this.wimg = require(`../../../public/images/index/weathercn02/${this.result.daily[1].day.img}.png`);
      
-    });
-   $.ajax({
-      url : "https://api.jisuapi.com/weather/query?appkey=90b47e2a6f6c02d3&city=北京",
-      type : "GET",
-      dataType : "jsonp",
-      success : res=>{
-         console.log("发送天气请求成功");
-         console.log(res.result);
-         this.result = res.result;
-         console.log(this.result);
-        //  明天
-        // 拿图片
-        // var srcHead = "../../../public/images/index/weathercn02/";
+  //   });
+  //  $.ajax({
+  //     url : "https://api.jisuapi.com/weather/query?appkey=90b47e2a6f6c02d3&city=北京",
+  //     type : "GET",
+  //     dataType : "jsonp",
+  //     success : res=>{
+  //        console.log("发送天气请求成功");
+  //        console.log(res.result);
+  //        this.result = res.result;
+  //        console.log(this.result);
+  //       //  明天
+  //       // 拿图片
+  //       // var srcHead = "../../../public/images/index/weathercn02/";
        
-        console.log(this.timg,this.wimg);
-        // 生活指数
-        this.warning1 = this.result.index[3];
-        this.warning2 = this.result.index[6];
-        console.log(this.warning1)
-      }
+  //       console.log(this.timg,this.wimg);
+  //       // 生活指数
+  //       this.warning1 = this.result.index[3];
+  //       this.warning2 = this.result.index[6];
+  //       console.log(this.warning1)
+  //     }
 
-   });
+  //  });
 
-  },//组件创建之后的函数
-  mounted() {
-    this.startTime = new Date().getTime();
-    console.log("页面创建时间:" +this.startTime);
+  // },//组件创建之后的函数
+  // mounted() {
+  //   this.startTime = new Date().getTime();
+  //   console.log("页面创建时间:" +this.startTime);
 
-  },
+  // },
 };
 </script>
 <style scoped>
