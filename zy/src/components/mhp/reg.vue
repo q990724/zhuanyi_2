@@ -2,7 +2,7 @@
     <div class="reg-container">
         <!-- 1.标题 -->
         <div>
-            <van-nav-bar title="注册" left-arrow @click-left="onClickLeft"  fixed/>
+            <van-nav-bar title="注册"  @click-left="onClickLeft"  fixed/>
         </div>
         <!-- 2.用户名和密码密码输入框 -->
         <van-cell-group class="user">
@@ -67,7 +67,7 @@ export default {
                 }
             }).then(res=>{
                 this.$toast(res.data.msg)
-                this.$router.push("/");
+                this.$router.push("/pwdLogin");
             })
         },
         uChange(){

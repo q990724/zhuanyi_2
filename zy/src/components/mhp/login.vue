@@ -1,7 +1,7 @@
 <template>
     <div class="login-container">
         <!-- 1.标题 -->
-        <van-nav-bar title="快速登录/注册" left-arrow @click-left="onClickLeft" class="login-title" />
+        <van-nav-bar title="快速登录/注册"  @click-left="onClickLeft" class="login-title" />
         <!-- 2.手机号输入框 -->
         <van-cell-group>
             <van-field class="phone-input"
