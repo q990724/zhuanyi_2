@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 2019-11-29 13:25:53
+-- Generation Time: 2019-11-29 15:27:55
 -- 服务器版本： 10.1.28-MariaDB
 -- PHP Version: 5.6.32
 
@@ -60,16 +60,6 @@ CREATE TABLE `doctor_orders` (
   `did` int(11) NOT NULL COMMENT '医生编号',
   `order_number` int(11) NOT NULL COMMENT '预约号码'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `doctor_orders`
---
-
-INSERT INTO `doctor_orders` (`do_id`, `uid`, `did`, `order_number`) VALUES
-(1, 1, 626, 13),
-(2, 2, 626, 2),
-(3, 1, 626, 14),
-(4, 1, 738, 1);
 
 -- --------------------------------------------------------
 
@@ -279,7 +269,8 @@ CREATE TABLE `user_orders` (
 --
 
 INSERT INTO `user_orders` (`order_id`, `uid`, `did`, `hname`, `class_name`, `class_subname`, `order_number`, `order_time`, `downtime`, `status`) VALUES
-(16, 1, 626, '北京口腔工作者协会顺义口腔诊所', '中医科', '乳腺外科门诊', 14, '2019年10月28日 08:00-08:59', 1574918441967, 1);
+(4, 1, 61293, '上城区清波社区卫生服务站', '内科', '心血管内科', 1, '1574857861648', 1574857861648, 1),
+(6, 1, 7685, '北京口腔工作者协会顺义口腔诊所', '精神心理科', '泌尿外科', 0, '2019年10月28日 08:00-08:59', 1574870742866, 1);
 
 -- --------------------------------------------------------
 
@@ -348,6 +339,12 @@ ALTER TABLE `user_orders`
   ADD PRIMARY KEY (`order_id`);
 
 --
+-- Indexes for table `user_question`
+--
+ALTER TABLE `user_question`
+  ADD PRIMARY KEY (`uq_id`);
+
+--
 -- 在导出的表使用AUTO_INCREMENT
 --
 
@@ -361,7 +358,7 @@ ALTER TABLE `doctors`
 -- 使用表AUTO_INCREMENT `doctor_orders`
 --
 ALTER TABLE `doctor_orders`
-  MODIFY `do_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '医生预约信息编号', AUTO_INCREMENT=5;
+  MODIFY `do_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '医生预约信息编号';
 
 --
 -- 使用表AUTO_INCREMENT `healthy_choice`
@@ -397,7 +394,13 @@ ALTER TABLE `user`
 -- 使用表AUTO_INCREMENT `user_orders`
 --
 ALTER TABLE `user_orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- 使用表AUTO_INCREMENT `user_question`
+--
+ALTER TABLE `user_question`
+  MODIFY `uq_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

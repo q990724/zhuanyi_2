@@ -74,11 +74,9 @@ export default{
                     if(res.data.code==-1){
                         this.$toast("登录账号或密码错误！")
                     }else if(res.data.code==1){
-                        console.log("laofu")
                         this.$toast("登录成功")
-                        // debugger
+                        sessionStorage.setItem('user',JSON.stringify(res.data.data[0]));
                         this.$router.push({name:"me",params:{username:this.username}})
-                        // this.add()
                     }
                 })
                 .catch(err=>{

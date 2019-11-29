@@ -123,6 +123,7 @@ router.get("/islogin",function(req,res){
  router.post("/uploadFile",(req,res)=>{
    var uid = req.session.uid;
    var base = req.body.base;
+   //console.log(base);
    var msg = req.body.msg;
    var time = req.body.time;
    if(!uid){
@@ -131,15 +132,19 @@ router.get("/islogin",function(req,res){
    }
 
    //解析图片
-   var path = '../public/upload/'+ new Date().getTime() +'.png';
-   var base64 = base.replace(/^data:image\/\w+;base64,/, "");//去掉图片base64码前面部分data:image/png;base64
+   var path = 'public/upload/'+ new Date().getTime() +'.png';
+   var base64 = base.replace(/\s+/g,"+");
+   base64 = base64.replace(/^data:image\/\w+;base64,/, "");//去掉图片base64码前面部分data:image/png;base64
+   //var base64 = base.slice(22);
+   console.log("哈哈哈哈或或:" + base64);
+   
    var dataBuffer = new Buffer(base64, 'base64'); //把base64码转成buffer对象
    fs.writeFile(path,dataBuffer,function(err){//用fs写入文件
       if(err){
           res.send({code : -1 , msg : "上传失败，解析错误"});
       }else{
         var sql = "insert into user_question values(null,?,?,?,?)";
-        var afterPath = path.slice(10);
+        var afterPath = path.slice(6);
         console.log(afterPath);
         pool.query(sql,[uid,msg,afterPath,time],(err,result)=>{
           if(err) throw err;
@@ -153,6 +158,25 @@ router.get("/islogin",function(req,res){
    })
   
    
+ });
+
+ //查询用户的图片问诊
+ router.get("/showPics",(req,res)=>{
+   var uid = req.session.uid;
+   if(!uid){
+     res.send({code : -2 , msg :"未登录!"});
+     return;
+   }
+   var sql = "select * from user_question where uid=?";
+   pool.query(sql,[uid],(err,result)=>{
+     if(err) throw err;
+     if(result.length>0){
+       res.send({code : 1 , msg : '查询成功',result : result});
+     }else{
+       res.send({code : 0 , msg : "还没有提交过图片问诊!"});
+     }
+   });
+
  });
 
 module.exports=router;
