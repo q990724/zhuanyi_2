@@ -33,7 +33,7 @@
         </van-col>
       </van-row>
     </div>
-    <div>
+    <div class = "l1">
       <van-row class="location">
         <van-col span="12" class = "location-pos">
           <span>
@@ -72,7 +72,7 @@
         </van-col>
       </van-row>
     </div>
-    <div class="c1">
+    <div class = "c1">
       <div>
         <van-row  >
           <van-col span="24" class="classification">
@@ -83,7 +83,7 @@
         </van-row> 
       </div>
     </div>
-    <div class="notice">
+    <div class = "notice">
       <van-row>
         <van-col span="24" class="shopping-img">
           <span>
@@ -136,10 +136,25 @@
                   <img src="../../../public/images/shopping/fbr72668402.png" alt="" class="vip">
                 </p>
               </router-link>
+              <router-link to="" class="limited-commodity-img">
+                <div class="find-more">
+                  <img src="../../../public/images/shopping/more.png" alt=""><br>
+                  <span class = "find-more-text">查看更多</span>
+                </div>
+              </router-link>
             </div>
           </van-col>
         </van-row>
       </div>
+    </div>
+    <div class = "find-drug">
+      <van-row>
+        <van-col span = "24">
+          <router-link to="" class = "find-drug-img"> 
+            <img src="../../../public/images/shopping/oXI124861095.png" alt="">
+          </router-link>
+        </van-col>
+      </van-row>
     </div>
   </div>
 </template>
@@ -150,27 +165,51 @@ export default {
     return {
       imgList:[{
         sImg:require("../../../public/images/shopping/rln99601889.png"),
-        text:"植珍艾 | 蕲艾艾灸贴",
+        text:"植珍艾 | 蕲...",
         price:"18.8",
         Dprice:"17.86"
       },
       {
-        sImg:require("../../../public/images/shopping/rln99601889.png"),
-        text:"植珍艾 | 蕲艾艾灸贴",
-        price:"18.8",
-        Dprice:"17.86"
+        sImg:require("../../../public/images/shopping/TR3113904370.png"),
+        text:"同仁堂六味...",
+        price:"9.9",
+        Dprice:"9.40"
       },
       {
-        sImg:require("../../../public/images/shopping/rln99601889.png"),
-        text:"植珍艾 | 蕲艾艾灸贴",
-        price:"18.8",
-        Dprice:"17.86"
+        sImg:require("../../../public/images/shopping/44M113896049.png"),
+        text:"舒痕美国进...",
+        price:"148",
+        Dprice:"140.6"
       },
       {
-        sImg:require("../../../public/images/shopping/rln99601889.png"),
-        text:"植珍艾 | 蕲艾艾灸贴",
-        price:"18.8",
-        Dprice:"17.86"
+        sImg:require("../../../public/images/shopping/Yem113887548.png"),
+        text:"碧生源奥利...",
+        price:"45.9",
+        Dprice:"43.60"
+      },
+      {
+        sImg:require("../../../public/images/shopping/b9W113893475.png"),
+        text:"太太静心助...",
+        price:"229.5",
+        Dprice:"218.02"
+      },
+      {
+        sImg:require("../../../public/images/shopping/Pmv85436583.png"),
+        text:"玫瑰姜枣茶...",
+        price:"34",
+        Dprice:"32.3"
+      },
+      {
+        sImg:require("../../../public/images/shopping/Et3108677484.png"),
+        text:"美的1.5L家...",
+        price:"299",
+        Dprice:"284.05"
+      },
+      {
+        sImg:require("../../../public/images/shopping/3g6102852348.png"),
+        text:"Joyoung/九...",
+        price:"155",
+        Dprice:"147.25"
       }]
     }
   }
@@ -179,12 +218,14 @@ export default {
 
 <style scoped>
   .navigation-bar{
-    display: flex;
+    position: fixed;
     padding: .4125rem 1.03125rem;
     top: 0;
     left: 0;
+    right: 0;
     background: #fff;
     align-items: center;
+    z-index: 999;
   }
   
   .shopping-search a{
@@ -221,9 +262,16 @@ export default {
   .shopping-cart>a{
     padding-left: .55rem;
   }
+  .shopping-cart>a>span>img{
+    width: 1.625rem;
+    height: 1.375rem;
+  }
   .commodity-order>a span:last-child,.shopping-cart>a span:last-child{
     font-size: .55rem;
     color: #2b313d;
+  }
+  .l1{
+    margin-top: 3.125rem;
   }
   .location{
     background:#fff;
@@ -339,7 +387,7 @@ export default {
     padding: .28rem .24rem 0;
   }
   .limited-commodity-img{
-    width: 120%;
+    width: 235%;
     padding-bottom: .3125rem; 
     display: flex;
     justify-content: space-around;
@@ -359,7 +407,7 @@ export default {
   .limited-commodity-img>a>span{
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: .75rem;
+    font-size: 10px;
     white-space: nowrap;
     color:#2b313d;
   }
@@ -377,5 +425,23 @@ export default {
   .vip{
     width: 1.875rem;
     height: .738125rem;
+  }
+  .find-more-text{
+    color: #9d9ea7;
+    font-size: .24rem;
+  }
+  .find-more{
+    display: inline-block !important;
+    width: 100%;
+    height: 100%;
+    line-height: 3;
+    align-items: center !important;
+    text-align: center !important;
+  }
+  .find-more img{
+    margin-top: 1.25rem;
+  }
+  .find-drug-img>img{
+    width: 100%;
   }
 </style>
