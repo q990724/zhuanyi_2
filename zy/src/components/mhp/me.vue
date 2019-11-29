@@ -147,7 +147,7 @@ export default {
         };
     },
     mounted() {
-        this.bus.$on("un",this.add);
+        // this.bus.$on("un",this.add);
     },
     updated(){
         // console.log("nishizhu"+this.user)
