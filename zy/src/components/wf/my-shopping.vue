@@ -128,8 +128,10 @@
               <router-link to="" v-for="(item,i) of imgList" :key="i">
                 <img :src="item.sImg" alt="">
                 <span>{{item.text}}</span>
-                <span class="text-type">¥</span>
-                <span class="text-type text-size">{{item.price}}</span>
+                <p>
+                  <span class="text-type">¥</span>
+                  <span class="text-type text-size">{{item.price}}</span>
+                </p>
                 <p>
                   <span class="text-type-2">¥</span>
                   <span class="text-type-2">{{item.Dprice}}</span>
@@ -156,6 +158,101 @@
         </van-col>
       </van-row>
     </div>
+    <div class = "drug">
+      <div>
+        <router-link to="">
+          <img src="../../../public/images/shopping/q98138163692.png" alt="">
+        </router-link>
+      </div>
+    </div>
+    <div>
+      <van-row>
+        <van-col span = "24" class = "illness">
+          <img src="../../../public/images/shopping/UI2124861701.png" alt="">
+        </van-col>
+      </van-row>
+      <van-row>
+        <van-col span = "24" class = "illness-img">
+          <router-link to="">
+            <img src="../../../public/images/shopping/3sc143496238.png" alt="">
+          </router-link>
+        </van-col>
+      </van-row>
+    </div>
+    <div>
+      <van-row>
+        <van-col span = "24" class = "service">
+          <img src="../../../public/images/shopping/eQ0125011886.png" alt="">
+        </van-col>
+      </van-row>
+      <van-row>
+        <van-col span = "24" class = "service-img">
+          <router-link to="">
+            <img src="../../../public/images/shopping/enl138163922.png" alt="">
+          </router-link>
+        </van-col>
+      </van-row>
+    </div>
+    <div>
+      <van-row>
+        <van-col span = "24" class = "cn-medicine">
+          <router-link to="">
+            <img src="../../../public/images/shopping/pan177774742.png" alt="">
+          </router-link>
+        </van-col>
+      </van-row>
+    </div>
+    <div>
+      <van-row class = "medicine-msg" v-for = "(item,i) of drugList" :key = "i">
+        <van-col span = "12">
+          <span>
+            <img :src="item.dImg" alt="">
+          </span>
+          <p>{{item.dmsg}}</p>
+          <p>
+            <span class = "medicine-discount">健康币抵10%</span>
+            <span class = "otc">OTC</span>
+          </p>
+          <p class = "price-style">
+            <span class = "currency-1">¥</span>
+            <span class = "drop-price-1">{{item.dprice1}}</span>
+            <span class = "currency-2">¥</span>
+            <span class = "drop-price-2">{{item.discount1}}</span>
+            <img src="../../../public/images/shopping/fbr72668402.png" alt="" class = "vip">
+          </p>
+          <div>
+            <button class = "btn">立即购买</button>
+          </div>
+        </van-col>
+        <van-col span = "12">
+          <span>
+            <img :src="item.dImg2" alt="">
+          </span>
+          <p>{{item.dmsg2}}}</p>
+          <p>
+            <span class = "medicine-discount">健康币抵10%</span>
+            <span class = "otc">OTC</span>
+          </p>
+          <p class = "price-style">
+            <span class = "currency-1">¥</span>
+            <span class = "drop-price-1">{{item.dprice2}}</span>
+            <span class = "currency-2">¥</span>
+            <span class = "drop-price-2">{{item.dprice2}}</span>
+            <img src="../../../public/images/shopping/fbr72668402.png" alt="" class = "vip">
+          </p>
+          <div>
+            <button class = "btn">立即购买</button>
+          </div>
+        </van-col>
+      </van-row>
+    </div>
+    <div>
+      <van-row>
+        <van-col span = "24" class = "shopping-footer">
+          <p>已经滑到底啦</p>
+        </van-col>
+      </van-row>
+    </div>
   </div>
 </template>
 
@@ -165,52 +262,94 @@ export default {
     return {
       imgList:[{
         sImg:require("../../../public/images/shopping/rln99601889.png"),
-        text:"植珍艾 | 蕲...",
+        text:"瑰姜枣茶7g*10袋玫瑰姜枣茶7g*10袋",
         price:"18.8",
         Dprice:"17.86"
       },
       {
         sImg:require("../../../public/images/shopping/TR3113904370.png"),
-        text:"同仁堂六味...",
+        text:"同仁堂六味地黄丸",
         price:"9.9",
         Dprice:"9.40"
       },
       {
         sImg:require("../../../public/images/shopping/44M113896049.png"),
-        text:"舒痕美国进...",
+        text:"舒痕美国进口硅凝胶",
         price:"148",
         Dprice:"140.6"
       },
       {
         sImg:require("../../../public/images/shopping/Yem113887548.png"),
-        text:"碧生源奥利...",
+        text:"碧生源奥利司他胶囊",
         price:"45.9",
         Dprice:"43.60"
       },
       {
         sImg:require("../../../public/images/shopping/b9W113893475.png"),
-        text:"太太静心助...",
+        text:"太太静心助眠口服液",
         price:"229.5",
         Dprice:"218.02"
       },
       {
         sImg:require("../../../public/images/shopping/Pmv85436583.png"),
-        text:"玫瑰姜枣茶...",
+        text:"玫瑰姜枣茶7g*10袋",
         price:"34",
         Dprice:"32.3"
       },
       {
         sImg:require("../../../public/images/shopping/Et3108677484.png"),
-        text:"美的1.5L家...",
+        text:"美的1.5L家用空气炸锅",
         price:"299",
         Dprice:"284.05"
       },
       {
         sImg:require("../../../public/images/shopping/3g6102852348.png"),
-        text:"Joyoung/九...",
+        text:"Joyoung/九阳榨汁机",
         price:"155",
         Dprice:"147.25"
-      }]
+      }],
+      drugList:[
+        {
+          dImg:require("../../../public/images/shopping/TR3113904370.png"),
+          dmsg:"同仁堂六味地黄丸9g*10丸",
+          dImg2:require("../../../public/images/shopping/6lF114020629.png"),
+          dmsg2:"汇仁肾宝片0.7g*126片",
+          dprice1:"15",
+          discount1:"14.25",
+          dprice2:"239",
+          discount2:"227.05"
+        },
+        {
+          dImg:require("../../../public/images/shopping/4WD82747069.png"),
+          dmsg:"同仁堂温肾全鹿丸9g*20丸",
+          dImg2:require("../../../public/images/shopping/ma282747085.png"),
+          dmsg2:"春梦男宝胶囊0.3g*12粒",
+          dprice1:"318",
+          discount1:"302.1",
+          dprice2:"6",
+          discount2:"25.7"
+        },
+        {
+          dImg:require("../../../public/images/shopping/Lly82743930.png"),
+          dmsg:"修正参茸补肾片0.3g*36片",
+          dImg2:require("../../../public/images/shopping/C2z113951108.png"),
+          dmsg2:"嗨久枸橼酸西地那非片50mg*2片",
+          dprice1:"68",
+          discount1:"64.6",
+          dprice2:"49",
+          discount2:"46.55"
+        },
+        {
+          dImg:require("../../../public/images/shopping/oXZ114020643.png"),
+          dmsg:"万艾可枸橼酸西地那非片50mg*2片",
+          dImg2:require("../../../public/images/shopping/xBc113900127.png"),
+          dmsg2:"嗨久枸橼酸西地那非片50mg*2片",
+          dprice1:"119",
+          discount1:"113.05",
+          dprice2:"49.9",
+          discount2:"47.40"
+        },
+      ]
     }
   }
 }
@@ -405,11 +544,14 @@ export default {
     justify-content: space-between;
   }
   .limited-commodity-img>a>span{
+    font-size: 10px;
+    color:#2b313d;
+    text-overflow: -o-ellipsis-lastline;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 10px;
-    white-space: nowrap;
-    color:#2b313d;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
   }
   .text-type{
     color: #ff695c !important;
@@ -443,5 +585,96 @@ export default {
   }
   .find-drug-img>img{
     width: 100%;
+  }
+  .drug{
+    overflow-X:auto;
+  }
+  .drug>div>a>img{
+    width:260%;
+    height:100%;
+  }
+  .illness>img,.illness-img>a>img,.service>img,.service-img>a>img{
+    width:100%;
+  }
+  .cn-medicine>a>img{
+    width:94%;
+    margin-top:1.25rem;
+    border-top-right-radius: 1.25rem;
+    border-top-left-radius: 1.25rem;
+    margin-left:3%;
+  }
+  .medicine-msg{
+    padding: 0 1.25rem;
+    display:flex;
+    justify-content:space-between;
+  }
+  .medicine-msg>div>span>img{
+    width:100%;
+  }
+  .medicine-msg>div>p{
+    color:#2b313d;
+    margin-bottom:.5rem;
+    overflow:hidden;
+    webkit-line-clamp: 1;
+    text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+  .medicine-discount{
+    font-size:.75rem;
+    border-radius: .04rem;
+    color:#a67500;
+    margin-right: .625rem;
+    border: .0625rem solid currentColor;
+  }
+  .otc{
+    font-size:.75rem;
+    margin-left: .1rem;
+    color: #3f86ff;
+    border: .0625rem solid currentColor;
+  }
+  .currency-1{
+    color: #ff695c;
+    font-size:.625rem;
+  }
+  .drop-price-1{
+    color: #ff695c;
+    font-size:1.25rem;
+    font-weight:600;
+    margin-left:.3125rem;
+    margin-right: .3125rem;
+  }
+  .currency-2{
+    color: #6b331a;
+    font-size:.625rem;
+  }
+  .drop-price-2{
+    color: #6b331a;
+    font-size:.9375rem;
+    margin-left:.3125rem;
+    margin-right: .3125rem;
+  }
+  .btn{
+    display:block;
+    background: #ff695c;
+    color: #fff;
+    margin:auto;
+    width:95%;
+    border-radius:1.25rem;
+    padding: .3rem .24rem;
+    text-align: center;
+    vertical-align: middle;
+    border:0;
+  }
+  .shopping-footer{
+    background: #f2f2f2;
+    text-align:center;
+    font-size: .24rem;
+    padding: .5rem 0 .8rem;
+    color: #bebebe;
+    margin-bottom:3.125rem;
   }
 </style>
