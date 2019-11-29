@@ -26,7 +26,7 @@
                         <van-col span="6">
                             <van-dropdown-menu>
                                 <van-dropdown-item
-                                 v-model="searchType" :title="searchType" :options="searchTypeList" />
+                                 v-model="searchType" :options="searchTypeList" />
                             </van-dropdown-menu>
                         </van-col>
                         <van-col span="18">
@@ -62,11 +62,13 @@
             <div class="index-content-top2">
                 <van-row type="flex" align="center">
                     <van-col span="8">
+                        <router-link to="doc_chat" style="color:#000;">
                         <div class="pic">
                             <img src="../../../public/images/index/top2-icon-1.png">
                         </div>
                         <h3>专家问诊</h3>
                         <p><span>31万</span>医生问诊</p>
+                        </router-link>
                     </van-col>
                     <van-col span="8">
                         <div class="pic">
@@ -79,7 +81,7 @@
                         <div class="pic">
                             <img src="../../../public/images/index/top2-icon-3.png">
                         </div>
-                        <h3>专家问诊</h3>
+                        <h3>健康商城</h3>
                         <p>极速送药 <span>1小时达</span></p>
                     </van-col>
                 </van-row>
@@ -243,8 +245,8 @@
                     </van-row>
                 </div>
 
-                <!-- 天气 -->
-                <weather></weather>
+                <!-- 天气
+                <weather></weather> -->
 
 
 
@@ -316,11 +318,10 @@ import oneByMore_json from "./json/oneByMore.js"
 export default {
     data(){
         return{
-            searchType : "请选择分类",
+            searchType : 0,
             searchTypeList: [
                 { text: '医院', value: 0 },
-                { text: '药品', value: 1 },
-                { text: '科室', value: 2 },
+                { text: '科室', value: 1 },
                 { text: '医生', value: 2 }
             ],
             searchVal : "",
@@ -333,7 +334,8 @@ export default {
             oneByMore_json : oneByMore_json,
             list : [],
             finished : false,
-            isloading : false
+            isloading : false,
+            searTypeCont : "医院"
         }
     },
     methods : {

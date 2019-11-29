@@ -1,7 +1,7 @@
 ﻿const express=require("express");
 var router=express.Router();
 var pool=require("../pool");
-
+var fs = require('fs');
 //登录接口
 router.get("/login/:phone&:upwd",function(req,res){
    var phone = req.params.phone;
@@ -117,6 +117,42 @@ router.get("/islogin",function(req,res){
    }else{
      res.send({code : 1 , msg : "已登录"});
    }
+ });
+
+ //上传图片接口
+ router.post("/uploadFile",(req,res)=>{
+   var uid = req.session.uid;
+   var base = req.body.base;
+   var msg = req.body.msg;
+   var time = req.body.time;
+   if(!uid){
+      res.send({code : -2 , msg : "未登录"});
+      return;
+   }
+
+   //解析图片
+   var path = '../public/upload/'+ new Date().getTime() +'.png';
+   var base64 = base.replace(/^data:image\/\w+;base64,/, "");//去掉图片base64码前面部分data:image/png;base64
+   var dataBuffer = new Buffer(base64, 'base64'); //把base64码转成buffer对象
+   fs.writeFile(path,dataBuffer,function(err){//用fs写入文件
+      if(err){
+          res.send({code : -1 , msg : "上传失败，解析错误"});
+      }else{
+        var sql = "insert into user_question values(null,?,?,?,?)";
+        var afterPath = path.slice(10);
+        console.log(afterPath);
+        pool.query(sql,[uid,msg,afterPath,time],(err,result)=>{
+          if(err) throw err;
+          if(result.affectedRows > 0){
+            res.send({code : 1 , msg : "上传成功！"});
+          }else{
+            res.send({code : -1 , msg : "上传失败!"});
+          }
+        });
+      }
+   })
+  
+   
  });
 
 module.exports=router;

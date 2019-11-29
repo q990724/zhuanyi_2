@@ -35,8 +35,8 @@
     </div>
     <div class="select">
       <van-dropdown-menu>
-        <van-dropdown-item v-model="value1" :options="option1" />
-        <van-dropdown-item v-model="value2" :options="option2" />
+        <van-dropdown-item v-model="value1" :options="option1" @change="searchDoctorForCity"/>
+        <van-dropdown-item v-model="value2" :options="option2" @change="searchDoctorForClass"/>
         <van-dropdown-item v-model="value3" :options="option3" />
         <van-dropdown-item title="筛选" ref="item">
           <van-switch-cell v-model="switch1" title="医院等级" />
@@ -65,49 +65,51 @@
         </div>
       </div>
     </div>
-    <div class="doc_details">
+    <div class="doc_details" v-for="(item,i) of result" :key="i">
       <div class="left"> 
-        <img src="../../../public/images/doc_chat/952.png">
+        <img :src="item.pic ? item.pic : unknowPic">
       </div>
       <div class="right">
-        <h3 class="dname">常红 <span class="dtype">主任医师</span> <span class="htype">三甲</span></h3>
-        <p class="hname">四川大学华西医院 血液内科</p>
-        <h4>接诊率：<span>100%</span> 好评率：<span>100%</span> 问诊量：<span>990</span></h4>
-        <p class="skill">擅长：擅长痤疮、皮炎湿疹、荨麻疹、银屑病、癣菌病、白癜风等常见皮肤病；尖锐湿疣、生殖器疱疹等性传播疾病；红斑狼疮、硬皮病等结缔组织病。</p>
+        <h3 class="dname">{{item.name}} <span class="dtype">主任医师</span> <span class="htype">三甲</span></h3>
+        <p class="hname">{{item.hospital}} {{item.city ? item.city : item.province}}</p>
+        <h4>接诊率：<span>100%</span> 好评率：<span>100%</span> 问诊量：<span>{{item.detailid}}</span></h4>
+        <p class="skill">擅长：{{item.speciality}}</p>
         <div class="bottom">
-          <p class="money">¥150起 <span>可咨询</span></p>
-          <p class="res">平均回复：<b>2小时内</b></p>
+          <p class="money">¥{{parseInt(50 + Math.random() * 201)}}起 <span>可咨询</span></p>
+          <p class="res">平均回复：<b>{{parseInt(1 + Math.random() * 5)}}小时内</b></p>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { Toast } from 'vant';
 export default {
   data() {
     return {
+      unknowPic : require("../../../public/images/qgh/unknow.png"),
       value1: 0,
       value2:0,
       value3:0,
       switch1: false,
       switch2: false,
       option1: [
-        { text: '全国', value: 0 },
-        { text: '北京', value: 1 },
-        { text: '天津', value: 2 },
-        { text: '天津', value: 3 },
-        { text: '上海', value: 4 },
-        { text: '重庆', value: 5 }
+        { text: '北京', value: 0 },
+        { text: '河南', value: 1 },
+        { text: '浙江', value: 2 },
+        { text: '河北', value: 3 },
+        { text: '黑龙江', value: 4 },
+        { text: '四川', value: 5 }
       ],
       option2: [
-        { text: '科室', value: 0 },
-        { text: '内科', value: 1 },
-        { text: '妇产科', value: 2 },
-        { text: '儿科', value: 3 },
-        { text: '皮肤科', value: 4 },
-        { text: '耳鼻科', value: 5 },
-        { text: '眼科', value: 6 },
-        { text: '骨科', value: 7 },
+        { text: '中医科', value: 0 },
+        { text: '产科', value: 1 },
+        { text: '儿科', value: 2 },
+        { text: '内科', value: 3 },
+        { text: '外科', value: 4 },
+        { text: '妇科', value: 5 },
+        { text: '男科', value: 6 },
+        { text: '骨伤科', value: 7 },
       ],
       option3: [
         { text: '综合排序', value: 0 },
@@ -133,16 +135,50 @@ export default {
         { text: "科室", value: 2 },
         { text: "医生", value: 2 }
       ],
-      searchVal: ""
+      searchVal: "",
+      result : []
     };
   },
   methods: {
-    onClickLeft() {
-      this.back(this);
-    },
+      onClickLeft() {
+        this.back(this);
+      },
       onConfirm() {
       this.$refs.item.toggle();
-    }
+      },
+      getDoctors(province=0,className=0){
+        var pro,cln;
+        for(let item of this.option1){
+          if(item.value == province){
+            pro = item.text;
+          }
+        }
+        for(let item of this.option2){
+          if(item.value == className){
+            cln = item.text;
+          }
+        }
+        $.ajax({
+          url : `https://api.jisuapi.com/hospital/get?province=${pro}&department=${cln}&start=0&num=20&appkey=90b47e2a6f6c02d3`,
+          dataType : "jsonp",
+          success: (data)=>{
+            console.log(data);
+            this.result = data.result.list;
+          },
+          error : (err)=>{
+            Toast.fail("服务器繁忙，请稍后再试!");
+          }
+        })
+      },
+      searchDoctorForCity(){
+        this.getDoctors(this.value1,this.value2);
+      },
+      searchDoctorForClass(){
+        this.getDoctors(this.value1,this.value2);
+      }
+  },
+  created(){
+    this.getDoctors();
   }
 };
 </script>
