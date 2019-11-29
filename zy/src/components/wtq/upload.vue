@@ -15,14 +15,7 @@
       </div>
       <textarea placeholder="为了更好获得医生帮助,请尽可能详细描述病情" id="text" cols="30" required rows="10" v-model="texts"></textarea>
       <div class="upload-img">
-        <van-uploader
-          id="up-area"
-          v-model="fileList"
-          multiple
-          :max-count="9"
-          :before-read="beforeRead" 
-          :after-read="afterRead"
-        />
+        <van-uploader id="up-area" :after-read="afterRead" v-model="fileList" :max-count="1"/>
       </div>
       <van-button id="button" type="primary" size="large" @click="uploadImages">上传图片</van-button>
     </div> 
@@ -36,42 +29,33 @@ export default {
     return {
       fileList:[],
       texts:"",
-      base:[],
+      baseURL:"",
     }
   },
   methods: {
     onClickLeft(){
       this.back(this)
     },
-    beforeRead(file) {
-      console.log(file);
-      for(var item of file){
-        if(item.type !== 'image/png'){
-           Toast('请上传 png 格式图片');
-            return false;
-        }
-      }   
-      return true;
-    },
-     afterRead(file) {
-       console.log(file);
-       for(var item of file){
-         this.base.push(item.content)
-       }
-       
+    afterRead(file) {
+      this.base = file.content;
     },
     uploadImages(){
       var texts = this.texts;
       var base = this.base;
-      console.log(texts,base);
       // 发送异步请求
-      for(var item of base){
-        axios.post("http://127.0.0.1:5050/user/uploadFile",`msg=${texts}&base=${item}&time=${new Date().getTime()}`,
-        ).then(res=>{
-          if(res.code == 1)resolve(true)
-          if(res.code != 1)resolve(false)
-        });
-      }
+      axios.post("http://127.0.0.1:5050/user/uploadFile",
+      `msg=${texts}&base=${this.base}&time=${new Date().getTime()}`).then(res=>{
+        if(res.data.code == 1){
+          Toast.success("问诊成功！");
+          this.$router.push("/");
+        }else{
+          Toast.fail("问诊失败，请稍后重试！");
+          this.$router.push("/");
+        }
+      }).catch(err=>{
+        Toast.fail("服务器繁忙，请稍后重试！");
+        this.$router.push("/");
+      })
     },
     
    

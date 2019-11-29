@@ -10,14 +10,15 @@
       </div>
     </div>
     <div v-else class="has_wz">
-      <p>问诊详情：</p>
-      <div class="pics">
-        <img src="../../../public/images/find/a3c23168112.jpg">
-        <img src="../../../public/images/find/a3c23168112.jpg">
-        <img src="../../../public/images/find/a3c23168112.jpg">
-        <img src="../../../public/images/find/a3c23168112.jpg">
-        <img src="../../../public/images/find/a3c23168112.jpg">
-        <img src="../../../public/images/find/a3c23168112.jpg">
+      <div class="pics"  v-for="(item,i) of result" :key="i">
+        <h2 style="color:#36d;">问诊信息</h2>
+        <div>
+          <p>问诊详情：<span>{{item.msg}}</span></p>
+          <img :src="`http://127.0.0.1:5050${item.baseUrl}`">
+        </div>
+        <div>
+          <span>{{new Date(item.time).toLocaleString()}}</span>
+        </div>
       </div>
     </div>
   </div>
@@ -26,8 +27,20 @@
 export default {
   data(){
     return{
-      hasWz:false
+      hasWz:false,
+      result : {}
     }
+  },
+  created(){
+    this.axios.get("http://127.0.0.1:5050/user/showPics").then(res=>{
+      if(res.data.code == -1){
+        this.hasWz = true;
+      }else if(res.data.code == -2){
+        this.$router.push("pwdLogin");
+      }else{
+        this.result = res.data.result;
+      }
+    });
   }
 }
 </script>
@@ -52,10 +65,8 @@ export default {
     padding:.977099rem;
   }
   .has_wz p{
-    font-size: .977099rem;
-    color:#36d;
-    margin-bottom: .610687rem;
-    margin-left: .610687rem;
+    font-size: 1.2rem;
+    color:#000;
     text-overflow: -o-ellipsis-lastline;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -63,16 +74,25 @@ export default {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
   }
+  .has_wz p>span{
+    color:#36d;
+    font-size: 1rem;
+  }
   .has_wz .pics {
     display: flex;
-    flex-wrap: wrap;
-    /* justify-content: space-around; */
+    flex-direction: column;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 10px;
+  }
+  .has_wz .pics>div{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
   }
   .has_wz .pics img{
     width:7.328244rem;
-    margin-bottom: .610687rem;
-    border:.061069rem solid #eee;
     border-radius: .610687rem;
-    margin-right: .610687rem;
   }
 </style>

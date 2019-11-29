@@ -135,8 +135,6 @@ router.get("/islogin",function(req,res){
    var path = 'public/upload/'+ new Date().getTime() +'.png';
    var base64 = base.replace(/\s+/g,"+");
    base64 = base64.replace(/^data:image\/\w+;base64,/, "");//去掉图片base64码前面部分data:image/png;base64
-   //var base64 = base.slice(22);
-   console.log("哈哈哈哈或或:" + base64);
    
    var dataBuffer = new Buffer(base64, 'base64'); //把base64码转成buffer对象
    fs.writeFile(path,dataBuffer,function(err){//用fs写入文件
@@ -176,7 +174,6 @@ router.get("/islogin",function(req,res){
        res.send({code : 0 , msg : "还没有提交过图片问诊!"});
      }
    });
-
  });
 
 module.exports=router;
