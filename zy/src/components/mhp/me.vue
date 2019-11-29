@@ -114,25 +114,25 @@ export default {
     data() {
         return {
             list:[
-                {text:"我的预约",path:"http://127.0.0.1:8081/images/me/me/icon-book.png"},
-                {text:"我的问诊",path:"http://127.0.0.1:8081/images/me/me/icon-consult.png"},
-                {text:"服务包订单",path:"http://127.0.0.1:8081/images/me/me/icon-order.png"},
-                {text:"商品订单",path:"http://127.0.0.1:8081/images/me/me/icon-order2.png"},
+                {text:"我的预约",path:require("../../../public/images/me/me/icon-book.png")},
+                {text:"我的问诊",path:require("../../../public/images/me/me/icon-consult.png")},
+                {text:"服务包订单",path:require("../../../public/images/me/me/icon-order.png")},
+                {text:"商品订单",path:require("../../../public/images/me/me/icon-order2.png")},
            
-                {text:"家庭联系人",path:"http://127.0.0.1:8081/images/me/me/icon-patients.png"},
-                {text:"关注收藏",path:"http://127.0.0.1:8081/images/me/me/icon-star.png"},
-                {text:"我的医生",path:"http://127.0.0.1:8081/images/me/me/icon-doctor.png"},
-                {text:"会员福利",path:"http://127.0.0.1:8081/images/me/me/icon-member.png"}, 
+                {text:"家庭联系人",path:require("../../../public/images/me/me/icon-patients.png")},
+                {text:"关注收藏",path:require("../../../public/images/me/me/icon-star.png")},
+                {text:"我的医生",path:require("../../../public/images/me/me/icon-doctor.png")},
+                {text:"会员福利",path:require("../../../public/images/me/me/icon-member.png")}, 
 
                 {text:"我的课程",path:"http://127.0.0.1:8081/images/me/me/icon-course.png"},
-                {text:"会员好友",path:"http://127.0.0.1:8081/images/me/me/BJh154243448.png"},
-                {text:"帮助反馈",path:"http://127.0.0.1:8081/images/me/me/icon-help.png"},
-                {text:"更多",path:"http://127.0.0.1:8081/images/me/me/icon-more.png"},      
+                {text:"会员好友",path:require("../../../public/images/me/me/BJh154243448.png")},
+                {text:"帮助反馈",path:require("../../../public/images/me/me/icon-help.png")},
+                {text:"更多",path:require("../../../public/images/me/me/icon-more.png")},      
 
-                {text:"我的关注",path:"http://127.0.0.1:8081/images/me/me/icon-sns-watch.png"},
-                {text:"我的提问",path:"http://127.0.0.1:8081/images/me/me/icon-sns-question.png"},
-                {text:"我的发帖",path:"http://127.0.0.1:8081/images/me/me/icon-sns-post.png"},
-                {text:"更多",path:"http://127.0.0.1:8081/images/me/me/icon-sns-more.png"},        
+                {text:"我的关注",path:require("../../../public/images/me/me/icon-sns-watch.png")},
+                {text:"我的提问",path:require("../../../public/images/me/me/icon-sns-question.png")},
+                {text:"我的发帖",path:require("../../../public/images/me/me/icon-sns-post.png")},
+                {text:"更多",path:require("../../../public/images/me/me/icon-sns-more.png")},        
             ],
         }
     },
