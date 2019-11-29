@@ -13,42 +13,77 @@
         <h3>请描述您的病情</h3>
         <span>如何描述?</span>
       </div>
-      <textarea placeholder="为了更好获得医生帮助,请尽可能详细描述病情" id="text" cols="30" required rows="10"></textarea>
+      <textarea placeholder="为了更好获得医生帮助,请尽可能详细描述病情" id="text" cols="30" required rows="10" v-model="texts"></textarea>
       <div class="upload-img">
         <van-uploader
           id="up-area"
           v-model="fileList"
           multiple
           :max-count="9"
-          :before-read="beforeRead"
+          :before-read="beforeRead" 
+          :after-read="afterRead"
         />
       </div>
+      <van-button id="button" type="primary" size="large" @click="uploadImages">大号按钮</van-button>
     </div> 
   </div>
 </template>
 <script>
+import axios from "axios";
 import { Toast } from 'vant';
 export default {
   data(){
     return {
-      fileList:[]
+      fileList:[],
+      texts:"",
+      base:[],
     }
   },
   methods: {
     onClickLeft(){
       this.back(this)
     },
-     beforeRead(file) {
-      if (file.type !== 'png') {
-        Toast('请上传png格式的图片');
-        return false;
-      }
+    beforeRead(file) {
+      console.log(file);
+      for(var item of file){
+        if(item.type !== 'image/png'){
+           Toast('请上传 png 格式图片');
+            return false;
+        }
+      }   
       return true;
     },
+     afterRead(file) {
+       console.log(file);
+       for(var item of file){
+         this.base.push(item.content)
+       }
+       
+    },
+    uploadImages(){
+      var texts = this.texts;
+      var base = this.base;
+      console.log(texts,base);
+      // 发送异步请求
+      for(var item of base){
+        axios.post("http://127.0.0.1:5050/user/uploadFile",`msg=${texts}&base=${item}&time=${new Date().getTime()}`,
+        ).then(res=>{
+          if(res.code == 1)resolve(true)
+          if(res.code != 1)resolve(false)
+        });
+      }
+    },
+    loadingPost(){
+      
+    },
+   
   },
 }
 </script>
 <style scoped>
+.des{
+  padding:0.875rem 1rem 0 1rem;
+}
 .van-nav-bar .van-icon{
   color:#000;
 }
@@ -79,5 +114,16 @@ export default {
 }
 #up-area{
   margin-top:2rem;
+}
+#button{
+  margin-top:15.25rem;
+
+}
+.van-button--primary{
+  background-color:#3f86ff;
+  color:#fff;
+  border:0;
+  outline:0;
+  border-radius:.625rem;
 }
 </style>
