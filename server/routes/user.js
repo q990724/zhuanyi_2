@@ -29,13 +29,13 @@ router.get("/login/:phone&:upwd",function(req,res){
 });
 
 //注册接口
-router.get("/reg",(req,res)=>{
+router.get("/reg",function(req,res){
    var uname=req.query.uname;
    var upwd=req.query.upwd;
    var sql="insert into user(uname,upwd) values(?,?)";
-   pool.query(sql,[uname,upwd],(err,res)=>{
+   pool.query(sql,[uname,upwd],(err,result)=>{
       if(err) throw err;
-      if(res.affectedRows==1){
+      if(result.affectedRows==1){
          res.send({code:1,msg:"注册成功"});
       }else{
          res.send({code:-1,msg:"注册失败"});

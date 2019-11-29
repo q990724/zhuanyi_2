@@ -28,7 +28,7 @@
         </div>
         <!-- 5.版权说明 -->
         <div class="qlogin">
-            <router-link  class="pwd" to="/login">快速登录/注册</router-link>
+            <router-link  class="pwd" to="/reg">注册</router-link>
         </div>
         <div class="copy">
             <p>登录即表示您已阅读并同意协议</p>
