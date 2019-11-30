@@ -32,7 +32,7 @@ export default {
     }
   },
   created(){
-    this.axios.get("http://127.0.0.1:5050/user/showPics").then(res=>{
+    this.axios.get("http://zhuanyi.applinzi.com/user/showPics").then(res=>{
       if(res.data.code == -1){
         this.hasWz = true;
       }else if(res.data.code == -2){
